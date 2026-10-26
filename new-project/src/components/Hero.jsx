@@ -605,21 +605,7 @@ export default function Hero({ onSelectProduct: _onSelectProduct } = {}) {
               <path className="botanical-leaf" d="M 390 60 C 380 20, 400 10, 410 25 C 415 40, 405 55, 390 60 Z" stroke="#c9a45c" strokeWidth="1" fill="rgba(201,164,92,0.06)" />
             </svg>
 
-            {/* Small Botanical Labels with Thin Connector Lines */}
-            <div className="botanical-label-group" style={{ position: "absolute", top: "28%", left: "-15%", display: "flex", alignItems: "center", gap: "6px" }}>
-              <span style={{ width: "32px", height: "1px", backgroundColor: "rgba(201, 164, 92, 0.45)" }} />
-              <span style={{ fontFamily: "var(--font-sans-body)", fontSize: "10px", letterSpacing: "0.2em", textTransform: "uppercase", color: "#c9a45c" }}>Tulsi</span>
-            </div>
-
-            <div className="botanical-label-group" style={{ position: "absolute", top: "52%", left: "-22%", display: "flex", alignItems: "center", gap: "6px" }}>
-              <span style={{ width: "42px", height: "1px", backgroundColor: "rgba(201, 164, 92, 0.45)" }} />
-              <span style={{ fontFamily: "var(--font-sans-body)", fontSize: "10px", letterSpacing: "0.2em", textTransform: "uppercase", color: "#c9a45c" }}>Neem</span>
-            </div>
-
-            <div className="botanical-label-group" style={{ position: "absolute", top: "74%", left: "-18%", display: "flex", alignItems: "center", gap: "6px" }}>
-              <span style={{ width: "36px", height: "1px", backgroundColor: "rgba(201, 164, 92, 0.45)" }} />
-              <span style={{ fontFamily: "var(--font-sans-body)", fontSize: "10px", letterSpacing: "0.2em", textTransform: "uppercase", color: "#c9a45c" }}>Giloy</span>
-            </div>
+            {/* Pure organic vine framing without loose scattered tags */}
           </div>
 
           {/* Second Botanical Vine (Bottom-Left Corner) */}
@@ -649,7 +635,11 @@ export default function Hero({ onSelectProduct: _onSelectProduct } = {}) {
         </div>
 
         {/* ===================================================================
-            ASYMMETRIC EDITORIAL CONTENT (INTENTIONAL POSITIONING)
+            TIGHT, DISCIPLINED EDITORIAL CONTENT BLOCK
+            - Spacing tightened and unified
+            - Mixed high-contrast luxury fonts (Marcellus + Italiana + Manrope + Plus Jakarta Sans)
+            - Short, punchy, minimal headline scale
+            - Bold key points grouped together in one clean glass pill strip
             =================================================================== */}
         <div
           className="container"
@@ -657,72 +647,103 @@ export default function Hero({ onSelectProduct: _onSelectProduct } = {}) {
             position: "relative",
             zIndex: 10,
             width: "100%",
-            paddingTop: "6.5rem",
-            paddingBottom: "5.5rem",
+            paddingTop: "calc(96px + 3vh)",
+            paddingBottom: "3.5rem",
           }}
         >
-          <div style={{ maxWidth: "860px" }}>
-            {/* Eyebrow with Soft Pulsing Glow Dot */}
+          <div style={{ maxWidth: "780px" }}>
+            {/* Architectural Eyebrow with Monogram Dot & Gold Accent */}
             <div
               style={{
                 display: "inline-flex",
                 alignItems: "center",
                 gap: "0.75rem",
-                marginBottom: "1.75rem",
+                marginBottom: "0.95rem",
               }}
             >
               <span
                 style={{
-                  width: "7px",
-                  height: "7px",
+                  width: "6px",
+                  height: "6px",
                   borderRadius: "50%",
                   backgroundColor: "#c9a45c",
                   display: "inline-block",
-                  boxShadow: "0 0 14px rgba(201, 164, 92, 0.9)",
+                  boxShadow: "0 0 12px rgba(201, 164, 92, 0.9)",
                   animation: "eyebrowPulse 2.4s ease-in-out infinite",
                 }}
               />
               <span
                 style={{
-                  fontFamily: "var(--font-sans-body)",
-                  fontSize: "12px",
-                  fontWeight: 500,
-                  letterSpacing: "0.22em",
+                  fontFamily: "'Manrope', sans-serif",
+                  fontSize: "11px",
+                  fontWeight: 600,
+                  letterSpacing: "0.26em",
                   color: "#c9a45c",
                   textTransform: "uppercase",
                 }}
               >
                 THE ART OF AYURVEDA
               </span>
+              <span
+                style={{
+                  width: "28px",
+                  height: "1px",
+                  backgroundColor: "rgba(201, 164, 92, 0.45)",
+                  display: "inline-block",
+                }}
+              />
+              <span
+                style={{
+                  fontFamily: "'Manrope', sans-serif",
+                  fontSize: "10px",
+                  fontWeight: 500,
+                  letterSpacing: "0.2em",
+                  color: "rgba(244, 239, 227, 0.55)",
+                  textTransform: "uppercase",
+                }}
+                className="hidden sm:inline-block"
+              >
+                ESTD. HARIDWAR
+              </span>
             </div>
 
-            {/* Dominant Headline with SplitText Line Masking */}
+            {/* Short, Crisp, Minimal Luxury Headline */}
             <h1
               ref={headlineRef}
               id="hero-headline"
               style={{
-                fontFamily: "var(--font-serif-display)",
-                fontSize: "clamp(64px, 8vw, 128px)",
-                lineHeight: 0.98,
-                fontWeight: 400,
-                letterSpacing: "-0.02em",
-                color: "#f4efe3",
-                marginBottom: "1.75rem",
+                lineHeight: 1.05,
+                letterSpacing: "-0.015em",
+                marginBottom: "1rem",
               }}
             >
+              {/* Line 1: Sculpted Roman Majesty (Marcellus) */}
               <span style={{ display: "block", overflow: "hidden" }}>
-                <span className="hero-split-line" style={{ display: "block" }}>
+                <span
+                  className="hero-split-line"
+                  style={{
+                    display: "block",
+                    fontFamily: "'Marcellus', serif",
+                    fontSize: "clamp(42px, 5.2vw, 76px)",
+                    fontWeight: 400,
+                    color: "#f4efe3",
+                  }}
+                >
                   Rooted in Nature.
                 </span>
               </span>
 
-              <span style={{ display: "block", overflow: "hidden", marginTop: "0.3rem" }}>
+              {/* Line 2: High-Fashion Cursive Italic with Liquid Gold Shimmer (Italiana) */}
+              <span style={{ display: "block", overflow: "hidden", marginTop: "0.15rem" }}>
                 <span
                   className="hero-split-line hero-shimmer-text"
                   style={{
                     display: "block",
+                    fontFamily: "'Italiana', serif",
                     fontStyle: "italic",
-                    fontWeight: 300,
+                    fontSize: "clamp(46px, 5.8vw, 84px)",
+                    fontWeight: 400,
+                    color: "#c9a45c",
                   }}
                 >
                   Crafted with Purpose.
@@ -730,22 +751,67 @@ export default function Hero({ onSelectProduct: _onSelectProduct } = {}) {
               </span>
             </h1>
 
-            {/* Subtext: One Line in Cormorant Italic */}
+            {/* Disciplined Modern Editorial Subtext (Plus Jakarta Sans / Manrope) */}
             <p
               ref={subtextRef}
               style={{
-                fontFamily: "var(--font-serif-display)",
-                fontStyle: "italic",
-                fontSize: "clamp(1.2rem, 1.8vw, 1.55rem)",
-                lineHeight: 1.4,
-                color: "rgba(244, 239, 227, 0.8)",
+                fontFamily: "'Plus Jakarta Sans', 'Inter', sans-serif",
+                fontSize: "clamp(15px, 1.25vw, 17px)",
+                lineHeight: 1.55,
+                color: "rgba(244, 239, 227, 0.76)",
                 fontWeight: 400,
-                maxWidth: "640px",
-                marginBottom: "3rem",
+                maxWidth: "580px",
+                marginBottom: "1.35rem",
               }}
             >
-              A timeless approach to Ayurvedic wellness.
+              Authentic Ayurvedic formulations honoring 5,000-year classical protocols, elevated by standardized clinical-grade botanical extraction.
             </p>
+
+            {/* KEY POINTS GROUPED TOGETHER & BOLD (Unified, Clean & Minimal) */}
+            <div
+              style={{
+                display: "inline-flex",
+                flexWrap: "wrap",
+                alignItems: "center",
+                gap: "1.25rem",
+                padding: "0.75rem 1.25rem",
+                borderRadius: "3px",
+                backgroundColor: "rgba(6, 21, 15, 0.6)",
+                border: "1px solid rgba(201, 164, 92, 0.22)",
+                backdropFilter: "blur(14px)",
+                WebkitBackdropFilter: "blur(14px)",
+                marginBottom: "1.65rem",
+              }}
+              className="hero-key-points-capsule"
+            >
+              {/* Point 1 */}
+              <div style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem" }}>
+                <span style={{ width: "5px", height: "5px", borderRadius: "50%", backgroundColor: "#c9a45c" }} />
+                <span style={{ fontFamily: "'Manrope', sans-serif", fontSize: "11.5px", color: "rgba(244, 239, 227, 0.9)" }}>
+                  <strong style={{ color: "#dfbe78", fontWeight: 700, letterSpacing: "0.03em" }}>100% Wild-Harvested</strong> · Himalayan Botanicals
+                </span>
+              </div>
+
+              <span style={{ width: "1px", height: "14px", backgroundColor: "rgba(201, 164, 92, 0.28)" }} className="hidden sm:inline-block" />
+
+              {/* Point 2 */}
+              <div style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem" }}>
+                <span style={{ width: "5px", height: "5px", borderRadius: "50%", backgroundColor: "#c9a45c" }} />
+                <span style={{ fontFamily: "'Manrope', sans-serif", fontSize: "11.5px", color: "rgba(244, 239, 227, 0.9)" }}>
+                  <strong style={{ color: "#dfbe78", fontWeight: 700, letterSpacing: "0.03em" }}>Charaka Samhita</strong> · Classical Formulations
+                </span>
+              </div>
+
+              <span style={{ width: "1px", height: "14px", backgroundColor: "rgba(201, 164, 92, 0.28)" }} className="hidden md:inline-block" />
+
+              {/* Point 3 */}
+              <div style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem" }}>
+                <span style={{ width: "5px", height: "5px", borderRadius: "50%", backgroundColor: "#c9a45c" }} />
+                <span style={{ fontFamily: "'Manrope', sans-serif", fontSize: "11.5px", color: "rgba(244, 239, 227, 0.9)" }}>
+                  <strong style={{ color: "#dfbe78", fontWeight: 700, letterSpacing: "0.03em" }}>NABL Tested</strong> · Heavy-Metal Safe
+                </span>
+              </div>
+            </div>
 
             {/* Primary & Secondary Action Group */}
             <nav
@@ -755,10 +821,10 @@ export default function Hero({ onSelectProduct: _onSelectProduct } = {}) {
                 display: "flex",
                 flexWrap: "wrap",
                 alignItems: "center",
-                gap: "2.25rem",
+                gap: "2rem",
               }}
             >
-              {/* Primary CTA "Discover Charak" with Sweep Fill */}
+              {/* Primary CTA "Discover Formulations" with Sweep Fill */}
               <a
                 ref={primaryBtnRef}
                 href="#formulations"
@@ -768,14 +834,14 @@ export default function Hero({ onSelectProduct: _onSelectProduct } = {}) {
                   display: "inline-flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  padding: "0.95rem 2.4rem",
+                  padding: "0.88rem 2.25rem",
                   borderRadius: "2px",
                   border: "1px solid #c9a45c",
                   backgroundColor: "#c9a45c",
                   color: "#06150f",
-                  fontFamily: "var(--font-sans-body)",
-                  fontSize: "12px",
-                  fontWeight: 500,
+                  fontFamily: "'Manrope', sans-serif",
+                  fontSize: "11.5px",
+                  fontWeight: 600,
                   letterSpacing: "0.18em",
                   textTransform: "uppercase",
                   textDecoration: "none",
@@ -797,7 +863,7 @@ export default function Hero({ onSelectProduct: _onSelectProduct } = {}) {
                   className="btn-dark-sweep"
                 />
                 <span style={{ position: "relative", zIndex: 1 }} className="btn-label">
-                  DISCOVER CHARAK
+                  DISCOVER FORMULATIONS
                 </span>
               </a>
 
@@ -808,15 +874,15 @@ export default function Hero({ onSelectProduct: _onSelectProduct } = {}) {
                   position: "relative",
                   display: "inline-flex",
                   alignItems: "center",
-                  gap: "0.6rem",
-                  fontFamily: "var(--font-sans-body)",
-                  fontSize: "12px",
+                  gap: "0.55rem",
+                  fontFamily: "'Manrope', sans-serif",
+                  fontSize: "11.5px",
                   fontWeight: 500,
                   letterSpacing: "0.18em",
                   textTransform: "uppercase",
                   color: "#f4efe3",
                   textDecoration: "none",
-                  padding: "0.4rem 0",
+                  padding: "0.35rem 0",
                   borderRadius: "2px",
                   transition: "color 250ms ease",
                 }}
