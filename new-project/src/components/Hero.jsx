@@ -14,6 +14,7 @@ export default function Hero({ onSelectProduct: _onSelectProduct } = {}) {
   const subtextRef = useRef(null);
   const ctaGroupRef = useRef(null);
   const marqueeRef = useRef(null);
+  const marqueeTrackRef = useRef(null);
   const watermarkRef = useRef(null);
   const canvasRef = useRef(null);
   const spotlightRef = useRef(null);
@@ -201,6 +202,18 @@ export default function Hero({ onSelectProduct: _onSelectProduct } = {}) {
         },
         0
       );
+
+      // Yellow tape translates horizontally with scroll
+      if (marqueeTrackRef.current) {
+        scrollTl.to(
+          marqueeTrackRef.current,
+          {
+            x: "-=260",
+            ease: "none",
+          },
+          0
+        );
+      }
 
       // Headline lifts and fades out
       scrollTl.to(
@@ -1055,62 +1068,69 @@ export default function Hero({ onSelectProduct: _onSelectProduct } = {}) {
         </div>
 
         {/* ===================================================================
-            BOTTOM: 1px Vertical Gold Line (40px tall, loop) + Thin Marquee Ticker
+            YELLOW LUXURY APOTHECARY TAPE / INFINITE SCROLL MARQUEE
+            Vibrant yellow-gold background (#e5b958) with high-contrast obsidian typography
             =================================================================== */}
         <div
           ref={marqueeRef}
+          aria-label="Ayurvedic Certification Ticker Tape"
           style={{
             position: "absolute",
             bottom: 0,
             left: 0,
             right: 0,
-            zIndex: 10,
+            zIndex: 25,
             display: "flex",
             alignItems: "center",
-            borderTop: "1px solid rgba(201, 164, 92, 0.14)",
-            backgroundColor: "rgba(6, 21, 15, 0.65)",
-            backdropFilter: "blur(12px)",
-            WebkitBackdropFilter: "blur(12px)",
             height: "44px",
+            background: "linear-gradient(90deg, #cba864 0%, #dfbe75 25%, #f3d790 50%, #dfbe75 75%, #cba864 100%)",
+            borderTop: "1px solid rgba(6, 21, 15, 0.5)",
+            borderBottom: "1px solid rgba(6, 21, 15, 0.5)",
+            boxShadow: "0 4px 20px rgba(0, 0, 0, 0.45)",
             overflow: "hidden",
+            cursor: "default",
           }}
         >
-          {/* 5. SVG: Replaced "SCROLL" box with a 1px vertical gold line (40px tall) that animates top to bottom in a loop */}
+          {/* Left Authentic Apothecary Seal Badge */}
           <div
             style={{
-              padding: "0 1.5rem",
+              padding: "0 1.25rem",
               display: "flex",
               alignItems: "center",
-              justifyContent: "center",
-              borderRight: "1px solid rgba(201, 164, 92, 0.15)",
+              gap: "0.55rem",
+              backgroundColor: "#06150f",
+              color: "#cba864",
               height: "100%",
               flexShrink: 0,
+              borderRight: "2px solid #06150f",
+              zIndex: 5,
             }}
           >
             <div
               style={{
-                position: "relative",
-                width: "1px",
-                height: "40px",
-                backgroundColor: "rgba(201, 164, 92, 0.25)",
-                overflow: "hidden",
+                width: "8px",
+                height: "8px",
+                borderRadius: "50%",
+                backgroundColor: "#e2be73",
+                boxShadow: "0 0 8px #e2be73",
+                animation: "eyebrowPulse 2s ease-in-out infinite",
+              }}
+            />
+            <span
+              style={{
+                fontFamily: "'Manrope', sans-serif",
+                fontSize: "11px",
+                fontWeight: 800,
+                letterSpacing: "0.22em",
+                textTransform: "uppercase",
+                color: "#f4efe3",
               }}
             >
-              <div
-                style={{
-                  position: "absolute",
-                  top: 0,
-                  left: 0,
-                  width: "100%",
-                  height: "16px",
-                  backgroundColor: "#c9a45c",
-                  animation: "verticalLine40 2s ease-in-out infinite",
-                }}
-              />
-            </div>
+              CHARAK · CERTIFIED
+            </span>
           </div>
 
-          {/* Thin Marquee Ticker */}
+          {/* Infinite Marquee Ticker Track with Seamless Loop & Scroll Parallax */}
           <div
             style={{
               overflow: "hidden",
@@ -1119,21 +1139,53 @@ export default function Hero({ onSelectProduct: _onSelectProduct } = {}) {
               width: "100%",
             }}
           >
-            <div className="marquee-track" style={{ display: "inline-flex", animation: "marqueeScroll 35s linear infinite" }}>
-              {[0, 1, 2, 3].map((k) => (
-                <span
-                  key={k}
+            <div
+              ref={marqueeTrackRef}
+              className="infinite-tape-track"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                willChange: "transform",
+              }}
+            >
+              {[0, 1].map((copyIdx) => (
+                <div
+                  key={copyIdx}
                   style={{
-                    fontFamily: "'Manrope', sans-serif",
-                    fontSize: "11px",
-                    letterSpacing: "0.2em",
-                    textTransform: "uppercase",
-                    color: "rgba(250, 247, 238, 0.65)",
-                    padding: "0 1.75rem",
+                    display: "inline-flex",
+                    alignItems: "center",
+                    flexShrink: 0,
                   }}
                 >
-                  Classical Formulations <span style={{ color: "#c9a45c" }}>·</span> Heavy-Metal Tested <span style={{ color: "#c9a45c" }}>·</span> Haridwar Botanical Heritage <span style={{ color: "#c9a45c" }}>·</span> Charaka Samhita <span style={{ color: "#c9a45c" }}>·</span> Standardized Extraction <span style={{ color: "#c9a45c" }}>·</span>
-                </span>
+                  {[0, 1, 2, 3].map((k) => (
+                    <span
+                      key={k}
+                      style={{
+                        fontFamily: "'Manrope', sans-serif",
+                        fontSize: "12px",
+                        fontWeight: 700,
+                        letterSpacing: "0.2em",
+                        textTransform: "uppercase",
+                        color: "#06150f",
+                        padding: "0 1.75rem",
+                        display: "inline-flex",
+                        alignItems: "center",
+                        gap: "1.2rem",
+                      }}
+                    >
+                      <span>Classical Formulations</span>
+                      <span style={{ opacity: 0.6, fontSize: "10px" }}>◈</span>
+                      <span>Heavy-Metal Tested</span>
+                      <span style={{ opacity: 0.6, fontSize: "10px" }}>◈</span>
+                      <span>Haridwar Botanical Heritage</span>
+                      <span style={{ opacity: 0.6, fontSize: "10px" }}>◈</span>
+                      <span>Charaka Samhita</span>
+                      <span style={{ opacity: 0.6, fontSize: "10px" }}>◈</span>
+                      <span>Standardized Extraction</span>
+                      <span style={{ opacity: 0.6, fontSize: "10px" }}>◈</span>
+                    </span>
+                  ))}
+                </div>
               ))}
             </div>
           </div>
@@ -1199,9 +1251,17 @@ export default function Hero({ onSelectProduct: _onSelectProduct } = {}) {
           100% { transform: translateY(260%); opacity: 0; }
         }
 
-        @keyframes marqueeScroll {
+        @keyframes infiniteTapeScroll {
           0% { transform: translateX(0); }
           100% { transform: translateX(-50%); }
+        }
+
+        .infinite-tape-track {
+          animation: infiniteTapeScroll 28s linear infinite;
+        }
+
+        .infinite-tape-track:hover {
+          animation-play-state: paused;
         }
 
         /* 4. BUTTONS: Primary hover = fill becomes dark green, text & border gold */
