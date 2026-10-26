@@ -43,13 +43,20 @@ export default function App() {
     });
 
     lenis.on("scroll", ScrollTrigger.update);
+    window.lenis = lenis;
 
     const params = new URLSearchParams(window.location.search);
     const scrollTarget = params.get("scroll");
     if (scrollTarget) {
+      const pos = parseInt(scrollTarget, 10);
+      window.scrollTo(0, pos);
+      lenis.scrollTo(pos, { immediate: true });
+      ScrollTrigger.update();
       setTimeout(() => {
-        lenis.scrollTo(parseInt(scrollTarget, 10), { immediate: true });
-      }, 400);
+        window.scrollTo(0, pos);
+        lenis.scrollTo(pos, { immediate: true });
+        ScrollTrigger.update();
+      }, 100);
     }
 
     const updateRaf = (time) => {

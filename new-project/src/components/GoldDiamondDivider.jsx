@@ -26,11 +26,11 @@ export default function GoldDiamondDivider({ className = "", light = false }) {
             });
             gsap.to(path, {
               strokeDashoffset: 0,
-              duration: 1.5,
+              duration: 1.6,
               ease: "power2.inOut",
               scrollTrigger: {
                 trigger: dividerRef.current,
-                start: "top 90%",
+                start: "top 92%",
                 toggleActions: "play none none reverse",
               },
             });
@@ -44,72 +44,76 @@ export default function GoldDiamondDivider({ className = "", light = false }) {
     return () => ctx.revert();
   }, []);
 
-  const strokeColor = light ? "#b8924a" : "#c9a45c";
+  const strokeColor = light ? "#b8924a" : "#cba864";
 
   return (
     <div
       ref={dividerRef}
-      className={`w-full flex justify-center items-center py-6 ${className}`}
+      className={`w-full flex justify-center items-center py-7 ${className}`}
       aria-hidden="true"
+      style={{ overflow: "hidden" }}
     >
       <svg
-        viewBox="0 0 800 40"
+        viewBox="0 0 900 44"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="w-full max-w-4xl h-8 px-4"
+        className="w-full max-w-4xl h-9 px-4"
         style={{ overflow: "visible" }}
       >
         {/* Left Hairline */}
         <path
           className="diamond-divider-path"
-          d="M 20 20 L 375 20"
+          d="M 20 22 L 390 22"
           stroke={strokeColor}
           strokeWidth="1"
-          strokeOpacity="0.35"
+          strokeOpacity="0.32"
+        />
+
+        {/* Left Flanking Botanical Leaf Sprout */}
+        <path
+          className="diamond-divider-path"
+          d="M 405 22 C 405 22 415 16 422 22 C 415 28 405 22 405 22 Z"
+          stroke={strokeColor}
+          strokeWidth="0.9"
+          strokeOpacity="0.75"
         />
 
         {/* Center Sacred Diamond Geometry */}
         {/* Outer Faceted Diamond */}
         <path
           className="diamond-divider-path"
-          d="M 400 8 L 412 20 L 400 32 L 388 20 Z"
+          d="M 450 7 L 464 22 L 450 37 L 436 22 Z"
           stroke={strokeColor}
-          strokeWidth="1"
-          strokeOpacity="0.85"
+          strokeWidth="1.2"
+          strokeOpacity="0.9"
         />
 
         {/* Inner Jewel Diamond */}
         <path
           className="diamond-divider-path"
-          d="M 400 13 L 406 20 L 400 27 L 394 20 Z"
+          d="M 450 13 L 458 22 L 450 31 L 442 22 Z"
           stroke={strokeColor}
           strokeWidth="0.8"
-          strokeOpacity="0.6"
+          strokeOpacity="0.65"
+          fill="rgba(203, 168, 100, 0.12)"
         />
 
-        {/* Flanking Diamond Wing Points */}
+        {/* Right Flanking Botanical Leaf Sprout */}
         <path
           className="diamond-divider-path"
-          d="M 382 20 L 385 20"
+          d="M 495 22 C 495 22 485 16 478 22 C 485 28 495 22 495 22 Z"
           stroke={strokeColor}
-          strokeWidth="1.2"
-          strokeOpacity="0.7"
-        />
-        <path
-          className="diamond-divider-path"
-          d="M 415 20 L 418 20"
-          stroke={strokeColor}
-          strokeWidth="1.2"
-          strokeOpacity="0.7"
+          strokeWidth="0.9"
+          strokeOpacity="0.75"
         />
 
         {/* Right Hairline */}
         <path
           className="diamond-divider-path"
-          d="M 425 20 L 780 20"
+          d="M 510 22 L 880 22"
           stroke={strokeColor}
           strokeWidth="1"
-          strokeOpacity="0.35"
+          strokeOpacity="0.32"
         />
       </svg>
     </div>

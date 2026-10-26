@@ -5,6 +5,29 @@ import { categories, products } from "../data/catalog";
 
 gsap.registerPlugin(ScrollTrigger);
 
+const CATEGORY_META = {
+  capsules: {
+    botanicals: "Shilajit, Ashwagandha, Gokshura",
+    target: "Cellular Rasayana & Vitality",
+    dosha: "Vata • Pitta Harmonizing",
+  },
+  oils: {
+    botanicals: "Pure Clove, Jaiphal, Sesame Taila",
+    target: "Sneha Kalpana Lipid Delivery",
+    dosha: "Vata Pacifying • Topical",
+  },
+  majun: {
+    botanicals: "Kashmiri Saffron, Swarna Bhasma, Tonic Roots",
+    target: "Classical Avaleha Confection",
+    dosha: "Tridoshic Rejuvenation",
+  },
+  regimens: {
+    botanicals: "Synergistic 90-Day Classical Protocol",
+    target: "Tri-Pillar Mind-Body Equilibrium",
+    dosha: "Tridosha Balance",
+  },
+};
+
 export default function FormulationsSection({ onSelectProduct }) {
   // 4 classical categories (excluding 'all')
   const featureCategories = categories.filter((c) => c.id !== "all");
@@ -14,12 +37,14 @@ export default function FormulationsSection({ onSelectProduct }) {
 
   const sectionRef = useRef(null);
   const archSvgRef = useRef(null);
+  const stageRef = useRef(null);
   const imageRef = useRef(null);
   const shadowRef = useRef(null);
+  const auraRef = useRef(null);
 
   const activeCat = featureCategories[activeIdx] || featureCategories[0];
 
-  const handleViewRange = (cat) => {
+  const handleOpenProduct = (cat) => {
     if (onSelectProduct) {
       const matched = products.find((p) => p.category === cat.id) || products[0];
       onSelectProduct(matched);
@@ -98,12 +123,12 @@ export default function FormulationsSection({ onSelectProduct }) {
 
     if (imageRef.current) {
       if (isReduced) {
-        gsap.set(imageRef.current, { opacity: 1, y: 0 });
+        gsap.set(imageRef.current, { opacity: 1, y: 0, scale: 1 });
       } else {
         gsap.fromTo(
           imageRef.current,
-          { y: 20, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.7, ease: "power3.out" }
+          { y: 22, opacity: 0, scale: 0.94 },
+          { y: 0, opacity: 1, scale: 1, duration: 0.7, ease: "power3.out" }
         );
       }
     }
@@ -111,376 +136,525 @@ export default function FormulationsSection({ onSelectProduct }) {
     if (shadowRef.current && !isReduced) {
       gsap.fromTo(
         shadowRef.current,
-        { scale: 0.88, opacity: 0.4 },
+        { scale: 0.85, opacity: 0.35 },
         { scale: 1, opacity: 1, duration: 0.7, ease: "power3.out" }
       );
     }
+
+    if (auraRef.current && !isReduced) {
+      gsap.fromTo(
+        auraRef.current,
+        { scale: 0.75, opacity: 0.2 },
+        { scale: 1, opacity: 0.8, duration: 0.9, ease: "power2.out" }
+      );
+    }
   }, [activeIdx]);
+
+  /* =========================================================================
+     4. INTERACTIVE 3D PERSPECTIVE TILT ON ARCHWAY STAGE (Smooth GSAP QuickTo)
+     ========================================================================= */
+  useEffect(() => {
+    const isReduced =
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (isReduced) return;
+
+    const stage = stageRef.current;
+    const img = imageRef.current;
+    const shadow = shadowRef.current;
+    if (!stage || !img || !shadow) return;
+
+    const tiltX = gsap.quickTo(img, "rotateX", { duration: 0.45, ease: "power2.out" });
+    const tiltY = gsap.quickTo(img, "rotateY", { duration: 0.45, ease: "power2.out" });
+    const imgZ = gsap.quickTo(img, "z", { duration: 0.45, ease: "power2.out" });
+    const shadowX = gsap.quickTo(shadow, "x", { duration: 0.45, ease: "power2.out" });
+
+    const handleMouseMove = (e) => {
+      const rect = stage.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5; // -0.5 to 0.5
+      const y = (e.clientY - rect.top) / rect.height - 0.5; // -0.5 to 0.5
+
+      tiltX(-y * 18); // tilt up/down
+      tiltY(x * 22);  // tilt left/right
+      imgZ(24);
+      shadowX(-x * 20);
+    };
+
+    const handleMouseLeave = () => {
+      tiltX(0);
+      tiltY(0);
+      imgZ(0);
+      shadowX(0);
+    };
+
+    stage.addEventListener("mousemove", handleMouseMove);
+    stage.addEventListener("mouseleave", handleMouseLeave);
+
+    return () => {
+      stage.removeEventListener("mousemove", handleMouseMove);
+      stage.removeEventListener("mouseleave", handleMouseLeave);
+    };
+  }, []);
 
   return (
     <section
       ref={sectionRef}
       id="formulations"
-      aria-label="Ayurvedic Formulations Range"
+      aria-label="Classical Formulations by Category"
       style={{
         position: "relative",
         zIndex: 20,
         backgroundColor: "#F4EFE3",
         color: "#0b2a1d",
-        padding: "7.5rem 0 8.5rem",
-        transition: "background-color 0.5s ease",
+        padding: "6rem 0 7rem",
         overflow: "hidden",
+        transition: "background-color 0.4s ease",
       }}
     >
       <div className="container" style={{ maxWidth: "1240px", margin: "0 auto", padding: "0 2rem" }}>
-        {/* 2-Column Responsive Grid */}
-        <div className="formulations-main-grid" style={{ display: "grid", gridTemplateColumns: "1.2fr 0.88fr", gap: "4.5rem", alignItems: "start" }}>
+        {/* ===================================================================
+            SECTION HEADER: Clean Editorial Hierarchy (Inspired by Dribbble "Our New Products")
+            =================================================================== */}
+        <div style={{ marginBottom: "4.5rem", maxWidth: "860px" }}>
+          <div
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "0.75rem",
+              marginBottom: "1rem",
+              fontFamily: "'Manrope', sans-serif",
+              fontSize: "12px",
+              fontWeight: 600,
+              letterSpacing: "0.22em",
+              textTransform: "uppercase",
+              color: "#b8924a",
+            }}
+          >
+            <span style={{ width: "24px", height: "1px", backgroundColor: "#b8924a" }} />
+            <span>02 — THE AYURVEDIC PHARMACOPOEIA</span>
+          </div>
+
+          <h2
+            style={{
+              fontFamily: "var(--font-serif-display, 'Cormorant Garamond', serif)",
+              fontSize: "clamp(38px, 4.8vw, 62px)",
+              fontWeight: 400,
+              lineHeight: 1.12,
+              letterSpacing: "-0.02em",
+              color: "#0b2a1d",
+              marginBottom: "1rem",
+            }}
+          >
+            Classical Formulations
+          </h2>
+
+          <p
+            style={{
+              fontFamily: "'Manrope', sans-serif",
+              fontSize: "15px",
+              lineHeight: 1.65,
+              color: "rgba(11, 42, 29, 0.72)",
+              maxWidth: "680px",
+            }}
+          >
+            Rooted in classical Sneha Kalpana and Avaleha protocols, calibrated with standardized botanical fractions for peak cellular assimilation.
+          </p>
+        </div>
+
+        {/* ===================================================================
+            MAIN 2-COLUMN LAYOUT (Desktop) & ACCORDION (Mobile)
+            =================================================================== */}
+        <div
+          className="formulations-main-grid"
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1.15fr 0.85fr",
+            gap: "4rem",
+            alignItems: "flex-start",
+          }}
+        >
           {/* =================================================================
-              LEFT COLUMN: 4 HUGE CORMORANT LIST ROWS (Numeral 01-04 small, name 56px)
-              Hairlines between rows; Hovered turns accent gold, others dim to 35%
+              LEFT COLUMN: 4 HUGE CATEGORY ROWS (Desktop)
               ================================================================= */}
-          <div style={{ display: "flex", flexDirection: "column", width: "100%" }}>
-            {/* Left-Aligned Subtle Eyebrow (No pill badge) */}
-            <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "2.5rem", letterSpacing: "0.2em" }}>
-              <span
-                style={{
-                  fontFamily: "'Manrope', sans-serif",
-                  fontSize: "12px",
-                  fontWeight: 600,
-                  color: "#b8924a",
-                  textTransform: "uppercase",
-                  letterSpacing: "0.2em",
-                }}
-              >
-                02
-              </span>
-              <span
-                style={{
-                  width: "48px",
-                  height: "1px",
-                  backgroundColor: "rgba(184, 146, 74, 0.45)",
-                  display: "inline-block",
-                }}
-              />
-              <span
-                style={{
-                  fontFamily: "'Manrope', sans-serif",
-                  fontSize: "12px",
-                  fontWeight: 600,
-                  color: "#b8924a",
-                  textTransform: "uppercase",
-                  letterSpacing: "0.2em",
-                }}
-              >
-                FORMULATIONS
-              </span>
-            </div>
+          <div className="formulations-desktop-list" style={{ display: "flex", flexDirection: "column" }}>
+            {featureCategories.map((cat, idx) => {
+              const isActive = activeIdx === idx;
+              const meta = CATEGORY_META[cat.id] || CATEGORY_META.capsules;
+              const numStr = String(idx + 1).padStart(2, "0");
 
-            {/* Desktop Category List */}
-            <div className="formulations-desktop-list" style={{ width: "100%" }}>
-              {featureCategories.map((cat, idx) => {
-                const isHoveredOrActive = activeIdx === idx;
-                const isDimmed = activeIdx !== null && activeIdx !== idx;
-                const numeral = `0${idx + 1}`;
-
-                return (
-                  <div
-                    key={cat.id}
-                    onMouseEnter={() => setActiveIdx(idx)}
-                    onClick={() => setActiveIdx(idx)}
-                    className="category-list-row cursor-pointer"
+              return (
+                <div
+                  key={cat.id}
+                  onMouseEnter={() => setActiveIdx(idx)}
+                  onClick={() => handleOpenProduct(cat)}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      setActiveIdx(idx);
+                      handleOpenProduct(cat);
+                    }
+                  }}
+                  className="formulation-cat-row group"
+                  style={{
+                    position: "relative",
+                    padding: "2.4rem 1.5rem 2.4rem 1.8rem",
+                    borderBottom: "1px solid rgba(184, 146, 74, 0.22)",
+                    cursor: "pointer",
+                    transition: "all 0.35s cubic-bezier(0.16, 1, 0.3, 1)",
+                    borderRadius: "12px",
+                    backgroundColor: isActive ? "rgba(184, 146, 74, 0.06)" : "transparent",
+                  }}
+                >
+                  {/* Left Active Gold Hairline Indicator */}
+                  <span
+                    aria-hidden="true"
                     style={{
-                      padding: "2.35rem 0",
-                      borderBottom: "1px solid rgba(184, 146, 74, 0.25)",
-                      borderTop: idx === 0 ? "1px solid rgba(184, 146, 74, 0.25)" : "none",
-                      opacity: isDimmed ? 0.35 : 1,
-                      transition: "opacity 0.4s ease",
-                      cursor: "pointer",
+                      position: "absolute",
+                      left: 0,
+                      top: "20%",
+                      bottom: "20%",
+                      width: "3px",
+                      borderRadius: "2px",
+                      backgroundColor: "#b8924a",
+                      transform: isActive ? "scaleY(1)" : "scaleY(0)",
+                      transformOrigin: "center",
+                      transition: "transform 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
+                      opacity: isActive ? 1 : 0,
                     }}
-                  >
-                    {/* Small Numeral 01-04 */}
-                    <div
-                      style={{
-                        fontFamily: "'Manrope', sans-serif",
-                        fontSize: "13px",
-                        fontWeight: 600,
-                        letterSpacing: "0.2em",
-                        color: "#b8924a",
-                        marginBottom: "0.4rem",
-                      }}
-                    >
-                      {numeral}
-                    </div>
+                  />
 
-                    {/* Category Name (Huge Cormorant Garamond 56px) */}
-                    <h3
+                  {/* Numeral and Title */}
+                  <div style={{ display: "flex", alignItems: "baseline", gap: "1.4rem" }}>
+                    <span
                       style={{
                         fontFamily: "var(--font-serif-display, 'Cormorant Garamond', serif)",
-                        fontSize: "clamp(36px, 4.2vw, 56px)",
-                        lineHeight: 1.08,
-                        fontWeight: 400,
-                        letterSpacing: "-0.015em",
-                        color: isHoveredOrActive ? "#b8924a" : "#0b2a1d",
-                        transition: "color 0.35s ease",
+                        fontSize: "1.35rem",
+                        fontWeight: 500,
+                        letterSpacing: "0.08em",
+                        color: isActive ? "#b8924a" : "rgba(11, 42, 29, 0.4)",
+                        transition: "color 0.3s ease",
                       }}
                     >
-                      {cat.name}
-                    </h3>
-                  </div>
-                );
-              })}
-            </div>
+                      {numStr}
+                    </span>
 
-            {/* Mobile Stacked Accordion List */}
-            <div className="formulations-mobile-list" style={{ display: "none", flexDirection: "column", width: "100%", borderTop: "1px solid rgba(184, 146, 74, 0.3)", borderBottom: "1px solid rgba(184, 146, 74, 0.3)" }}>
-              {featureCategories.map((cat, idx) => {
-                const isOpen = mobileExpandedIdx === idx;
-                const numeral = `0${idx + 1}`;
-
-                return (
-                  <div
-                    key={cat.id}
-                    style={{
-                      borderBottom:
-                        idx < featureCategories.length - 1
-                          ? "1px solid rgba(184, 146, 74, 0.25)"
-                          : "none",
-                    }}
-                  >
-                    {/* Accordion Row Header */}
-                    <button
-                      type="button"
-                      onClick={() => setMobileExpandedIdx(isOpen ? -1 : idx)}
-                      style={{
-                        width: "100%",
-                        padding: "1.35rem 0",
-                        textAlign: "left",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "space-between",
-                        background: "none",
-                        border: "none",
-                        cursor: "pointer",
-                      }}
-                    >
-                      <div>
-                        <div
-                          style={{
-                            fontFamily: "'Manrope', sans-serif",
-                            fontSize: "12px",
-                            fontWeight: 600,
-                            letterSpacing: "0.2em",
-                            color: "#b8924a",
-                            marginBottom: "0.2rem",
-                          }}
-                        >
-                          {numeral}
-                        </div>
-                        <h3
-                          style={{
-                            fontFamily: "var(--font-serif-display, 'Cormorant Garamond', serif)",
-                            fontSize: "1.75rem",
-                            fontWeight: 400,
-                            color: isOpen ? "#b8924a" : "#0b2a1d",
-                            lineHeight: 1.2,
-                          }}
-                        >
-                          {cat.name}
-                        </h3>
-                      </div>
-                      <span
+                    <div style={{ flex: 1 }}>
+                      <h3
                         style={{
-                          fontSize: "20px",
-                          color: "#b8924a",
-                          transition: "transform 0.3s ease",
-                          transform: isOpen ? "rotate(45deg)" : "rotate(0deg)",
+                          fontFamily: "var(--font-serif-display, 'Cormorant Garamond', serif)",
+                          fontSize: "clamp(32px, 3.8vw, 48px)",
+                          fontWeight: 400,
+                          lineHeight: 1.15,
+                          letterSpacing: "-0.015em",
+                          color: isActive ? "#0b2a1d" : "rgba(11, 42, 29, 0.45)",
+                          transition: "color 0.3s ease, transform 0.3s ease",
+                          transform: isActive ? "translateX(4px)" : "translateX(0)",
                         }}
                       >
-                        +
-                      </span>
-                    </button>
+                        {cat.name}
+                      </h3>
 
-                    {/* Accordion Expanded Body */}
-                    {isOpen && (
-                      <div style={{ paddingBottom: "2rem", paddingTop: "0.5rem", display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
-                        <div
-                          style={{
-                            position: "relative",
-                            width: "280px",
-                            height: "320px",
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "center",
-                          }}
-                        >
-                          {/* Arch SVG Outline */}
-                          <svg
-                            viewBox="0 0 280 320"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                            style={{ position: "absolute", inset: 0, width: "100%", height: "100%", pointerEvents: "none" }}
-                          >
-                            <path
-                              d="M 25 310 L 25 125 A 115 115 0 0 1 255 125 L 255 310"
-                              stroke="#b8924a"
-                              strokeWidth="1"
-                              strokeOpacity="0.45"
-                            />
-                            <path
-                              d="M 140 10 L 145 15 L 140 20 L 135 15 Z"
-                              stroke="#b8924a"
-                              strokeWidth="1"
-                              strokeOpacity="0.6"
-                            />
-                          </svg>
-
-                          <img
-                            src={`/assets/cat-${idx + 1}.png`}
-                            alt={cat.name}
-                            onError={(e) => {
-                              if (cat.featuredImage) {
-                                e.currentTarget.src = cat.featuredImage;
-                              }
-                            }}
-                            style={{
-                              maxHeight: "75%",
-                              maxWidth: "75%",
-                              objectFit: "contain",
-                              position: "relative",
-                              zIndex: 2,
-                            }}
-                          />
-                        </div>
-
-                        {/* Elliptical Shadow */}
-                        <div
-                          style={{
-                            width: "160px",
-                            height: "14px",
-                            borderRadius: "50%",
-                            background: "radial-gradient(ellipse at center, rgba(11, 42, 29, 0.3) 0%, rgba(11, 42, 29, 0) 70%)",
-                            filter: "blur(3px)",
-                            marginTop: "-8px",
-                            marginBottom: "1rem",
-                          }}
-                        />
-
+                      {/* Expanded Subtext & Botanical Meta */}
+                      <div
+                        style={{
+                          overflow: "hidden",
+                          maxHeight: isActive ? "120px" : "0px",
+                          opacity: isActive ? 1 : 0,
+                          transition: "max-height 0.4s ease, opacity 0.35s ease, margin-top 0.35s ease",
+                          marginTop: isActive ? "0.65rem" : "0px",
+                        }}
+                      >
                         <p
                           style={{
                             fontFamily: "'Manrope', sans-serif",
                             fontSize: "13.5px",
                             lineHeight: 1.55,
-                            color: "rgba(11, 42, 29, 0.78)",
-                            maxWidth: "320px",
-                            marginBottom: "1rem",
+                            color: "rgba(11, 42, 29, 0.75)",
+                            marginBottom: "0.45rem",
                           }}
                         >
-                          {cat.desc || cat.tagline}
+                          {cat.tagline}
                         </p>
 
-                        <button
-                          type="button"
-                          onClick={() => handleViewRange(cat)}
-                          className="stage-view-link inline-flex items-center gap-2 group cursor-pointer"
+                        <div
                           style={{
-                            fontFamily: "'Manrope', sans-serif",
-                            fontSize: "12px",
+                            display: "flex",
+                            alignItems: "center",
+                            gap: "0.85rem",
+                            flexWrap: "wrap",
+                            fontSize: "11.5px",
                             fontWeight: 600,
-                            letterSpacing: "0.18em",
-                            textTransform: "uppercase",
-                            color: "#0b2a1d",
-                            position: "relative",
-                            paddingBottom: "3px",
-                            background: "none",
-                            border: "none",
-                            cursor: "pointer",
+                            letterSpacing: "0.06em",
+                            color: "#b8924a",
+                            fontFamily: "'Manrope', sans-serif",
                           }}
                         >
-                          <span>View range</span>
-                          <span style={{ color: "#b8924a" }}>→</span>
-                        </button>
+                          <span>{meta.botanicals}</span>
+                          <span>•</span>
+                          <span style={{ color: "rgba(11, 42, 29, 0.6)" }}>{meta.dosha}</span>
+                        </div>
                       </div>
-                    )}
+                    </div>
+
+                    {/* Arrow Glyph */}
+                    <span
+                      aria-hidden="true"
+                      style={{
+                        fontFamily: "'Manrope', sans-serif",
+                        fontSize: "1.2rem",
+                        color: "#b8924a",
+                        transform: isActive ? "translateX(6px)" : "translateX(0)",
+                        opacity: isActive ? 1 : 0.25,
+                        transition: "all 0.3s ease",
+                      }}
+                    >
+                      →
+                    </span>
                   </div>
-                );
-              })}
-            </div>
+                </div>
+              );
+            })}
           </div>
 
           {/* =================================================================
-              RIGHT COLUMN: STICKY PRODUCT STAGE WITH ARCH OUTLINE & CONTACT SHADOW
+              MOBILE ACCORDION LIST (<1024px)
               ================================================================= */}
-          <div className="formulations-desktop-stage" style={{ display: "flex", flexDirection: "column", alignItems: "center", width: "100%" }}>
+          <div className="formulations-mobile-list" style={{ display: "none", flexDirection: "column", gap: "1rem" }}>
+            {featureCategories.map((cat, idx) => {
+              const isExpanded = mobileExpandedIdx === idx;
+              const numStr = String(idx + 1).padStart(2, "0");
+
+              return (
+                <div
+                  key={cat.id}
+                  style={{
+                    border: "1px solid rgba(184, 146, 74, 0.3)",
+                    borderRadius: "14px",
+                    overflow: "hidden",
+                    backgroundColor: isExpanded ? "#FAF6EE" : "rgba(255, 255, 255, 0.4)",
+                  }}
+                >
+                  <button
+                    type="button"
+                    onClick={() => setMobileExpandedIdx(isExpanded ? -1 : idx)}
+                    style={{
+                      width: "100%",
+                      padding: "1.4rem 1.25rem",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                      textAlign: "left",
+                    }}
+                  >
+                    <div style={{ display: "flex", alignItems: "baseline", gap: "0.85rem" }}>
+                      <span
+                        style={{
+                          fontFamily: "var(--font-serif-display, 'Cormorant Garamond', serif)",
+                          fontSize: "1.1rem",
+                          color: "#b8924a",
+                        }}
+                      >
+                        {numStr}
+                      </span>
+                      <span
+                        style={{
+                          fontFamily: "var(--font-serif-display, 'Cormorant Garamond', serif)",
+                          fontSize: "1.5rem",
+                          color: "#0b2a1d",
+                        }}
+                      >
+                        {cat.name}
+                      </span>
+                    </div>
+                    <span
+                      style={{
+                        fontSize: "1.2rem",
+                        color: "#b8924a",
+                        transform: isExpanded ? "rotate(90deg)" : "rotate(0deg)",
+                        transition: "transform 0.3s ease",
+                      }}
+                    >
+                      →
+                    </span>
+                  </button>
+
+                  {isExpanded && (
+                    <div style={{ padding: "0 1.25rem 1.6rem" }}>
+                      <div
+                        style={{
+                          height: "240px",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          marginBottom: "1rem",
+                          position: "relative",
+                        }}
+                      >
+                        <img
+                          src={`/assets/cat-${idx + 1}.png`}
+                          alt={cat.name}
+                          onError={(e) => {
+                            if (cat.featuredImage) e.currentTarget.src = cat.featuredImage;
+                          }}
+                          style={{ maxHeight: "100%", maxWidth: "80%", objectFit: "contain" }}
+                        />
+                      </div>
+                      <p
+                        style={{
+                          fontFamily: "'Manrope', sans-serif",
+                          fontSize: "13.5px",
+                          lineHeight: 1.6,
+                          color: "rgba(11, 42, 29, 0.8)",
+                          marginBottom: "1.2rem",
+                        }}
+                      >
+                        {cat.desc || cat.tagline}
+                      </p>
+                      <button
+                        type="button"
+                        onClick={() => handleOpenProduct(cat)}
+                        className="btn-primary"
+                        style={{ width: "100%", fontSize: "0.88rem" }}
+                      >
+                        <span>Explore {cat.name}</span>
+                        <span>→</span>
+                      </button>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+
+          {/* =================================================================
+              RIGHT COLUMN: STICKY 3D JHAROKHA ARCHWAY STAGE (Desktop)
+              ================================================================= */}
+          <div
+            className="formulations-desktop-stage"
+            style={{
+              position: "sticky",
+              top: "120px",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
             <div
+              ref={stageRef}
+              onClick={() => handleOpenProduct(activeCat)}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  handleOpenProduct(activeCat);
+                }
+              }}
+              aria-label={`View ${activeCat.name} formulation details`}
               style={{
-                position: "sticky",
-                top: "120px",
-                width: "100%",
+                position: "relative",
+                width: "380px",
+                height: "530px",
+                borderRadius: "190px 190px 20px 20px",
+                backgroundColor: "rgba(255, 255, 255, 0.55)",
+                backdropFilter: "blur(12px)",
+                WebkitBackdropFilter: "blur(12px)",
+                border: "1px solid rgba(184, 146, 74, 0.35)",
+                boxShadow: "0 20px 50px -15px rgba(11, 42, 29, 0.15), 0 0 25px rgba(184, 146, 74, 0.08)",
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
+                justifyContent: "center",
+                padding: "2rem 1.5rem",
+                cursor: "pointer",
+                perspective: "1000px",
+                transformStyle: "preserve-3d",
               }}
             >
-              {/* Product Stage Container */}
+              {/* Inner Antique-Gold Outline Offset 8px */}
+              <div
+                aria-hidden="true"
+                style={{
+                  position: "absolute",
+                  inset: "8px",
+                  borderRadius: "182px 182px 14px 14px",
+                  border: "1px solid rgba(184, 146, 74, 0.22)",
+                  pointerEvents: "none",
+                }}
+              />
+
+              {/* Decorative SVG Arch Lines */}
+              <svg
+                ref={archSvgRef}
+                viewBox="0 0 380 530"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  width: "100%",
+                  height: "100%",
+                  pointerEvents: "none",
+                }}
+              >
+                <path
+                  className="arch-outline-path"
+                  d="M 20 510 L 20 190 C 20 96 96 20 190 20 C 284 20 360 96 360 190 L 360 510"
+                  stroke="#b8924a"
+                  strokeWidth="0.8"
+                  strokeOpacity="0.3"
+                />
+                <circle cx="190" cy="20" r="3" fill="#b8924a" fillOpacity="0.8" />
+              </svg>
+
+              {/* Radiant Botanical Aura behind Bottle */}
+              <div
+                ref={auraRef}
+                aria-hidden="true"
+                style={{
+                  position: "absolute",
+                  top: "38%",
+                  left: "50%",
+                  transform: "translate(-50%, -50%)",
+                  width: "260px",
+                  height: "260px",
+                  borderRadius: "50%",
+                  background: "radial-gradient(circle, rgba(184, 146, 74, 0.18) 0%, rgba(244, 239, 227, 0) 70%)",
+                  filter: "blur(20px)",
+                  pointerEvents: "none",
+                }}
+              />
+
+              {/* 3D Product Stage Image */}
               <div
                 style={{
                   position: "relative",
-                  width: "360px",
-                  height: "450px",
+                  width: "100%",
+                  height: "360px",
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "center",
                   justifyContent: "center",
+                  transformStyle: "preserve-3d",
                 }}
               >
-                {/* Thin Gold Arch Outline SVG (Draws on enter) */}
-                <svg
-                  ref={archSvgRef}
-                  viewBox="0 0 360 450"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  style={{ position: "absolute", inset: 0, width: "100%", height: "100%", pointerEvents: "none", overflow: "visible" }}
-                >
-                  {/* Outer Arch */}
-                  <path
-                    className="arch-outline-path"
-                    d="M 30 440 L 30 170 A 150 150 0 0 1 330 170 L 330 440"
-                    stroke="#b8924a"
-                    strokeWidth="1"
-                    strokeOpacity="0.45"
-                  />
-                  {/* Inner Hairline Arch */}
-                  <path
-                    className="arch-outline-path"
-                    d="M 38 440 L 38 175 A 142 142 0 0 1 322 175 L 322 440"
-                    stroke="#b8924a"
-                    strokeWidth="0.75"
-                    strokeOpacity="0.25"
-                  />
-                  {/* Apex Diamond Accent */}
-                  <path
-                    className="arch-outline-path"
-                    d="M 180 14 L 186 21 L 180 28 L 174 21 Z"
-                    stroke="#b8924a"
-                    strokeWidth="1"
-                    strokeOpacity="0.7"
-                  />
-                </svg>
-
-                {/* Transparent Product Image: Crossfades and rises 20px on category change */}
                 <div
+                  ref={imageRef}
                   style={{
-                    position: "relative",
-                    zIndex: 2,
                     width: "100%",
-                    height: "280px",
+                    height: "320px",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
+                    position: "relative",
+                    zIndex: 2,
+                    willChange: "transform, opacity",
                   }}
                 >
                   <img
-                    ref={imageRef}
                     src={`/assets/cat-${activeIdx + 1}.png`}
                     alt={activeCat.name}
                     onError={(e) => {
@@ -490,9 +664,10 @@ export default function FormulationsSection({ onSelectProduct }) {
                     }}
                     style={{
                       maxHeight: "100%",
-                      maxWidth: "85%",
+                      maxWidth: "82%",
                       objectFit: "contain",
                       display: "block",
+                      filter: "drop-shadow(0 14px 24px rgba(11, 42, 29, 0.15))",
                     }}
                   />
                 </div>
@@ -501,19 +676,19 @@ export default function FormulationsSection({ onSelectProduct }) {
                 <div
                   ref={shadowRef}
                   style={{
-                    width: "190px",
-                    height: "16px",
+                    width: "200px",
+                    height: "18px",
                     borderRadius: "50%",
-                    background: "radial-gradient(ellipse at center, rgba(11, 42, 29, 0.35) 0%, rgba(11, 42, 29, 0) 70%)",
-                    filter: "blur(4px)",
-                    marginTop: "-12px",
+                    background: "radial-gradient(ellipse at center, rgba(11, 42, 29, 0.38) 0%, rgba(11, 42, 29, 0) 72%)",
+                    filter: "blur(5px)",
+                    marginTop: "-14px",
                     position: "relative",
                     zIndex: 1,
                   }}
                 />
               </div>
 
-              {/* Under the Stage: 2-line Description & View Range Link with Underline Draw */}
+              {/* Under the Stage: Description & View Range Link */}
               <div
                 style={{
                   width: "100%",
@@ -521,30 +696,28 @@ export default function FormulationsSection({ onSelectProduct }) {
                   flexDirection: "column",
                   alignItems: "center",
                   textAlign: "center",
-                  marginTop: "1.25rem",
-                  maxWidth: "380px",
+                  marginTop: "1.4rem",
+                  maxWidth: "340px",
                 }}
               >
                 <p
                   style={{
                     fontFamily: "'Manrope', sans-serif",
-                    fontSize: "14px",
-                    lineHeight: 1.6,
+                    fontSize: "13.5px",
+                    lineHeight: 1.55,
                     color: "rgba(11, 42, 29, 0.78)",
                     maxHeight: "3.2em",
                     overflow: "hidden",
                     display: "-webkit-box",
                     WebkitLineClamp: 2,
                     WebkitBoxOrient: "vertical",
-                    marginBottom: "1.25rem",
+                    marginBottom: "1.1rem",
                   }}
                 >
                   {activeCat.desc || activeCat.tagline}
                 </p>
 
-                <button
-                  type="button"
-                  onClick={() => handleViewRange(activeCat)}
+                <div
                   className="stage-view-link inline-flex items-center gap-2 group cursor-pointer"
                   style={{
                     fontFamily: "'Manrope', sans-serif",
@@ -555,12 +728,9 @@ export default function FormulationsSection({ onSelectProduct }) {
                     color: "#0b2a1d",
                     position: "relative",
                     paddingBottom: "3px",
-                    background: "none",
-                    border: "none",
-                    cursor: "pointer",
                   }}
                 >
-                  <span>View range</span>
+                  <span>Explore Formulation</span>
                   <span
                     className="stage-arrow"
                     style={{
@@ -587,7 +757,7 @@ export default function FormulationsSection({ onSelectProduct }) {
                       transition: "transform 0.35s cubic-bezier(0.16, 1, 0.3, 1)",
                     }}
                   />
-                </button>
+                </div>
               </div>
             </div>
           </div>
