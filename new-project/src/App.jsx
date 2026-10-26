@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Lenis from "lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -7,9 +7,9 @@ gsap.registerPlugin(ScrollTrigger);
 import BotanicalCanvas from "./components/BotanicalCanvas";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
-import AttributesStrip from "./components/AttributesStrip";
-import CategoryShowcase from "./components/CategoryShowcase";
-import ProductCatalog from "./components/ProductCatalog";
+import ManifestoSection from "./components/ManifestoSection";
+import GoldDiamondDivider from "./components/GoldDiamondDivider";
+import FormulationsSection from "./components/FormulationsSection";
 import ProductModal from "./components/ProductModal";
 import DoshaQuiz from "./components/DoshaQuiz";
 import ExtractionJourney from "./components/ExtractionJourney";
@@ -24,11 +24,9 @@ import Footer from "./components/Footer";
 import QuickEnquiryModal from "./components/QuickEnquiryModal";
 
 export default function App() {
-  const [activeCategory, setActiveCategory] = useState("all");
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [enquiryModalOpen, setEnquiryModalOpen] = useState(false);
   const [enquiryInitialType, setEnquiryInitialType] = useState("Doctor / Clinical Practice");
-
 
   // Luxury Smooth Scrolling with Lenis synchronized to GSAP ScrollTrigger
   useEffect(() => {
@@ -69,8 +67,6 @@ export default function App() {
       {/* Ambient Floating Golden Pollen / Spores Canvas */}
       <BotanicalCanvas />
 
-      {/* Top Notification Bar suppressed per visual direction (Do not add a marquee or announcement ticker) */}
-
       {/* Sticky Glass Navbar */}
       <Navbar onOpenEnquiry={handleOpenEnquiry} />
 
@@ -79,18 +75,14 @@ export default function App() {
         {/* Asymmetrical Editorial Hero with Interactive Product Stage Switcher */}
         <Hero onSelectProduct={setSelectedProduct} />
 
-        {/* Prestige 4-Column Attribute Ribbon */}
-        <AttributesStrip />
+        {/* STEP 2: Manifesto Section (Dark green #06150f, word scrub reveal, 4 count-up stats) */}
+        <ManifestoSection />
 
-        {/* Editorial Category Mosaic */}
-        <CategoryShowcase onSelectCategory={(catId) => setActiveCategory(catId)} />
+        {/* STEP 4: Thin Gold Diamond SVG Divider that draws itself on scroll */}
+        <GoldDiamondDivider />
 
-        {/* Product Showcase & Catalog */}
-        <ProductCatalog
-          activeCategory={activeCategory}
-          onSelectCategory={setActiveCategory}
-          onSelectProduct={setSelectedProduct}
-        />
+        {/* STEP 3: Merged Formulations Section (Ivory #F4EFE3, huge list rows, sticky product stage) */}
+        <FormulationsSection onSelectProduct={setSelectedProduct} />
 
         {/* Interactive Ayurvedic Constitution / Dosha Diagnostic Tool */}
         <DoshaQuiz onOpenEnquiry={handleOpenEnquiry} />
