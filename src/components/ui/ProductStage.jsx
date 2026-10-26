@@ -6,7 +6,7 @@ import { OpenBook } from './Ornament';
 export function ProductStage({
   filename,
   alt = 'Product image',
-  transparent = false,
+  transparent = true,
   aspectRatio = 'aspect-[3/4]',
   className = '',
   imgClassName = '',
@@ -20,8 +20,8 @@ export function ProductStage({
       className={clsx(
         'relative w-full overflow-hidden flex items-center justify-center p-6 sm:p-8',
         'bg-[radial-gradient(circle_at_center,_#ffffff_0%,_#E8F0EA_100%)]',
-        'shadow-stage border border-gold/20 transition-all duration-300',
-        arched ? 'rounded-t-[999px] rounded-b-[4px]' : 'rounded-[4px]',
+        'shadow-stage border border-gold/25 transition-all duration-300',
+        arched ? 'rounded-t-[999px] rounded-b-2xl' : 'rounded-2xl',
         aspectRatio,
         className
       )}
@@ -43,7 +43,7 @@ export function ProductStage({
           <div className="w-12 h-12 rounded-full border border-gold/40 flex items-center justify-center mb-3 text-gold/80">
             <OpenBook className="w-6 h-6" />
           </div>
-          <span className="font-display text-sm tracking-wide text-forest/70 uppercase">
+          <span className="font-display text-xs tracking-wider text-forest/70 uppercase font-semibold">
             Image Coming Soon
           </span>
           <span className="font-body text-xs text-ink/50 mt-1">

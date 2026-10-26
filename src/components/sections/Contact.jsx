@@ -26,15 +26,15 @@ export function Contact() {
           {/* Left Column: Direct Office Contact Details (5 cols) */}
           <div className="lg:col-span-5 flex flex-col space-y-6">
             <Reveal>
-              <div className="bg-paper p-6 sm:p-8 rounded-[4px] border border-gold/30 shadow-sm space-y-6">
-                <h3 className="font-display text-xl text-neem font-medium border-b border-gold/20 pb-3">
+              <div className="bg-paper p-6 sm:p-8 rounded-3xl border border-gold/30 shadow-md space-y-6">
+                <h3 className="font-display text-xl text-neem font-semibold border-b border-gold/20 pb-3">
                   Direct Institutional Desk
                 </h3>
 
                 {config.phone && (
                   <div className="flex items-start gap-3.5">
-                    <div className="w-9 h-9 rounded-[3px] bg-mist border border-gold/30 flex items-center justify-center text-forest flex-shrink-0 mt-0.5">
-                      <Phone className="w-4 h-4" />
+                    <div className="w-10 h-10 rounded-xl bg-mist border border-gold/30 flex items-center justify-center text-forest flex-shrink-0 mt-0.5 shadow-2xs">
+                      <Phone className="w-4 h-4 text-gold" />
                     </div>
                     <div>
                       <span className="font-body text-xs text-ink/60 uppercase tracking-wide block">
@@ -49,8 +49,8 @@ export function Contact() {
 
                 {config.whatsappNumber && (
                   <div className="flex items-start gap-3.5">
-                    <div className="w-9 h-9 rounded-[3px] bg-mist border border-gold/30 flex items-center justify-center text-forest flex-shrink-0 mt-0.5">
-                      <MessageCircle className="w-4 h-4" />
+                    <div className="w-10 h-10 rounded-xl bg-mist border border-gold/30 flex items-center justify-center text-forest flex-shrink-0 mt-0.5 shadow-2xs">
+                      <MessageCircle className="w-4 h-4 text-gold" />
                     </div>
                     <div>
                       <span className="font-body text-xs text-ink/60 uppercase tracking-wide block">
@@ -66,8 +66,8 @@ export function Contact() {
 
                 {config.email && (
                   <div className="flex items-start gap-3.5">
-                    <div className="w-9 h-9 rounded-[3px] bg-mist border border-gold/30 flex items-center justify-center text-forest flex-shrink-0 mt-0.5">
-                      <Mail className="w-4 h-4" />
+                    <div className="w-10 h-10 rounded-xl bg-mist border border-gold/30 flex items-center justify-center text-forest flex-shrink-0 mt-0.5 shadow-2xs">
+                      <Mail className="w-4 h-4 text-gold" />
                     </div>
                     <div>
                       <span className="font-body text-xs text-ink/60 uppercase tracking-wide block">
@@ -82,8 +82,8 @@ export function Contact() {
 
                 {config.address && (
                   <div className="flex items-start gap-3.5">
-                    <div className="w-9 h-9 rounded-[3px] bg-mist border border-gold/30 flex items-center justify-center text-forest flex-shrink-0 mt-0.5">
-                      <MapPin className="w-4 h-4" />
+                    <div className="w-10 h-10 rounded-xl bg-mist border border-gold/30 flex items-center justify-center text-forest flex-shrink-0 mt-0.5 shadow-2xs">
+                      <MapPin className="w-4 h-4 text-gold" />
                     </div>
                     <div>
                       <span className="font-body text-xs text-ink/60 uppercase tracking-wide block">

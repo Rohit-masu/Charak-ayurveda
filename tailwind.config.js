@@ -16,14 +16,14 @@ export default {
         ink: "#16251C",
       },
       fontFamily: {
-        display: ["Marcellus", "serif"],
-        body: ["Hind", "sans-serif"],
+        display: ["Cinzel", "Marcellus", "serif"],
+        body: ["Outfit", "Hind", "sans-serif"],
       },
       boxShadow: {
         stage: "0 10px 30px -10px rgba(15, 46, 33, 0.08)",
       },
       borderRadius: {
-        arch: "999px 999px 0 0",
+        arch: "999px 999px 1rem 1rem",
       },
     },
   },

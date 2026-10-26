@@ -34,11 +34,11 @@ export function TrustStrip() {
             const Icon = item.icon;
             return (
               <div key={idx} className="flex items-center gap-3.5 group">
-                <div className="w-11 h-11 rounded-[3px] bg-mist border border-gold/30 flex items-center justify-center flex-shrink-0 text-forest group-hover:border-gold transition-colors">
+                <div className="w-12 h-12 rounded-2xl bg-mist border border-gold/30 flex items-center justify-center flex-shrink-0 text-forest group-hover:border-gold group-hover:scale-105 transition-all shadow-2xs">
                   <Icon className="w-5 h-5 text-current" />
                 </div>
                 <div className="flex flex-col">
-                  <span className="font-display text-sm sm:text-base text-neem font-medium">
+                  <span className="font-display text-sm sm:text-base text-neem font-semibold">
                     {item.title}
                   </span>
                   <span className="font-body text-xs text-ink/70">

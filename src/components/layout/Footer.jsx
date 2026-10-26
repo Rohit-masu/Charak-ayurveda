@@ -1,6 +1,6 @@
 ﻿import React from 'react';
 import { Link } from 'react-router-dom';
-import { MessageCircle, Mail, Phone, MapPin } from 'lucide-react';
+import { MessageCircle, Mail, Phone, MapPin, Stethoscope, Lock } from 'lucide-react';
 import { Logo } from '../ui/Logo';
 import { Container } from '../ui/Container';
 import { PaisleyPatternOverlay } from '../ui/Ornament';
@@ -35,7 +35,7 @@ function YoutubeIcon({ className = 'w-4 h-4' }) {
   );
 }
 
-export function Footer() {
+export function Footer({ onOpenLogin }) {
   const currentYear = new Date().getFullYear();
   const whatsappUrl = getGeneralWhatsAppUrl();
 
@@ -58,7 +58,7 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Instagram"
-                  className="w-9 h-9 rounded-[3px] border border-gold/40 flex items-center justify-center text-gold-soft hover:text-paper hover:border-gold-soft transition-colors"
+                  className="w-9 h-9 rounded-full border border-gold/40 flex items-center justify-center text-gold-soft hover:text-paper hover:border-gold-soft transition-colors"
                 >
                   <InstagramIcon className="w-4 h-4" />
                 </a>
@@ -69,7 +69,7 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Facebook"
-                  className="w-9 h-9 rounded-[3px] border border-gold/40 flex items-center justify-center text-gold-soft hover:text-paper hover:border-gold-soft transition-colors"
+                  className="w-9 h-9 rounded-full border border-gold/40 flex items-center justify-center text-gold-soft hover:text-paper hover:border-gold-soft transition-colors"
                 >
                   <FacebookIcon className="w-4 h-4" />
                 </a>
@@ -80,7 +80,7 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="YouTube"
-                  className="w-9 h-9 rounded-[3px] border border-gold/40 flex items-center justify-center text-gold-soft hover:text-paper hover:border-gold-soft transition-colors"
+                  className="w-9 h-9 rounded-full border border-gold/40 flex items-center justify-center text-gold-soft hover:text-paper hover:border-gold-soft transition-colors"
                 >
                   <YoutubeIcon className="w-4 h-4" />
                 </a>
@@ -88,10 +88,10 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Col 2: Quick Links */}
+          {/* Col 2: Navigation & Portals */}
           <div>
-            <h3 className="font-display text-base tracking-wide text-gold-soft uppercase mb-4">
-              Navigation
+            <h3 className="font-display text-sm tracking-wider text-gold-soft uppercase font-semibold mb-4">
+              Navigation & Portals
             </h3>
             <ul className="space-y-2.5 font-body text-sm text-paper/80">
               {content.header.nav.map((item) => (
@@ -114,12 +114,32 @@ export function Footer() {
                   <span>{content.footer.privacyLinkText}</span>
                 </Link>
               </li>
+              <li className="pt-2 border-t border-gold/20">
+                <button
+                  type="button"
+                  onClick={() => onOpenLogin && onOpenLogin('doctor')}
+                  className="text-gold-soft hover:text-paper transition-colors inline-flex items-center gap-1.5 text-xs font-semibold"
+                >
+                  <Stethoscope className="w-3.5 h-3.5 text-gold-soft" />
+                  <span>Doctor & MR Login Portal</span>
+                </button>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  onClick={() => onOpenLogin && onOpenLogin('admin')}
+                  className="text-paper/70 hover:text-gold-soft transition-colors inline-flex items-center gap-1.5 text-xs"
+                >
+                  <Lock className="w-3 h-3 text-gold/60" />
+                  <span>Admin Panel Console</span>
+                </button>
+              </li>
             </ul>
           </div>
 
           {/* Col 3: Direct Contact */}
           <div>
-            <h3 className="font-display text-base tracking-wide text-gold-soft uppercase mb-4">
+            <h3 className="font-display text-sm tracking-wider text-gold-soft uppercase font-semibold mb-4">
               Institutional Contact
             </h3>
             <ul className="space-y-3 font-body text-sm text-paper/80">
@@ -157,7 +177,7 @@ export function Footer() {
 
           {/* Col 4: Registered Address & Licences */}
           <div>
-            <h3 className="font-display text-base tracking-wide text-gold-soft uppercase mb-4">
+            <h3 className="font-display text-sm tracking-wider text-gold-soft uppercase font-semibold mb-4">
               Registered Desk
             </h3>
             {config.address && (

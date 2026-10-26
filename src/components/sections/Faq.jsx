@@ -30,13 +30,13 @@ export function Faq() {
             const isOpen = openIndex === idx;
             return (
               <Reveal key={idx} delay={idx * 50}>
-                <div className="border border-gold/30 rounded-[3px] bg-paper overflow-hidden transition-colors hover:border-gold">
+                <div className="border border-gold/30 rounded-2xl bg-paper overflow-hidden transition-all hover:border-gold shadow-2xs">
                   <button
                     type="button"
                     onClick={() => toggleItem(idx)}
                     aria-expanded={isOpen}
                     aria-controls={`faq-answer-${idx}`}
-                    className="w-full px-6 py-4.5 sm:py-5 flex items-center justify-between gap-4 text-left font-display text-base sm:text-lg text-neem focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-soft"
+                    className="w-full px-6 py-4.5 sm:py-5 flex items-center justify-between gap-4 text-left font-display text-base sm:text-lg text-neem font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-soft"
                   >
                     <span>{faq.q}</span>
                     <ChevronDown

@@ -19,10 +19,10 @@ export function CategoryTabs({ activeCategory = 'all', onSelectCategory }) {
             type="button"
             onClick={() => onSelectCategory(cat.id)}
             className={clsx(
-              'px-4 sm:px-5 py-2 text-sm sm:text-base font-body font-medium rounded-[3px] transition-all duration-200 border',
+              'px-5 py-2 text-sm sm:text-base font-body font-medium rounded-full transition-all duration-250 border',
               isActive
-                ? 'bg-forest text-paper border-forest shadow-sm'
-                : 'bg-paper text-ink/80 border-gold/40 hover:border-gold hover:text-forest'
+                ? 'bg-forest text-paper border-forest shadow-md scale-105'
+                : 'bg-paper text-ink/80 border-gold/40 hover:border-gold hover:text-forest hover:bg-mist/40'
             )}
           >
             {cat.name}

@@ -69,13 +69,13 @@ export function Categories({ onSelectCategory }) {
                       handleTileClick(cat.id);
                     }
                   }}
-                  className="group relative bg-mist/60 hover:bg-mist p-6 sm:p-7 rounded-[3px] border border-gold/30 hover:border-gold transition-all duration-300 cursor-pointer flex flex-col h-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-soft hover:-translate-y-1.5 hover:shadow-lg"
+                  className="group relative bg-mist/60 hover:bg-mist p-6 sm:p-7 rounded-2xl border border-gold/30 hover:border-gold transition-all duration-300 cursor-pointer flex flex-col h-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-soft hover:-translate-y-1.5 hover:shadow-lg"
                 >
-                  <div className="w-12 h-12 rounded-[3px] bg-paper border border-gold/40 flex items-center justify-center text-forest group-hover:border-gold group-hover:bg-forest group-hover:text-gold-soft transition-all duration-300 group-hover:scale-110 group-hover:-rotate-3 mb-5 shadow-sm">
+                  <div className="w-12 h-12 rounded-xl bg-paper border border-gold/40 flex items-center justify-center text-forest group-hover:border-gold group-hover:bg-forest group-hover:text-gold-soft transition-all duration-300 group-hover:scale-110 group-hover:-rotate-3 mb-5 shadow-sm">
                     <Icon className="w-6 h-6 transition-transform duration-300" />
                   </div>
 
-                  <h3 className="font-display text-xl text-neem font-medium group-hover:text-forest transition-colors mb-2">
+                  <h3 className="font-display text-lg sm:text-xl text-neem font-semibold group-hover:text-forest transition-colors mb-2">
                     {cat.name}
                   </h3>
 

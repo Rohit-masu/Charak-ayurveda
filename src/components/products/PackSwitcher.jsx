@@ -16,7 +16,7 @@ export function PackSwitcher({ packs = [], selectedIndex = 0, onSelect }) {
             aria-checked={isSelected}
             onClick={() => onSelect(index)}
             className={clsx(
-              'px-3.5 py-1.5 rounded-[3px] text-xs sm:text-sm font-medium transition-all duration-200 border',
+              'px-4 py-1.5 rounded-full text-xs sm:text-sm font-medium transition-all duration-200 border',
               isSelected
                 ? 'bg-forest text-paper border-forest shadow-sm'
                 : 'bg-paper text-ink/80 border-gold/40 hover:border-gold hover:text-forest'

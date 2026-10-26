@@ -5,7 +5,7 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    font-family: 'Hind', sans-serif;
+    font-family: 'Outfit', sans-serif;
     color: #16251C;
     background-color: #FCFBF7;
   }
@@ -21,7 +21,7 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Marcellus', serif;
+    font-family: 'Cinzel', serif;
   }
 }
 

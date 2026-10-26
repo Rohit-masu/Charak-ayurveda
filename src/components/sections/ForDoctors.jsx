@@ -1,5 +1,5 @@
 ﻿import React from 'react';
-import { FileText } from 'lucide-react';
+import { FileText, Stethoscope } from 'lucide-react';
 import { Container } from '../ui/Container';
 import { Button } from '../ui/Button';
 import { PaisleyPatternOverlay, NeemSprig } from '../ui/Ornament';
@@ -8,7 +8,7 @@ import { content } from '../../data/content';
 import { config } from '../../data/config';
 import { getDoctorWhatsAppUrl } from '../../lib/whatsapp';
 
-export function ForDoctors() {
+export function ForDoctors({ onOpenLogin }) {
   const data = content.forDoctors;
   const doctorWhatsAppUrl = getDoctorWhatsAppUrl();
 
@@ -28,7 +28,7 @@ export function ForDoctors() {
                 </span>
               </div>
 
-              <h2 className="font-display text-3xl sm:text-4xl text-paper font-normal leading-[1.15] mb-5">
+              <h2 className="font-display text-3xl sm:text-4xl text-paper font-semibold leading-[1.18] mb-5">
                 {data.title}
               </h2>
 
@@ -36,7 +36,7 @@ export function ForDoctors() {
                 {data.subtitle}
               </p>
 
-              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5">
+              <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3.5">
                 <Button
                   variant="dark-primary"
                   href={data.primaryCta.href}
@@ -44,6 +44,16 @@ export function ForDoctors() {
                 >
                   {data.primaryCta.text}
                 </Button>
+
+                {/* Doctor / MR Portal Login trigger */}
+                <button
+                  type="button"
+                  onClick={() => onOpenLogin && onOpenLogin('doctor')}
+                  className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full font-body text-sm font-semibold text-neem bg-gold-soft hover:bg-gold-soft/90 transition-all active:scale-[0.98] shadow-sm"
+                >
+                  <Stethoscope className="w-4 h-4 text-neem" />
+                  <span>Doctor / MR Login</span>
+                </button>
 
                 {config.catalogPdf && (
                   <Button
@@ -67,12 +77,12 @@ export function ForDoctors() {
             <div className="grid grid-cols-1 gap-5">
               {data.steps.map((step, idx) => (
                 <Reveal key={idx} delay={idx * 140}>
-                  <div className="group bg-forest/50 border border-gold/30 rounded-[3px] p-6 flex items-start gap-5 hover:border-gold-soft hover:bg-forest/70 hover:-translate-y-1 transition-all duration-300 shadow-sm hover:shadow-lg">
+                  <div className="group bg-forest/50 border border-gold/30 rounded-2xl p-6 flex items-start gap-5 hover:border-gold-soft hover:bg-forest/70 hover:-translate-y-1 transition-all duration-300 shadow-sm hover:shadow-lg">
                     <div className="w-10 h-10 rounded-full border border-gold-soft/60 flex items-center justify-center flex-shrink-0 text-gold-soft font-display text-lg font-semibold bg-neem group-hover:bg-gold-soft group-hover:text-neem group-hover:scale-110 group-hover:border-gold-soft transition-all duration-300 shadow-sm">
                       {step.num}
                     </div>
                     <div>
-                      <h3 className="font-display text-xl text-paper font-medium mb-1.5 group-hover:text-gold-soft transition-colors">
+                      <h3 className="font-display text-lg sm:text-xl text-paper font-semibold mb-1.5 group-hover:text-gold-soft transition-colors">
                         {step.title}
                       </h3>
                       <p className="font-body text-sm sm:text-base text-paper/80 leading-relaxed">

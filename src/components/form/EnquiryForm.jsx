@@ -44,36 +44,21 @@ export function EnquiryForm({ className = '' }) {
       return;
     }
 
-    // WhatsApp redirection link
     const waUrl = getFormWhatsAppUrl(formData);
     setLastWhatsAppUrl(waUrl);
 
-    // Optional future backend endpoint hook (PHP/Laravel)
-    /*
-    try {
-      await fetch('/api/enquiry', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData)
-      });
-    } catch (err) {
-      console.warn('Backend sync error', err);
-    }
-    */
-
-    // Open WhatsApp in new tab
     window.open(waUrl, '_blank', 'noopener,noreferrer');
     setSubmitted(true);
   };
 
   return (
-    <div className={clsx('bg-paper rounded-[4px] border border-gold/40 p-6 sm:p-8 md:p-10 shadow-sm', className)}>
+    <div className={clsx('bg-paper rounded-3xl border border-gold/40 p-6 sm:p-8 md:p-10 shadow-lg', className)}>
       {submitted ? (
         <div className="text-center py-8">
           <div className="w-14 h-14 bg-mist rounded-full flex items-center justify-center mx-auto mb-4 text-forest">
             <CheckCircle2 className="w-8 h-8" />
           </div>
-          <h3 className="font-display text-2xl text-neem mb-2">
+          <h3 className="font-display text-2xl text-neem mb-2 font-semibold">
             Enquiry Prepared
           </h3>
           <p className="font-body text-base text-ink/80 max-w-md mx-auto mb-6">
@@ -123,7 +108,7 @@ export function EnquiryForm({ className = '' }) {
                 placeholder="Dr. Rajesh Sharma"
                 aria-describedby={errors.name ? 'name-error' : undefined}
                 className={clsx(
-                  'w-full px-4 py-2.5 rounded-[3px] bg-paper border font-body text-base text-ink transition-colors',
+                  'w-full px-4 py-3 rounded-xl bg-paper border font-body text-base text-ink transition-colors',
                   'focus:outline-none focus:ring-2 focus:ring-gold-soft focus:border-forest',
                   errors.name ? 'border-red-500' : 'border-gold/40'
                 )}
@@ -139,7 +124,7 @@ export function EnquiryForm({ className = '' }) {
                 onChange={handleChange}
                 aria-describedby={errors.role ? 'role-error' : undefined}
                 className={clsx(
-                  'w-full px-4 py-2.5 rounded-[3px] bg-paper border font-body text-base text-ink transition-colors',
+                  'w-full px-4 py-3 rounded-xl bg-paper border font-body text-base text-ink transition-colors',
                   'focus:outline-none focus:ring-2 focus:ring-gold-soft focus:border-forest',
                   errors.role ? 'border-red-500' : 'border-gold/40'
                 )}
@@ -166,7 +151,7 @@ export function EnquiryForm({ className = '' }) {
                 placeholder="e.g. Varanasi, UP"
                 aria-describedby={errors.city ? 'city-error' : undefined}
                 className={clsx(
-                  'w-full px-4 py-2.5 rounded-[3px] bg-paper border font-body text-base text-ink transition-colors',
+                  'w-full px-4 py-3 rounded-xl bg-paper border font-body text-base text-ink transition-colors',
                   'focus:outline-none focus:ring-2 focus:ring-gold-soft focus:border-forest',
                   errors.city ? 'border-red-500' : 'border-gold/40'
                 )}
@@ -185,7 +170,7 @@ export function EnquiryForm({ className = '' }) {
                 maxLength={13}
                 aria-describedby={errors.phone ? 'phone-error' : undefined}
                 className={clsx(
-                  'w-full px-4 py-2.5 rounded-[3px] bg-paper border font-body text-base text-ink transition-colors',
+                  'w-full px-4 py-3 rounded-xl bg-paper border font-body text-base text-ink transition-colors',
                   'focus:outline-none focus:ring-2 focus:ring-gold-soft focus:border-forest',
                   errors.phone ? 'border-red-500' : 'border-gold/40'
                 )}
@@ -202,7 +187,7 @@ export function EnquiryForm({ className = '' }) {
               onChange={handleChange}
               aria-describedby={errors.product ? 'product-error' : undefined}
               className={clsx(
-                'w-full px-4 py-2.5 rounded-[3px] bg-paper border font-body text-base text-ink transition-colors',
+                'w-full px-4 py-3 rounded-xl bg-paper border font-body text-base text-ink transition-colors',
                 'focus:outline-none focus:ring-2 focus:ring-gold-soft focus:border-forest',
                 errors.product ? 'border-red-500' : 'border-gold/40'
               )}
@@ -225,7 +210,7 @@ export function EnquiryForm({ className = '' }) {
               value={formData.message}
               onChange={handleChange}
               placeholder="Provide details about your clinic, dealership, or requirement..."
-              className="w-full px-4 py-2.5 rounded-[3px] bg-paper border border-gold/40 font-body text-base text-ink transition-colors focus:outline-none focus:ring-2 focus:ring-gold-soft focus:border-forest"
+              className="w-full px-4 py-3 rounded-xl bg-paper border border-gold/40 font-body text-base text-ink transition-colors focus:outline-none focus:ring-2 focus:ring-gold-soft focus:border-forest"
             />
           </Field>
 
@@ -237,7 +222,7 @@ export function EnquiryForm({ className = '' }) {
                 name="consent"
                 checked={formData.consent}
                 onChange={handleChange}
-                className="mt-1 h-4 w-4 rounded-[2px] border-gold text-forest focus:ring-gold-soft"
+                className="mt-1 h-4 w-4 rounded border-gold text-forest focus:ring-gold-soft"
               />
               <span className="font-body text-xs sm:text-sm text-ink/80 leading-normal">
                 I understand that submitting this enquiry opens a prefilled message to Charak Ayurveda's official WhatsApp desk, and I consent to being contacted regarding this request per the{' '}
@@ -257,7 +242,7 @@ export function EnquiryForm({ className = '' }) {
             <Button
               type="submit"
               variant="primary"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-3"
             >
               <MessageCircle className="w-5 h-5 text-gold-soft" />
               <span>Submit & Open WhatsApp</span>

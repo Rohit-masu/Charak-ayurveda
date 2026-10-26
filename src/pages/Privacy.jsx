@@ -1,15 +1,24 @@
-﻿import React from 'react';
+﻿import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, ShieldAlert } from 'lucide-react';
 import { Container } from '../components/ui/Container';
 import { Header } from '../components/layout/Header';
 import { Footer } from '../components/layout/Footer';
+import { LoginModal } from '../components/layout/LoginModal';
 import { config } from '../data/config';
 
 export function Privacy() {
+  const [loginModalOpen, setLoginModalOpen] = useState(false);
+  const [loginModalTab, setLoginModalTab] = useState('doctor');
+
+  const handleOpenLogin = (tab = 'doctor') => {
+    setLoginModalTab(tab);
+    setLoginModalOpen(true);
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-paper text-ink font-body">
-      <Header />
+      <Header onOpenLogin={handleOpenLogin} />
 
       <main className="flex-1 py-16 sm:py-24">
         <Container className="max-w-4xl">
@@ -23,7 +32,7 @@ export function Privacy() {
           </Link>
 
           {/* Draft banner */}
-          <div className="bg-amber-50 border border-amber-300 rounded-[3px] p-4 mb-8 flex items-start gap-3">
+          <div className="bg-amber-50 border border-amber-300 rounded-2xl p-4 sm:p-5 mb-8 flex items-start gap-3.5 shadow-2xs">
             <ShieldAlert className="w-5 h-5 text-amber-700 flex-shrink-0 mt-0.5" />
             <div>
               <h4 className="font-display text-sm font-semibold text-amber-900">
@@ -35,16 +44,16 @@ export function Privacy() {
             </div>
           </div>
 
-          <h1 className="font-display text-3xl sm:text-4xl text-neem font-normal mb-4">
+          <h1 className="font-display text-3xl sm:text-4xl text-neem font-semibold mb-4">
             Privacy Policy
           </h1>
           <p className="font-body text-xs text-ink/60 mb-8 border-b border-gold/20 pb-4">
             Last Updated: October 2026
           </p>
 
-          <div className="space-y-6 font-body text-base text-ink/80 leading-relaxed">
+          <div className="space-y-6 font-body text-base text-ink/80 leading-relaxed font-normal">
             <section>
-              <h2 className="font-display text-xl text-neem font-medium mb-2">
+              <h2 className="font-display text-xl text-neem font-semibold mb-2">
                 1. Overview
               </h2>
               <p>
@@ -53,7 +62,7 @@ export function Privacy() {
             </section>
 
             <section>
-              <h2 className="font-display text-xl text-neem font-medium mb-2">
+              <h2 className="font-display text-xl text-neem font-semibold mb-2">
                 2. Information We Collect
               </h2>
               <p className="mb-2">
@@ -68,7 +77,7 @@ export function Privacy() {
             </section>
 
             <section>
-              <h2 className="font-display text-xl text-neem font-medium mb-2">
+              <h2 className="font-display text-xl text-neem font-semibold mb-2">
                 3. How Your Information Is Transmitted (WhatsApp Protocol)
               </h2>
               <p>
@@ -77,7 +86,7 @@ export function Privacy() {
             </section>
 
             <section>
-              <h2 className="font-display text-xl text-neem font-medium mb-2">
+              <h2 className="font-display text-xl text-neem font-semibold mb-2">
                 4. Purpose of Use
               </h2>
               <p>
@@ -86,7 +95,7 @@ export function Privacy() {
             </section>
 
             <section>
-              <h2 className="font-display text-xl text-neem font-medium mb-2">
+              <h2 className="font-display text-xl text-neem font-semibold mb-2">
                 5. Data Rights & Opt-Out
               </h2>
               <p>
@@ -95,13 +104,13 @@ export function Privacy() {
             </section>
 
             <section>
-              <h2 className="font-display text-xl text-neem font-medium mb-2">
+              <h2 className="font-display text-xl text-neem font-semibold mb-2">
                 6. Contact Information
               </h2>
               <p>
                 For questions regarding this policy, reach our desk at:
               </p>
-              <div className="bg-mist p-4 rounded-[3px] border border-gold/30 text-sm mt-2">
+              <div className="bg-mist p-5 rounded-2xl border border-gold/30 text-sm mt-2">
                 <p className="font-semibold text-neem">{config.brandName}</p>
                 <p>{config.address}</p>
                 <p>Email: {config.email}</p>
@@ -112,7 +121,13 @@ export function Privacy() {
         </Container>
       </main>
 
-      <Footer />
+      <Footer onOpenLogin={handleOpenLogin} />
+
+      <LoginModal
+        isOpen={loginModalOpen}
+        initialTab={loginModalTab}
+        onClose={() => setLoginModalOpen(false)}
+      />
     </div>
   );
 }
