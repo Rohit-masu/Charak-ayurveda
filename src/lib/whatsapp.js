@@ -1,4 +1,4 @@
-﻿import { config } from '../data/config';
+import { config } from '../data/config';
 
 function getCleanNumber() {
   return (config.whatsappNumber || '').replace(/[^\d]/g, '');

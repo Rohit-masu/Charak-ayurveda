@@ -1,4 +1,4 @@
-﻿import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useReducedMotion } from './useReducedMotion';
 
 export function useReveal(threshold = 0.15) {

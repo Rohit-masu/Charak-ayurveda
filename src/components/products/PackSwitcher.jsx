@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import clsx from 'clsx';
 
 export function PackSwitcher({ packs = [], selectedIndex = 0, onSelect }) {

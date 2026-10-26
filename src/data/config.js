@@ -1,4 +1,4 @@
-﻿export const config = {
+export const config = {
   brandName: "Charak Ayurveda",
   tagline: "Ayurvedic Care, Rooted in Tradition",
   whatsappNumber: "919876543210", // Digits with country code, without '+'

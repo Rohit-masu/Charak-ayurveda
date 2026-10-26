@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { Pill, Droplets, Sparkles, Package, ArrowRight } from 'lucide-react';
 import { Container } from '../ui/Container';
 import { SectionHeading } from '../ui/SectionHeading';

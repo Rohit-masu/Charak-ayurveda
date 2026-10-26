@@ -1,4 +1,4 @@
-﻿export function validateForm(data) {
+export function validateForm(data) {
   const errors = {};
 
   if (!data.name || data.name.trim().length < 2) {

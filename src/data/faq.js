@@ -1,4 +1,4 @@
-﻿export const faqs = [
+export const faqs = [
   {
     q: "Where can I purchase Charak Ayurveda products?",
     a: "Charak Ayurveda products are available through licensed Ayurvedic clinics, registered pharmacies, and verified stockists. You can also connect with our direct supply desk via WhatsApp for genuine, factory-dispatched supplies."

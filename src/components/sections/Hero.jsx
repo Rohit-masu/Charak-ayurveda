@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { ShieldCheck, Leaf, Sparkles, Stethoscope, ArrowRight } from 'lucide-react';
 import { Container } from '../ui/Container';
 import { Button } from '../ui/Button';

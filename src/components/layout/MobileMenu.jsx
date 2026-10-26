@@ -1,4 +1,4 @@
-﻿import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { X, MessageCircle, Lock, Stethoscope } from 'lucide-react';
 import clsx from 'clsx';
 import { Logo } from '../ui/Logo';

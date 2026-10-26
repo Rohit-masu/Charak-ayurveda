@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { X, Sparkles } from 'lucide-react';
 import { content } from '../../data/content';
 

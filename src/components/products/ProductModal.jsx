@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import clsx from 'clsx';
 import { X, MessageCircle } from 'lucide-react';
 import { ProductStage } from '../ui/ProductStage';

@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { MessageCircle, Mail, Phone, MapPin, Stethoscope, Lock } from 'lucide-react';
 import { Logo } from '../ui/Logo';

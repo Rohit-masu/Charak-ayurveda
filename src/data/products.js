@@ -1,4 +1,4 @@
-﻿export const categories = [
+export const categories = [
   { id: "all",         name: "All Products" },
   { id: "capsules",    name: "Capsules" },
   { id: "massage-oil", name: "Massage Oil" },

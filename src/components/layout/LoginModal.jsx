@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { X, Lock, Stethoscope, ShieldCheck, UserCheck, ArrowRight, CheckCircle2 } from 'lucide-react';
 import clsx from 'clsx';
 import { Button } from '../ui/Button';

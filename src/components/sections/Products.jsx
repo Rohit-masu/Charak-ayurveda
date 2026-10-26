@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import clsx from 'clsx';
 import { Container } from '../ui/Container';
 import { SectionHeading } from '../ui/SectionHeading';

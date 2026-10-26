@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { Menu, MessageCircle, Stethoscope, Lock } from 'lucide-react';
 import clsx from 'clsx';
 import { Logo } from '../ui/Logo';

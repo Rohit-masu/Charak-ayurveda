@@ -1,4 +1,4 @@
-﻿export const content = {
+export const content = {
   announcement: {
     enabled: true,
     text: "Doctor and distributor enquiries open for pan-India supply and distribution",

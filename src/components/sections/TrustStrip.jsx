@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { Leaf, ShieldCheck, Award, HeartPulse } from 'lucide-react';
 import { Container } from '../ui/Container';
 
