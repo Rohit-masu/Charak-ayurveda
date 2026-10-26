@@ -1,7 +1,7 @@
 ﻿import React from 'react';
 import clsx from 'clsx';
+import { ArrowRight } from 'lucide-react';
 import { ProductStage } from '../ui/ProductStage';
-import { Button } from '../ui/Button';
 
 export function ProductCard({ product, onSelect }) {
   const isPlaceholder = product.status === 'placeholder';
@@ -28,26 +28,27 @@ export function ProductCard({ product, onSelect }) {
       onClick={handleCardClick}
       onKeyDown={handleKeyDown}
       className={clsx(
-        'group relative flex flex-col bg-paper rounded-[4px] p-5 sm:p-6 transition-all duration-250',
+        'group relative flex flex-col bg-paper rounded-[4px] p-5 sm:p-6 transition-all duration-300 ease-out',
         'border border-gold/25',
         isPlaceholder
           ? 'opacity-70 cursor-not-allowed select-none'
-          : 'cursor-pointer hover:-translate-y-1 hover:border-gold hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-soft'
+          : 'cursor-pointer hover:-translate-y-2 hover:border-gold hover:shadow-xl hover:shadow-neem/8 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-soft'
       )}
     >
-      {/* Arched Stage with Product Visual */}
+      {/* Arched Stage with Transparent Product Visual */}
       <ProductStage
         filename={primaryPack ? primaryPack.file : null}
         alt={product.name}
-        transparent={primaryPack ? primaryPack.transparent : false}
+        transparent={primaryPack ? primaryPack.transparent : true}
         aspectRatio="aspect-[4/5]"
         arched={true}
-        className="mb-5 transition-transform duration-300 group-hover:scale-[1.02]"
+        className="mb-5 transition-all duration-400 group-hover:shadow-md group-hover:bg-[radial-gradient(circle_at_center,_#ffffff_15%,_#E1ECE4_100%)]"
+        imgClassName="group-hover:-translate-y-2 group-hover:scale-105 duration-400 ease-out drop-shadow-md"
       />
 
       {/* Details */}
       <div className="flex flex-col flex-1">
-        <span className="font-body text-xs uppercase tracking-wider text-gold font-semibold mb-1">
+        <span className="font-body text-xs uppercase tracking-wider text-gold font-semibold mb-1 group-hover:text-forest transition-colors">
           {product.category.replace('-', ' ')}
         </span>
 
@@ -69,8 +70,9 @@ export function ProductCard({ product, onSelect }) {
             <span className="font-body text-xs text-forest/70 font-medium">
               {product.packs ? `${product.packs.length} ${product.packs.length === 1 ? 'pack' : 'packs'} available` : ''}
             </span>
-            <span className="font-body text-xs font-semibold text-forest group-hover:text-gold transition-colors inline-flex items-center gap-1">
-              View details &rarr;
+            <span className="font-body text-xs font-semibold text-forest group-hover:text-gold transition-colors inline-flex items-center gap-1.5">
+              <span>View details</span>
+              <ArrowRight className="w-3.5 h-3.5 transition-transform duration-250 group-hover:translate-x-1" />
             </span>
           </div>
         )}

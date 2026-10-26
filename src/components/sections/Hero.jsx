@@ -43,9 +43,9 @@ export function Hero() {
               <Button
                 variant="dark-primary"
                 href={data.primaryCta.href}
-                className="text-base px-7 py-3"
+                className="text-base px-7 py-3 group relative overflow-hidden"
               >
-                {data.primaryCta.text}
+                <span className="relative z-10">{data.primaryCta.text}</span>
               </Button>
 
               <Button
@@ -60,7 +60,7 @@ export function Hero() {
             {/* Trust Row */}
             <div className="pt-6 border-t border-gold/25 grid grid-cols-1 sm:grid-cols-3 gap-4">
               {data.trustBadges.map((badge, idx) => (
-                <div key={idx} className="flex items-center gap-2.5">
+                <div key={idx} className="flex items-center gap-2.5 transition-transform duration-200 hover:translate-x-1">
                   <div className="w-6 h-6 rounded-full border border-gold/40 flex items-center justify-center flex-shrink-0 text-gold-soft">
                     {idx === 0 && <Leaf className="w-3.5 h-3.5" />}
                     {idx === 1 && <ShieldCheck className="w-3.5 h-3.5" />}
@@ -82,7 +82,7 @@ export function Hero() {
             </div>
 
             {/* Arched Stage Frame */}
-            <div className="relative w-full max-w-md sm:max-w-lg">
+            <div className="relative w-full max-w-md sm:max-w-lg group">
               {/* Arched Drawing Gold Hairline */}
               <svg
                 className="absolute inset-0 w-full h-full pointer-events-none z-20"
@@ -110,7 +110,7 @@ export function Hero() {
                       <img
                         src={bottleSrc}
                         alt="Charak Ayurveda Rati Shakti 60 Capsules Crown Bottle"
-                        className="max-h-[82%] w-auto object-contain mix-blend-multiply drop-shadow-md"
+                        className="max-h-[84%] w-auto object-contain drop-shadow-lg transition-transform duration-500 ease-out hover:scale-105 hover:-translate-y-2 cursor-pointer"
                       />
                     )}
                     {/* 30 Caps Box */}
@@ -118,7 +118,7 @@ export function Hero() {
                       <img
                         src={boxSrc}
                         alt="Charak Ayurveda Rati Shakti 30 Capsules Box"
-                        className="max-h-[75%] w-auto object-contain mix-blend-multiply drop-shadow-sm hidden xs:block"
+                        className="max-h-[76%] w-auto object-contain drop-shadow-md hidden xs:block transition-transform duration-500 ease-out hover:scale-105 hover:-translate-y-1.5 cursor-pointer"
                       />
                     )}
                   </div>

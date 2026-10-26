@@ -23,10 +23,10 @@ export const products = [
     dosage: "Take 1-2 capsules twice daily with warm milk or water, or as directed by an Ayurvedic physician.",
     storage: "Store in a cool, dry place away from direct sunlight. Keep out of reach of children.",
     packs: [
-      { label: "60 capsules, bottle (1000 mg)", file: "rati-shakti-bottle-60.png", transparent: false },
-      { label: "30 capsules, box",              file: "rati-shakti-box-30.png",    transparent: false },
-      { label: "30 capsules, bottle",           file: "rati-shakti-bottle-30.png", transparent: false },
-      { label: "15 capsules, trial pack",       file: "rati-shakti-trial-15.png",  transparent: false }
+      { label: "60 capsules, bottle (1000 mg)", file: "rati-shakti-bottle-60.png", transparent: true },
+      { label: "30 capsules, box",              file: "rati-shakti-box-30.png",    transparent: true },
+      { label: "30 capsules, bottle",           file: "rati-shakti-bottle-30.png", transparent: true },
+      { label: "15 capsules, trial pack",       file: "rati-shakti-trial-15.png",  transparent: true }
     ]
   },
   {
@@ -45,7 +45,7 @@ export const products = [
     dosage: "Gently massage a few drops onto the desired area in circular motions, or as directed by an Ayurvedic practitioner.",
     storage: "Store in a cool, dry place away from direct heat and sunlight. Keep container tightly closed.",
     packs: [
-      { label: "30 ml pump bottle & carton", file: "rati-shakti-oil-30ml.png", transparent: false }
+      { label: "30 ml pump bottle & carton", file: "rati-shakti-oil-30ml.png", transparent: true }
     ]
   },
   {
@@ -64,7 +64,7 @@ export const products = [
     dosage: "Take 3-5 grams (half a teaspoon) twice daily with lukewarm milk, or as directed by an Ayurvedic physician.",
     storage: "Store in a cool, dry place. Keep jar tightly closed after each use.",
     packs: [
-      { label: "100 gm amber jar", file: "rati-shakti-majun-100g.png", transparent: false }
+      { label: "100 gm amber jar", file: "rati-shakti-majun-100g.png", transparent: true }
     ]
   },
   {
@@ -83,7 +83,7 @@ export const products = [
     dosage: "Take 1-2 capsules daily after meals with warm milk, or as advised by an Ayurvedic physician.",
     storage: "Store in a cool, dark place away from moisture and heat. Keep out of reach of children.",
     packs: [
-      { label: "90 capsules, Maharaja bottle", file: "rati-shakti-maharaja-90.png", transparent: false }
+      { label: "90 capsules, Maharaja bottle", file: "rati-shakti-maharaja-90.png", transparent: true }
     ]
   }
 ];

@@ -1,5 +1,5 @@
 ﻿import React from 'react';
-import { FileText, ArrowRight, MessageCircle, CheckCircle } from 'lucide-react';
+import { FileText } from 'lucide-react';
 import { Container } from '../ui/Container';
 import { Button } from '../ui/Button';
 import { PaisleyPatternOverlay, NeemSprig } from '../ui/Ornament';
@@ -66,13 +66,13 @@ export function ForDoctors() {
           <div className="lg:col-span-7">
             <div className="grid grid-cols-1 gap-5">
               {data.steps.map((step, idx) => (
-                <Reveal key={idx} delay={idx * 120}>
-                  <div className="bg-forest/50 border border-gold/30 rounded-[3px] p-6 flex items-start gap-5 hover:border-gold-soft transition-colors">
-                    <div className="w-10 h-10 rounded-full border border-gold-soft/60 flex items-center justify-center flex-shrink-0 text-gold-soft font-display text-lg font-semibold bg-neem">
+                <Reveal key={idx} delay={idx * 140}>
+                  <div className="group bg-forest/50 border border-gold/30 rounded-[3px] p-6 flex items-start gap-5 hover:border-gold-soft hover:bg-forest/70 hover:-translate-y-1 transition-all duration-300 shadow-sm hover:shadow-lg">
+                    <div className="w-10 h-10 rounded-full border border-gold-soft/60 flex items-center justify-center flex-shrink-0 text-gold-soft font-display text-lg font-semibold bg-neem group-hover:bg-gold-soft group-hover:text-neem group-hover:scale-110 group-hover:border-gold-soft transition-all duration-300 shadow-sm">
                       {step.num}
                     </div>
                     <div>
-                      <h3 className="font-display text-xl text-paper font-medium mb-1.5">
+                      <h3 className="font-display text-xl text-paper font-medium mb-1.5 group-hover:text-gold-soft transition-colors">
                         {step.title}
                       </h3>
                       <p className="font-body text-sm sm:text-base text-paper/80 leading-relaxed">

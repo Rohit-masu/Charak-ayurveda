@@ -16,7 +16,7 @@ export function FloatingWhatsApp() {
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Enquire directly on WhatsApp"
-        className="flex items-center justify-center w-14 h-14 rounded-full bg-[#25D366] text-white shadow-xl hover:scale-105 active:scale-95 transition-all duration-200 border-2 border-paper focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-soft"
+        className="flex items-center justify-center w-14 h-14 rounded-full bg-[#25D366] text-white shadow-xl hover:scale-110 active:scale-95 transition-all duration-300 border-2 border-paper focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-soft animate-whatsapp-pulse"
       >
         <MessageCircle className="w-7 h-7 fill-current" />
       </a>
