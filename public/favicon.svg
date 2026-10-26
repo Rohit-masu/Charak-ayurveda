@@ -1,0 +1,13 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <rect width="64" height="64" rx="14" fill="#0F2E21"/>
+  <!-- Neem sprig leaves -->
+  <path d="M32 10C32 10 33 16 38 18C33 20 32 26 32 26C32 26 31 20 26 18C31 16 32 10 32 10Z" fill="#DDBF73"/>
+  <path d="M38 18C38 18 43 20 46 16C45 21 41 24 41 24C41 24 39 21 38 18Z" fill="#B8923F"/>
+  <path d="M26 18C26 18 21 20 18 16C19 21 23 24 23 24C23 24 25 21 26 18Z" fill="#B8923F"/>
+  <!-- Open Book -->
+  <path d="M32 36C28 33 20 33 16 35V51C20 49 28 49 32 52C36 49 44 49 48 51V35C44 33 36 33 32 36Z" stroke="#DDBF73" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M32 36V52" stroke="#DDBF73" stroke-width="2" stroke-linecap="round"/>
+  <!-- Book spine accent -->
+  <path d="M19 40C23 38 29 38 32 40" stroke="#B8923F" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M45 40C41 38 35 38 32 40" stroke="#B8923F" stroke-width="1.5" stroke-linecap="round"/>
+</svg>

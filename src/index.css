@@ -1,0 +1,89 @@
+﻿@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-family: 'Hind', sans-serif;
+    color: #16251C;
+    background-color: #FCFBF7;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    background-color: #FCFBF7;
+    color: #16251C;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Marcellus', serif;
+  }
+}
+
+/* Hero animations & keyframes */
+@keyframes drawArch {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes fadeUpSettle {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes swaySprig {
+  0% {
+    transform: rotate(-1.5deg);
+  }
+  50% {
+    transform: rotate(2deg);
+  }
+  100% {
+    transform: rotate(-1.5deg);
+  }
+}
+
+.animate-draw-arch {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: drawArch 1.2s ease-out forwards;
+}
+
+.animate-hero-product {
+  opacity: 0;
+  animation: fadeUpSettle 0.8s ease-out 0.9s forwards;
+}
+
+.animate-sway {
+  transform-origin: bottom center;
+  animation: swaySprig 7s ease-in-out infinite;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .animate-hero-product {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .animate-draw-arch {
+    stroke-dashoffset: 0 !important;
+  }
+}
