@@ -704,8 +704,8 @@ export default function Hero({ onSelectProduct: _onSelectProduct } = {}) {
             position: "relative",
             zIndex: 10,
             width: "100%",
-            paddingTop: "calc(96px + 4vh)",
-            paddingBottom: "4rem",
+            paddingTop: "calc(96px + 6vh)",
+            paddingBottom: "8vh",
           }}
         >
           <div style={{ maxWidth: "760px" }}>
@@ -981,19 +981,19 @@ export default function Hero({ onSelectProduct: _onSelectProduct } = {}) {
                   alignItems: "center",
                   justifyContent: "center",
                   height: "56px",
-                  padding: "0 2.4rem",
-                  borderRadius: "2px",
+                  padding: "0 2.6rem",
+                  borderRadius: "28px 4px 28px 4px",
                   border: "1px solid #c9a45c",
                   backgroundColor: "#c9a45c",
                   color: "#06150f",
                   fontFamily: "'Manrope', sans-serif",
                   fontSize: "12px",
-                  fontWeight: 500,
+                  fontWeight: 600,
                   letterSpacing: "0.2em",
                   textTransform: "uppercase",
                   textDecoration: "none",
-                  boxShadow: "0 4px 20px rgba(0, 0, 0, 0.35)",
-                  transition: "color 300ms ease, border-color 300ms ease, background-color 300ms ease",
+                  boxShadow: "0 4px 22px rgba(201, 164, 92, 0.35)",
+                  transition: "all 350ms cubic-bezier(0.16, 1, 0.3, 1)",
                 }}
                 className="hero-primary-cta group"
               >
@@ -1008,8 +1008,12 @@ export default function Hero({ onSelectProduct: _onSelectProduct } = {}) {
                   }}
                   className="btn-dark-hover"
                 />
-                <span style={{ position: "relative", zIndex: 1 }} className="btn-label">
-                  DISCOVER CHARAK
+                <span style={{ position: "relative", zIndex: 1, display: "inline-flex", alignItems: "center", gap: "0.55rem" }} className="btn-label">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z" />
+                    <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12" />
+                  </svg>
+                  <span>DISCOVER CHARAK</span>
                 </span>
               </a>
 
@@ -1067,129 +1071,7 @@ export default function Hero({ onSelectProduct: _onSelectProduct } = {}) {
           </div>
         </div>
 
-        {/* ===================================================================
-            YELLOW LUXURY APOTHECARY TAPE / INFINITE SCROLL MARQUEE
-            Vibrant yellow-gold background (#e5b958) with high-contrast obsidian typography
-            =================================================================== */}
-        <div
-          ref={marqueeRef}
-          aria-label="Ayurvedic Certification Ticker Tape"
-          style={{
-            position: "absolute",
-            bottom: 0,
-            left: 0,
-            right: 0,
-            zIndex: 25,
-            display: "flex",
-            alignItems: "center",
-            height: "44px",
-            background: "linear-gradient(90deg, #cba864 0%, #dfbe75 25%, #f3d790 50%, #dfbe75 75%, #cba864 100%)",
-            borderTop: "1px solid rgba(6, 21, 15, 0.5)",
-            borderBottom: "1px solid rgba(6, 21, 15, 0.5)",
-            boxShadow: "0 4px 20px rgba(0, 0, 0, 0.45)",
-            overflow: "hidden",
-            cursor: "default",
-          }}
-        >
-          {/* Left Authentic Apothecary Seal Badge */}
-          <div
-            style={{
-              padding: "0 1.25rem",
-              display: "flex",
-              alignItems: "center",
-              gap: "0.55rem",
-              backgroundColor: "#06150f",
-              color: "#cba864",
-              height: "100%",
-              flexShrink: 0,
-              borderRight: "2px solid #06150f",
-              zIndex: 5,
-            }}
-          >
-            <div
-              style={{
-                width: "8px",
-                height: "8px",
-                borderRadius: "50%",
-                backgroundColor: "#e2be73",
-                boxShadow: "0 0 8px #e2be73",
-                animation: "eyebrowPulse 2s ease-in-out infinite",
-              }}
-            />
-            <span
-              style={{
-                fontFamily: "'Manrope', sans-serif",
-                fontSize: "11px",
-                fontWeight: 800,
-                letterSpacing: "0.22em",
-                textTransform: "uppercase",
-                color: "#f4efe3",
-              }}
-            >
-              CHARAK · CERTIFIED
-            </span>
-          </div>
-
-          {/* Infinite Marquee Ticker Track with Seamless Loop & Scroll Parallax */}
-          <div
-            style={{
-              overflow: "hidden",
-              whiteSpace: "nowrap",
-              display: "flex",
-              width: "100%",
-            }}
-          >
-            <div
-              ref={marqueeTrackRef}
-              className="infinite-tape-track"
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                willChange: "transform",
-              }}
-            >
-              {[0, 1].map((copyIdx) => (
-                <div
-                  key={copyIdx}
-                  style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    flexShrink: 0,
-                  }}
-                >
-                  {[0, 1, 2, 3].map((k) => (
-                    <span
-                      key={k}
-                      style={{
-                        fontFamily: "'Manrope', sans-serif",
-                        fontSize: "12px",
-                        fontWeight: 700,
-                        letterSpacing: "0.2em",
-                        textTransform: "uppercase",
-                        color: "#06150f",
-                        padding: "0 1.75rem",
-                        display: "inline-flex",
-                        alignItems: "center",
-                        gap: "1.2rem",
-                      }}
-                    >
-                      <span>Classical Formulations</span>
-                      <span style={{ opacity: 0.6, fontSize: "10px" }}>◈</span>
-                      <span>Heavy-Metal Tested</span>
-                      <span style={{ opacity: 0.6, fontSize: "10px" }}>◈</span>
-                      <span>Haridwar Botanical Heritage</span>
-                      <span style={{ opacity: 0.6, fontSize: "10px" }}>◈</span>
-                      <span>Charaka Samhita</span>
-                      <span style={{ opacity: 0.6, fontSize: "10px" }}>◈</span>
-                      <span>Standardized Extraction</span>
-                      <span style={{ opacity: 0.6, fontSize: "10px" }}>◈</span>
-                    </span>
-                  ))}
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
+        
 
         {/* ===================================================================
             VERTICAL GOLD LINE WIPE TRANSITION TO NEXT SECTION
@@ -1268,6 +1150,9 @@ export default function Hero({ onSelectProduct: _onSelectProduct } = {}) {
         .hero-primary-cta:hover {
           color: #c9a45c !important;
           border-color: #c9a45c !important;
+          border-radius: 4px 28px 4px 28px !important;
+          box-shadow: 0 8px 30px rgba(201, 164, 92, 0.5) !important;
+          transform: translateY(-2px);
         }
 
         .hero-primary-cta:hover .btn-dark-hover {

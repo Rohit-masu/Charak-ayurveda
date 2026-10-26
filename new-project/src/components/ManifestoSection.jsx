@@ -79,6 +79,8 @@ export default function ManifestoSection() {
   const plinthRef = useRef(null);
   const leftLeafRef = useRef(null);
   const rightLeafRef = useRef(null);
+  const tapeRef = useRef(null);
+  const tapeTrackRef = useRef(null);
   const numRefs = useRef([]);
   const [hoveredPillar, setHoveredPillar] = useState(null);
 
@@ -139,6 +141,20 @@ export default function ManifestoSection() {
             },
           }
         );
+      }
+
+      // 0. Yellow Tape Scroll Parallax (Accelerates on scroll)
+      if (tapeTrackRef.current) {
+        gsap.to(tapeTrackRef.current, {
+          x: "-=300",
+          ease: "none",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top bottom",
+            end: "top top",
+            scrub: 0.8,
+          },
+        });
       }
 
       // 3. Parallax on Flanking Botanical Silhouettes
@@ -206,10 +222,131 @@ export default function ManifestoSection() {
         position: "relative",
         zIndex: 20,
         backgroundColor: "#06150f",
-        padding: "6.5rem 0 5.5rem",
+        padding: "0 0 5.5rem",
         overflow: "hidden",
       }}
     >
+      {/* ===================================================================
+          YELLOW LUXURY APOTHECARY TAPE / INFINITE SCROLL MARQUEE
+          Fills the lower transition space between the Hero and Manifesto
+          =================================================================== */}
+      <div
+        ref={tapeRef}
+        aria-label="Ayurvedic Certification Ticker Tape"
+        style={{
+          width: "100%",
+          height: "46px",
+          display: "flex",
+          alignItems: "center",
+          background: "linear-gradient(90deg, #cba864 0%, #dfbe75 25%, #f3d790 50%, #dfbe75 75%, #cba864 100%)",
+          borderTop: "1px solid rgba(6, 21, 15, 0.5)",
+          borderBottom: "1px solid rgba(6, 21, 15, 0.5)",
+          boxShadow: "0 6px 25px rgba(0, 0, 0, 0.5)",
+          overflow: "hidden",
+          cursor: "default",
+          marginBottom: "5rem",
+          position: "relative",
+          zIndex: 30,
+        }}
+      >
+        {/* Left Authentic Apothecary Seal Badge */}
+        <div
+          style={{
+            padding: "0 1.25rem",
+            display: "flex",
+            alignItems: "center",
+            gap: "0.55rem",
+            backgroundColor: "#06150f",
+            color: "#cba864",
+            height: "100%",
+            flexShrink: 0,
+            borderRight: "2px solid #06150f",
+            zIndex: 5,
+          }}
+        >
+          <div
+            style={{
+              width: "8px",
+              height: "8px",
+              borderRadius: "50%",
+              backgroundColor: "#e2be73",
+              boxShadow: "0 0 8px #e2be73",
+            }}
+          />
+          <span
+            style={{
+              fontFamily: "'Manrope', sans-serif",
+              fontSize: "11px",
+              fontWeight: 800,
+              letterSpacing: "0.22em",
+              textTransform: "uppercase",
+              color: "#f4efe3",
+            }}
+          >
+            CHARAK · CERTIFIED
+          </span>
+        </div>
+
+        {/* Infinite Marquee Ticker Track with Seamless Loop */}
+        <div
+          style={{
+            overflow: "hidden",
+            whiteSpace: "nowrap",
+            display: "flex",
+            width: "100%",
+          }}
+        >
+          <div
+            ref={tapeTrackRef}
+            className="infinite-tape-track"
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              willChange: "transform",
+            }}
+          >
+            {[0, 1].map((copyIdx) => (
+              <div
+                key={copyIdx}
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  flexShrink: 0,
+                }}
+              >
+                {[0, 1, 2, 3].map((k) => (
+                  <span
+                    key={k}
+                    style={{
+                      fontFamily: "'Manrope', sans-serif",
+                      fontSize: "12px",
+                      fontWeight: 700,
+                      letterSpacing: "0.2em",
+                      textTransform: "uppercase",
+                      color: "#06150f",
+                      padding: "0 1.75rem",
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: "1.2rem",
+                    }}
+                  >
+                    <span>Classical Formulations</span>
+                    <span style={{ opacity: 0.6, fontSize: "10px" }}>◈</span>
+                    <span>Heavy-Metal Tested</span>
+                    <span style={{ opacity: 0.6, fontSize: "10px" }}>◈</span>
+                    <span>Haridwar Botanical Heritage</span>
+                    <span style={{ opacity: 0.6, fontSize: "10px" }}>◈</span>
+                    <span>Charaka Samhita</span>
+                    <span style={{ opacity: 0.6, fontSize: "10px" }}>◈</span>
+                    <span>Standardized Extraction</span>
+                    <span style={{ opacity: 0.6, fontSize: "10px" }}>◈</span>
+                  </span>
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
       {/* Ambient Radial Golden Aura */}
       <div
         aria-hidden="true"
@@ -598,6 +735,19 @@ export default function ManifestoSection() {
       </div>
 
       <style>{`
+        @keyframes infiniteTapeScroll {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+
+        .infinite-tape-track {
+          animation: infiniteTapeScroll 28s linear infinite;
+        }
+
+        .infinite-tape-track:hover {
+          animation-play-state: paused;
+        }
+
         @media (max-width: 1024px) {
           .manifesto-pillars-grid {
             grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
