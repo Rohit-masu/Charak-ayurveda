@@ -1,114 +1,185 @@
-﻿import React from "react";
-import { BookOpen, Leaf, Compass, Stethoscope } from "lucide-react";
+import React, { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function AttributesStrip() {
-  const attributes = [
+  const stripRef = useRef(null);
+
+  const items = [
     {
-      icon: BookOpen,
+      num: "01",
       title: "Classical Lineage",
-      subtitle: "Rooted in Charaka Samhita scriptures",
+      desc: "Rooted in authentic Charaka Samhita scriptures and Vedic pharmacology.",
     },
     {
-      icon: Leaf,
+      num: "02",
       title: "Botanical Integrity",
-      subtitle: "Purified Himalayan herbs & zero synthetic fillers",
+      desc: "Wild-harvested Himalayan herbs with zero synthetic excipients or binders.",
     },
     {
-      icon: Compass,
+      num: "03",
       title: "Disciplined Assays",
-      subtitle: "Standardized batch testing in Haridwar",
+      desc: "Standardized batch testing with NABL heavy-metal and purity validation.",
     },
     {
-      icon: Stethoscope,
-      title: "Practitioner Network",
-      subtitle: "Dedicated clinical supply for BAMS doctors",
+      num: "04",
+      title: "Clinical Practice",
+      desc: "Dedicated clinical supply network formulated for certified BAMS doctors.",
     },
   ];
 
+  useEffect(() => {
+    const isReduced =
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (isReduced) return;
+
+    const ctx = gsap.context(() => {
+      gsap.from(".trust-col", {
+        scrollTrigger: {
+          trigger: stripRef.current,
+          start: "top 88%",
+          toggleActions: "play none none reverse",
+        },
+        y: 28,
+        opacity: 0,
+        duration: 0.85,
+        stagger: 0.14,
+        ease: "power2.out",
+      });
+    }, stripRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
     <section
-      aria-label="Brand Attributes"
+      ref={stripRef}
+      id="trust-strip"
+      aria-label="Brand Trust Indicators"
       style={{
-        background: "#051610",
-        borderTop: "1px solid rgba(203, 168, 100, 0.22)",
-        borderBottom: "1px solid rgba(203, 168, 100, 0.22)",
-        padding: "2rem 0",
+        position: "relative",
+        zIndex: 20,
+        backgroundColor: "#06150f",
+        borderTop: "1px solid rgba(201, 164, 92, 0.25)",
+        borderBottom: "1px solid rgba(201, 164, 92, 0.25)",
+        padding: "3.5rem 0",
       }}
     >
-      <div className="container">
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
-            gap: "1.75rem",
-          }}
-        >
-          {attributes.map((attr, index) => {
-            const Icon = attr.icon;
-            return (
+      <div className="container mx-auto px-6 max-w-7xl">
+        <div className="grid grid-cols-1 md:grid-cols-4">
+          {items.map((item, idx) => (
+            <div
+              key={item.num}
+              className="trust-col group relative flex flex-col justify-start"
+              style={{
+                padding: "1rem 1.75rem",
+                borderRight:
+                  idx < items.length - 1
+                    ? "1px solid rgba(201, 164, 92, 0.25)"
+                    : "none",
+                transition: "opacity 0.3s ease",
+              }}
+            >
+              {/* Large Cormorant Numeral with Hover Underline Draw */}
               <div
-                key={attr.title}
                 style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "1rem",
-                  padding: "0.5rem 0.75rem",
-                  borderRight:
-                    index < attributes.length - 1
-                      ? "1px solid rgba(203, 168, 100, 0.12)"
-                      : "none",
+                  position: "relative",
+                  display: "inline-block",
+                  alignSelf: "flex-start",
+                  marginBottom: "1rem",
                 }}
-                className="attribute-item"
               >
-                <div
+                <span
                   style={{
-                    width: "2.75rem",
-                    height: "2.75rem",
-                    borderRadius: "8px",
-                    background: "rgba(22, 64, 48, 0.5)",
-                    border: "1px solid var(--border-gold-subtle)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    color: "var(--accent-gold-light)",
-                    flexShrink: 0,
+                    fontFamily: "var(--font-serif-display, 'Cormorant Garamond', serif)",
+                    fontSize: "clamp(2.4rem, 3.2vw, 3.4rem)",
+                    fontWeight: 400,
+                    lineHeight: 1,
+                    letterSpacing: "-0.02em",
+                    color: "rgba(201, 164, 92, 0.6)",
+                    display: "block",
                   }}
                 >
-                  <Icon size={20} />
-                </div>
+                  {item.num}
+                </span>
 
-                <div>
-                  <h4
-                    style={{
-                      fontFamily: "var(--font-sans-body)",
-                      fontSize: "0.95rem",
-                      fontWeight: 600,
-                      color: "#faf7f0",
-                      marginBottom: "0.15rem",
-                    }}
-                  >
-                    {attr.title}
-                  </h4>
-                  <p
-                    style={{
-                      fontSize: "0.82rem",
-                      color: "var(--text-light-muted)",
-                      lineHeight: 1.35,
-                    }}
-                  >
-                    {attr.subtitle}
-                  </p>
-                </div>
+                {/* 1px Gold Line Draws Left-to-Right on Column Hover */}
+                <span
+                  className="numeral-draw-line"
+                  style={{
+                    position: "absolute",
+                    bottom: "-4px",
+                    left: 0,
+                    width: "100%",
+                    height: "1px",
+                    backgroundColor: "#c9a45c",
+                    transform: "scaleX(0)",
+                    transformOrigin: "left",
+                    transition: "transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
+                  }}
+                />
               </div>
-            );
-          })}
+
+              {/* Title in Ivory (Manrope 500, 15px) - Turns Gold on Hover */}
+              <h3
+                className="trust-title"
+                style={{
+                  fontFamily: "'Manrope', sans-serif",
+                  fontWeight: 500,
+                  fontSize: "15px",
+                  lineHeight: 1.35,
+                  color: "#faf8f2",
+                  marginBottom: "0.45rem",
+                  transition: "color 0.3s ease",
+                }}
+              >
+                {item.title}
+              </h3>
+
+              {/* Description in Ivory 60% (13px, Max 2 Lines) */}
+              <p
+                style={{
+                  fontFamily: "'Manrope', sans-serif",
+                  fontWeight: 400,
+                  fontSize: "13px",
+                  lineHeight: 1.5,
+                  color: "rgba(250, 248, 242, 0.6)",
+                  maxHeight: "3em",
+                  overflow: "hidden",
+                  display: "-webkit-box",
+                  WebkitLineClamp: 2,
+                  WebkitBoxOrient: "vertical",
+                }}
+              >
+                {item.desc}
+              </p>
+            </div>
+          ))}
         </div>
       </div>
 
       <style>{`
-        @media (max-width: 900px) {
-          .attribute-item {
+        /* Hover Effects: Title turns gold, 1px line draws under numeral */
+        .trust-col:hover .trust-title {
+          color: #c9a45c !important;
+        }
+
+        .trust-col:hover .numeral-draw-line {
+          transform: scaleX(1) !important;
+        }
+
+        @media (max-width: 768px) {
+          .trust-col {
             border-right: none !important;
+            border-bottom: 1px solid rgba(201, 164, 92, 0.2) !important;
+            padding: 1.75rem 0.5rem !important;
+          }
+          .trust-col:last-child {
+            border-bottom: none !important;
           }
         }
       `}</style>
