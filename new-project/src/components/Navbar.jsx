@@ -1,292 +1,437 @@
-﻿import React, { useState, useEffect } from "react";
-import { MessageCircle, Menu, X, ArrowUpRight } from "lucide-react";
-import { contactDetails } from "../data/catalog";
+import React, { useState, useEffect } from "react";
+import { ArrowUpRight, Menu, X } from "lucide-react";
 
 export default function Navbar({ onOpenEnquiry }) {
   const [scrolled, setScrolled] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const [hoveredIndex, setHoveredIndex] = useState(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+      const scrollY = window.scrollY;
+      setScrolled(scrollY > 40);
+
+      const winHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = winHeight > 0 ? Math.min(1, Math.max(0, scrollY / winHeight)) : 0;
+      setScrollProgress(progress);
     };
+
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const navLinks = [
-    { label: "Heritage", href: "#heritage" },
+    { label: "Philosophy", href: "#heritage" },
     { label: "Formulations", href: "#formulations" },
-    { label: "Categories", href: "#categories" },
     { label: "Botanicals", href: "#botanicals" },
-    { label: "Practitioners & Trade", href: "#practitioners" },
+    { label: "Quality", href: "#extraction-journey" },
     { label: "Contact", href: "#contact" },
   ];
 
-  const handleLinkClick = () => {
-    setMobileMenuOpen(false);
-  };
-
-  const whatsappLink = `https://wa.me/${contactDetails.whatsappNumber}?text=${encodeURIComponent(
-    "Hello Charak Ayurveda, I would like to enquire about your Ayurvedic formulations and professional distribution."
-  )}`;
-
   return (
-    <header
-      style={{
-        position: "sticky",
-        top: 0,
-        zIndex: 50,
-        background: scrolled
-          ? "rgba(7, 28, 20, 0.94)"
-          : "rgba(7, 28, 20, 0.82)",
-        backdropFilter: "blur(18px)",
-        WebkitBackdropFilter: "blur(18px)",
-        borderBottom: scrolled
-          ? "1px solid rgba(203, 168, 100, 0.28)"
-          : "1px solid rgba(255, 255, 255, 0.08)",
-        transition: "all 300ms ease",
-        boxShadow: scrolled ? "0 8px 30px rgba(0, 0, 0, 0.45)" : "none",
-      }}
-    >
-      <div
-        className="container"
+    <>
+      <header
+        role="banner"
         style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          height: "4.75rem",
+          position: "fixed",
+          top: 0,
+          left: 0,
+          right: 0,
+          zIndex: 50,
+          height: scrolled ? "72px" : "96px",
+          backgroundColor: scrolled ? "rgba(6, 21, 15, 0.65)" : "transparent",
+          backdropFilter: scrolled ? "blur(20px)" : "none",
+          WebkitBackdropFilter: scrolled ? "blur(20px)" : "none",
+          borderBottom: "1px solid rgba(201, 164, 92, 0.12)",
+          transition: "height 350ms cubic-bezier(0.16, 1, 0.3, 1), background-color 350ms ease, backdrop-filter 350ms ease",
         }}
+        className="flex items-center"
       >
-        {/* Brand Identity / Wordmark */}
-        <a
-          href="#"
+        <div
+          className="container"
           style={{
             display: "flex",
             alignItems: "center",
-            gap: "0.85rem",
-            textDecoration: "none",
+            justifyContent: "space-between",
+            width: "100%",
+            height: "100%",
           }}
         >
-          {/* Botanical Crest Emblem */}
-          <div
-            style={{
-              width: "2.6rem",
-              height: "2.6rem",
-              borderRadius: "50%",
-              background: "radial-gradient(circle, #1a4d38 0%, #0c2b1f 100%)",
-              border: "1.5px solid var(--accent-gold-primary)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              boxShadow: "0 0 16px rgba(203, 168, 100, 0.25)",
-              flexShrink: 0,
-            }}
-          >
-            <svg
-              width="22"
-              height="22"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="#dfbe78"
-              strokeWidth="1.6"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M12 2L15 8L21 9L16.5 13.5L18 20L12 16.5L6 20L7.5 13.5L3 9L9 8L12 2Z" />
-              <circle cx="12" cy="12" r="3" stroke="#dfbe78" strokeWidth="1.2" />
-            </svg>
-          </div>
-
-          <div style={{ display: "flex", flexDirection: "column" }}>
-            <span
-              style={{
-                fontFamily: "var(--font-serif-accent)",
-                fontSize: "1.25rem",
-                fontWeight: 700,
-                letterSpacing: "0.14em",
-                color: "#faf7f0",
-                lineHeight: 1.15,
-              }}
-            >
-              CHARAK <span style={{ color: "var(--accent-gold-light)", fontWeight: 500 }}>AYURVEDA</span>
-            </span>
-            <span
-              style={{
-                fontFamily: "var(--font-sans-body)",
-                fontSize: "0.68rem",
-                letterSpacing: "0.16em",
-                color: "var(--accent-gold-primary)",
-                textTransform: "uppercase",
-                fontWeight: 500,
-              }}
-            >
-              चरकसंहिता परम् प्रमाणम् • Estd. Tradition
-            </span>
-          </div>
-        </a>
-
-        {/* Desktop Navigation Links */}
-        <nav
-          aria-label="Main Navigation"
-          style={{
-            display: "none",
-            alignItems: "center",
-            gap: "1.85rem",
-          }}
-          className="desktop-nav"
-        >
-          {navLinks.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              style={{
-                fontSize: "0.88rem",
-                fontWeight: 500,
-                color: "var(--text-light-secondary)",
-                transition: "color 200ms ease",
-                position: "relative",
-                padding: "0.3rem 0",
-              }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = "var(--accent-gold-light)")}
-              onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-light-secondary)")}
-            >
-              {link.label}
-            </a>
-          ))}
-        </nav>
-
-        {/* Action CTAs */}
-        <div
-          style={{
-            display: "none",
-            alignItems: "center",
-            gap: "0.85rem",
-          }}
-          className="desktop-actions"
-        >
+          {/* Brand Identity with Monogram Seal */}
           <a
-            href={whatsappLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-secondary"
+            href="#"
+            aria-label="Charak Ayurveda Home"
             style={{
-              padding: "0.6rem 1.15rem",
-              fontSize: "0.84rem",
-              borderRadius: "6px",
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "0.85rem",
+              textDecoration: "none",
             }}
+            className="group"
           >
-            <MessageCircle size={15} style={{ color: "#25D366" }} />
-            <span>WhatsApp Desk</span>
+            {/* Small Gold SVG Monogram Seal */}
+            <div
+              style={{
+                width: "34px",
+                height: "34px",
+                borderRadius: "50%",
+                border: "1px solid #c9a45c",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                backgroundColor: "rgba(201, 164, 92, 0.08)",
+                boxShadow: "0 0 14px rgba(201, 164, 92, 0.2)",
+                transition: "transform 400ms ease, box-shadow 400ms ease",
+              }}
+              className="group-hover:scale-105"
+            >
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 32 32"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                {/* Classical Ayurvedic Botanical Monogram: Interlocking C & A Leaf Crest */}
+                <circle cx="16" cy="16" r="14" stroke="#c9a45c" strokeWidth="0.8" opacity="0.6" strokeDasharray="2 2" />
+                <path
+                  d="M20 11C18.2 9.2 14.8 9.2 13 11C11.2 12.8 11.2 16.2 13 18C14.8 19.8 17.5 19.8 19.5 18.5"
+                  stroke="#c9a45c"
+                  strokeWidth="1.2"
+                  strokeLinecap="round"
+                />
+                <path
+                  d="M16 8L16 23"
+                  stroke="#c9a45c"
+                  strokeWidth="0.9"
+                  strokeLinecap="round"
+                  opacity="0.7"
+                />
+                <circle cx="16" cy="8" r="1.5" fill="#c9a45c" />
+                <path
+                  d="M12 18C13.5 16 16 14 19 14.5"
+                  stroke="#c9a45c"
+                  strokeWidth="1"
+                  strokeLinecap="round"
+                />
+              </svg>
+            </div>
+
+            {/* Typography Wordmark */}
+            <span
+              style={{
+                fontFamily: "var(--font-serif-display)",
+                fontSize: "1.35rem",
+                fontWeight: 400,
+                letterSpacing: "0.14em",
+                color: "#f4efe3",
+                lineHeight: 1,
+              }}
+            >
+              CHARAK <span style={{ color: "#c9a45c", fontWeight: 300 }}>AYURVEDA</span>
+            </span>
           </a>
 
-          <button
-            onClick={() => onOpenEnquiry("General / Product Enquiry")}
-            className="btn-primary"
+          {/* Desktop Navigation Links */}
+          <nav
+            aria-label="Primary Navigation"
             style={{
-              padding: "0.6rem 1.35rem",
-              fontSize: "0.84rem",
-              borderRadius: "6px",
+              display: "none",
+              alignItems: "center",
+              gap: "2.75rem",
             }}
+            className="desktop-nav"
           >
-            <span>Enquire Now</span>
-            <ArrowUpRight size={14} />
-          </button>
-        </div>
-
-        {/* Mobile Hamburger Button */}
-        <button
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
-          aria-expanded={mobileMenuOpen}
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            width: "2.6rem",
-            height: "2.6rem",
-            borderRadius: "6px",
-            background: "rgba(255, 255, 255, 0.06)",
-            border: "1px solid rgba(203, 168, 100, 0.3)",
-            color: "var(--accent-gold-light)",
-          }}
-          className="mobile-toggle"
-        >
-          {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
-        </button>
-      </div>
-
-      {/* Mobile Drawer Menu */}
-      {mobileMenuOpen && (
-        <div
-          style={{
-            background: "rgba(7, 24, 17, 0.98)",
-            backdropFilter: "blur(20px)",
-            borderBottom: "1px solid var(--border-gold-subtle)",
-            padding: "1.5rem 1.25rem 2rem",
-            display: "flex",
-            flexDirection: "column",
-            gap: "1.2rem",
-          }}
-          className="animate-fade-in"
-        >
-          <div style={{ display: "flex", flexDirection: "column", gap: "0.85rem" }}>
-            {navLinks.map((link) => (
+            {navLinks.map((link, idx) => (
               <a
                 key={link.label}
                 href={link.href}
-                onClick={handleLinkClick}
+                onMouseEnter={() => setHoveredIndex(idx)}
+                onMouseLeave={() => setHoveredIndex(null)}
                 style={{
-                  fontSize: "1.05rem",
+                  position: "relative",
+                  fontFamily: "var(--font-sans-body)",
+                  fontSize: "12px",
                   fontWeight: 500,
-                  color: "#f5f3ec",
-                  padding: "0.4rem 0",
-                  borderBottom: "1px solid rgba(255, 255, 255, 0.06)",
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
+                  letterSpacing: "0.18em",
+                  textTransform: "uppercase",
+                  color: "#f4efe3",
+                  textDecoration: "none",
+                  padding: "0.5rem 0",
+                  opacity: hoveredIndex !== null && hoveredIndex !== idx ? 0.5 : 1,
+                  transition: "opacity 240ms ease, color 240ms ease",
                 }}
+                className="hover:text-[#c9a45c] group"
               >
                 <span>{link.label}</span>
-                <span style={{ color: "var(--accent-gold-primary)", fontSize: "0.85rem" }}>→</span>
+                {/* Gold Underline draws left-to-right */}
+                <span
+                  style={{
+                    position: "absolute",
+                    bottom: 0,
+                    left: 0,
+                    width: "100%",
+                    height: "1px",
+                    backgroundColor: "#c9a45c",
+                    transform: hoveredIndex === idx ? "scaleX(1)" : "scaleX(0)",
+                    transformOrigin: "left",
+                    transition: "transform 260ms cubic-bezier(0.16, 1, 0.3, 1)",
+                  }}
+                />
               </a>
+            ))}
+          </nav>
+
+          {/* Desktop Action: Gold "Enquire" CTA */}
+          <div
+            style={{
+              display: "none",
+              alignItems: "center",
+            }}
+            className="desktop-actions"
+          >
+            <button
+              onClick={() => {
+                if (onOpenEnquiry) onOpenEnquiry("General Enquiry");
+              }}
+              style={{
+                position: "relative",
+                overflow: "hidden",
+                padding: "0.62rem 1.65rem",
+                borderRadius: "2px",
+                border: "1px solid #c9a45c",
+                backgroundColor: "transparent",
+                color: "#c9a45c",
+                fontFamily: "var(--font-sans-body)",
+                fontSize: "12px",
+                fontWeight: 500,
+                letterSpacing: "0.18em",
+                textTransform: "uppercase",
+                cursor: "pointer",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "0.45rem",
+                transition: "color 350ms ease, border-color 350ms ease",
+              }}
+              className="navbar-enquire-btn group"
+            >
+              {/* Sweeping Gold Background */}
+              <span
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  backgroundColor: "#c9a45c",
+                  transform: "translateX(-101%)",
+                  transition: "transform 350ms cubic-bezier(0.16, 1, 0.3, 1)",
+                  zIndex: 0,
+                }}
+                className="cta-sweep-bg"
+              />
+
+              <span style={{ position: "relative", zIndex: 1 }} className="btn-text">
+                Enquire
+              </span>
+
+              <ArrowUpRight
+                size={13}
+                style={{
+                  position: "relative",
+                  zIndex: 1,
+                  transition: "transform 250ms cubic-bezier(0.16, 1, 0.3, 1)",
+                }}
+                className="cta-arrow"
+              />
+            </button>
+          </div>
+
+          {/* Mobile Hamburger Toggle */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={mobileMenuOpen}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              width: "2.5rem",
+              height: "2.5rem",
+              borderRadius: "2px",
+              background: "transparent",
+              border: "1px solid rgba(201, 164, 92, 0.35)",
+              color: "#c9a45c",
+              cursor: "pointer",
+            }}
+            className="mobile-toggle"
+          >
+            {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+          </button>
+        </div>
+
+        {/* 1px Gold Scroll Progress Line at Bottom */}
+        <div
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            bottom: 0,
+            left: 0,
+            width: "100%",
+            height: "1px",
+            backgroundColor: "#c9a45c",
+            transform: `scaleX(${scrollProgress})`,
+            transformOrigin: "left",
+            transition: "transform 80ms linear",
+            opacity: scrolled ? 1 : 0,
+          }}
+        />
+      </header>
+
+      {/* Fullscreen Mobile Overlay Menu with Masked Line-by-Line Reveal */}
+      {mobileMenuOpen && (
+        <div
+          style={{
+            position: "fixed",
+            inset: 0,
+            zIndex: 100,
+            backgroundColor: "rgba(6, 21, 15, 0.98)",
+            backdropFilter: "blur(24px)",
+            WebkitBackdropFilter: "blur(24px)",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+            padding: "2.5rem 1.75rem 3rem",
+          }}
+        >
+          {/* Header row in mobile overlay */}
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+            <span
+              style={{
+                fontFamily: "var(--font-serif-display)",
+                fontSize: "1.25rem",
+                letterSpacing: "0.14em",
+                color: "#f4efe3",
+              }}
+            >
+              CHARAK <span style={{ color: "#c9a45c" }}>AYURVEDA</span>
+            </span>
+
+            <button
+              onClick={() => setMobileMenuOpen(false)}
+              aria-label="Close menu"
+              style={{
+                background: "transparent",
+                border: "1px solid rgba(201, 164, 92, 0.4)",
+                color: "#c9a45c",
+                width: "2.5rem",
+                height: "2.5rem",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                borderRadius: "2px",
+                cursor: "pointer",
+              }}
+            >
+              <X size={20} />
+            </button>
+          </div>
+
+          {/* Masked Line-by-Line Links */}
+          <div style={{ display: "flex", flexDirection: "column", gap: "1.75rem" }}>
+            {navLinks.map((link, i) => (
+              <div
+                key={link.label}
+                style={{
+                  overflow: "hidden",
+                }}
+              >
+                <a
+                  href={link.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  style={{
+                    display: "block",
+                    fontFamily: "var(--font-serif-display)",
+                    fontSize: "2.25rem",
+                    fontWeight: 400,
+                    letterSpacing: "0.04em",
+                    color: "#f4efe3",
+                    textDecoration: "none",
+                    animation: `mobileLinkReveal 500ms cubic-bezier(0.16, 1, 0.3, 1) ${i * 80 + 100}ms forwards`,
+                    transform: "translateY(100%)",
+                  }}
+                  className="hover:text-[#c9a45c] transition-colors"
+                >
+                  {link.label}
+                </a>
+              </div>
             ))}
           </div>
 
-          <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem", marginTop: "0.5rem" }}>
+          {/* Bottom CTA in Mobile Overlay */}
+          <div>
             <button
               onClick={() => {
                 setMobileMenuOpen(false);
-                onOpenEnquiry("General / Product Enquiry");
+                if (onOpenEnquiry) onOpenEnquiry("General Enquiry");
               }}
-              className="btn-primary"
-              style={{ width: "100%", justifyContent: "center" }}
+              style={{
+                width: "100%",
+                padding: "1rem",
+                borderRadius: "2px",
+                border: "1px solid #c9a45c",
+                backgroundColor: "#c9a45c",
+                color: "#06150f",
+                fontFamily: "var(--font-sans-body)",
+                fontSize: "12px",
+                fontWeight: 600,
+                letterSpacing: "0.18em",
+                textTransform: "uppercase",
+                cursor: "pointer",
+              }}
             >
-              Enquire Directly <ArrowUpRight size={15} />
+              Enquire Directly
             </button>
-
-            <a
-              href={whatsappLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-secondary"
-              style={{ width: "100%", justifyContent: "center" }}
-            >
-              <MessageCircle size={16} style={{ color: "#25D366" }} />
-              <span>Connect on WhatsApp</span>
-            </a>
           </div>
         </div>
       )}
 
-      {/* Responsive Media Query Helper */}
+      {/* Scoped CSS for Navbar */}
       <style>{`
         @media (min-width: 992px) {
-          .desktop-nav { display: flex !important; }
-          .desktop-actions { display: flex !important; }
-          .mobile-toggle { display: none !important; }
+          .desktop-nav {
+            display: flex !important;
+          }
+          .desktop-actions {
+            display: flex !important;
+          }
+          .mobile-toggle {
+            display: none !important;
+          }
+        }
+
+        .navbar-enquire-btn:hover {
+          color: #06150f !important;
+          border-color: #c9a45c !important;
+        }
+
+        .navbar-enquire-btn:hover .cta-sweep-bg {
+          transform: translateX(0) !important;
+        }
+
+        .navbar-enquire-btn:hover .cta-arrow {
+          transform: translate(2px, -2px) !important;
+        }
+
+        @keyframes mobileLinkReveal {
+          from {
+            transform: translateY(100%);
+            opacity: 0;
+          }
+          to {
+            transform: translateY(0);
+            opacity: 1;
+          }
         }
       `}</style>
-    </header>
+    </>
   );
 }

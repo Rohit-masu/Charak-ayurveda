@@ -1,6 +1,10 @@
-﻿import React, { useState } from "react";
+﻿import React, { useState, useEffect } from "react";
+import Lenis from "lenis";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 import BotanicalCanvas from "./components/BotanicalCanvas";
-import AnnouncementBar from "./components/AnnouncementBar";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import AttributesStrip from "./components/AttributesStrip";
@@ -25,6 +29,36 @@ export default function App() {
   const [enquiryModalOpen, setEnquiryModalOpen] = useState(false);
   const [enquiryInitialType, setEnquiryInitialType] = useState("Doctor / Clinical Practice");
 
+
+  // Luxury Smooth Scrolling with Lenis synchronized to GSAP ScrollTrigger
+  useEffect(() => {
+    const isReduced =
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (isReduced) return;
+
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true,
+    });
+
+    lenis.on("scroll", ScrollTrigger.update);
+
+    const updateRaf = (time) => {
+      lenis.raf(time * 1000);
+    };
+
+    gsap.ticker.add(updateRaf);
+    gsap.ticker.lagSmoothing(0);
+
+    return () => {
+      gsap.ticker.remove(updateRaf);
+      lenis.destroy();
+    };
+  }, []);
+
   const handleOpenEnquiry = (type = "Doctor / Clinical Practice") => {
     setEnquiryInitialType(type);
     setEnquiryModalOpen(true);
@@ -35,8 +69,7 @@ export default function App() {
       {/* Ambient Floating Golden Pollen / Spores Canvas */}
       <BotanicalCanvas />
 
-      {/* Top Notification Bar */}
-      <AnnouncementBar onOpenEnquiry={handleOpenEnquiry} />
+      {/* Top Notification Bar suppressed per visual direction (Do not add a marquee or announcement ticker) */}
 
       {/* Sticky Glass Navbar */}
       <Navbar onOpenEnquiry={handleOpenEnquiry} />
