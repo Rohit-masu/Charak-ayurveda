@@ -36,7 +36,6 @@ export default function ManifestoSection() {
       window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     if (isReduced) {
-      // In reduced motion, display full values immediately
       numRefs.current.forEach((el, i) => {
         if (el) el.textContent = `${STATS[i].target}${STATS[i].suffix}`;
       });
@@ -50,8 +49,8 @@ export default function ManifestoSection() {
         const wordTl = gsap.timeline({
           scrollTrigger: {
             trigger: sentenceRef.current,
-            start: "top 80%",
-            end: "bottom 40%",
+            start: "top 85%",
+            end: "bottom 45%",
             scrub: 0.6,
           },
         });
@@ -61,12 +60,12 @@ export default function ManifestoSection() {
           wordTl.to(
             el,
             {
-              color: isGold ? "#c9a45c" : "#f4efe3",
+              color: isGold ? "#c9a45c" : "#faf8f2",
               opacity: 1,
               ease: "power1.inOut",
               duration: 1,
             },
-            idx * 0.35
+            idx * 0.28
           );
         });
       }
@@ -84,7 +83,7 @@ export default function ManifestoSection() {
             ease: "power2.out",
             scrollTrigger: {
               trigger: statsRef.current,
-              start: "top 85%",
+              start: "top 88%",
               toggleActions: "play none none reverse",
             },
             onUpdate: () => {
@@ -108,33 +107,37 @@ export default function ManifestoSection() {
         zIndex: 20,
         backgroundColor: "#06150f",
         padding: "7.5rem 0 6.5rem",
+        overflow: "hidden",
       }}
     >
-      <div className="container mx-auto px-6 max-w-7xl">
+      <div className="container" style={{ maxWidth: "1240px", margin: "0 auto", padding: "0 2rem" }}>
         {/* ===================================================================
             LARGE SENTENCE: WORD-BY-WORD SCRUB REVEAL (Cormorant Garamond)
             Words scrub from Ivory 20% to full ivory; "classical wisdom" ends in gold.
             =================================================================== */}
-        <div style={{ maxWidth: "1100px", textAlign: "left", marginBottom: "6rem" }}>
+        <div style={{ maxWidth: "1050px", textAlign: "left", marginBottom: "5.5rem" }}>
           <h2
             ref={sentenceRef}
             style={{
               fontFamily: "var(--font-serif-display, 'Cormorant Garamond', serif)",
-              fontSize: "clamp(36px, 5vw, 72px)",
+              fontSize: "clamp(34px, 4.5vw, 64px)",
               fontWeight: 400,
-              lineHeight: 1.14,
+              lineHeight: 1.16,
               letterSpacing: "-0.015em",
+              wordBreak: "normal",
+              overflowWrap: "break-word",
             }}
           >
             {WORDS.map((item, i) => (
               <span
                 key={i}
                 data-gold={item.isGold}
-                className="manifesto-word inline-block"
+                className="manifesto-word"
                 style={{
+                  display: "inline-block",
                   color: "rgba(244, 239, 227, 0.2)",
-                  marginRight: "0.28em",
-                  transition: "none",
+                  marginRight: "0.26em",
+                  willChange: "color, opacity",
                 }}
               >
                 {item.text}
@@ -148,22 +151,28 @@ export default function ManifestoSection() {
             =================================================================== */}
         <div
           ref={statsRef}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4"
+          className="manifesto-stats-grid"
           style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(4, minmax(0, 1fr))",
             borderTop: "1px solid rgba(201, 164, 92, 0.25)",
             borderBottom: "1px solid rgba(201, 164, 92, 0.25)",
+            width: "100%",
           }}
         >
           {STATS.map((stat, idx) => (
             <div
               key={stat.label}
-              className="stat-col flex flex-col justify-between"
+              className="manifesto-stat-col"
               style={{
-                padding: "2.5rem 1.75rem",
+                padding: "2.6rem 2rem",
                 borderRight:
                   idx < STATS.length - 1
                     ? "1px solid rgba(201, 164, 92, 0.25)"
                     : "none",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "flex-start",
               }}
             >
               {/* Count-Up Large Numeral */}
@@ -202,12 +211,29 @@ export default function ManifestoSection() {
 
       <style>{`
         @media (max-width: 1024px) {
-          .stat-col {
+          .manifesto-stats-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+          }
+          .manifesto-stat-col:nth-child(2) {
             border-right: none !important;
+          }
+          .manifesto-stat-col:nth-child(1),
+          .manifesto-stat-col:nth-child(2) {
             border-bottom: 1px solid rgba(201, 164, 92, 0.25);
           }
-          .stat-col:last-child {
-            border-bottom: none;
+        }
+
+        @media (max-width: 640px) {
+          .manifesto-stats-grid {
+            grid-template-columns: 1fr !important;
+          }
+          .manifesto-stat-col {
+            border-right: none !important;
+            border-bottom: 1px solid rgba(201, 164, 92, 0.25) !important;
+            padding: 2rem 1rem !important;
+          }
+          .manifesto-stat-col:last-child {
+            border-bottom: none !important;
           }
         }
       `}</style>

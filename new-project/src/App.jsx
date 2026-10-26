@@ -44,6 +44,14 @@ export default function App() {
 
     lenis.on("scroll", ScrollTrigger.update);
 
+    const params = new URLSearchParams(window.location.search);
+    const scrollTarget = params.get("scroll");
+    if (scrollTarget) {
+      setTimeout(() => {
+        lenis.scrollTo(parseInt(scrollTarget, 10), { immediate: true });
+      }, 400);
+    }
+
     const updateRaf = (time) => {
       lenis.raf(time * 1000);
     };

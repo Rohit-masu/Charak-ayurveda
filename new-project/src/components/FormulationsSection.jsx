@@ -20,7 +20,6 @@ export default function FormulationsSection({ onSelectProduct }) {
   const activeCat = featureCategories[activeIdx] || featureCategories[0];
 
   const handleViewRange = (cat) => {
-    // Open the featured product in the modal
     if (onSelectProduct) {
       const matched = products.find((p) => p.category === cat.id) || products[0];
       onSelectProduct(matched);
@@ -49,7 +48,7 @@ export default function FormulationsSection({ onSelectProduct }) {
               scrollTrigger: {
                 trigger: sectionRef.current,
                 start: "top bottom",
-                end: "top 30%",
+                end: "top 35%",
                 scrub: true,
               },
             }
@@ -130,17 +129,19 @@ export default function FormulationsSection({ onSelectProduct }) {
         color: "#0b2a1d",
         padding: "7.5rem 0 8.5rem",
         transition: "background-color 0.5s ease",
+        overflow: "hidden",
       }}
     >
-      <div className="container mx-auto px-6 max-w-7xl">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+      <div className="container" style={{ maxWidth: "1240px", margin: "0 auto", padding: "0 2rem" }}>
+        {/* 2-Column Responsive Grid */}
+        <div className="formulations-main-grid" style={{ display: "grid", gridTemplateColumns: "1.2fr 0.88fr", gap: "4.5rem", alignItems: "start" }}>
           {/* =================================================================
               LEFT COLUMN: 4 HUGE CORMORANT LIST ROWS (Numeral 01-04 small, name 56px)
               Hairlines between rows; Hovered turns accent gold, others dim to 35%
               ================================================================= */}
-          <div className="lg:col-span-7 flex flex-col justify-start">
-            {/* Left-Aligned Subtle Eyebrow */}
-            <div className="flex items-center gap-3 mb-8" style={{ letterSpacing: "0.2em" }}>
+          <div style={{ display: "flex", flexDirection: "column", width: "100%" }}>
+            {/* Left-Aligned Subtle Eyebrow (No pill badge) */}
+            <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "2.5rem", letterSpacing: "0.2em" }}>
               <span
                 style={{
                   fontFamily: "'Manrope', sans-serif",
@@ -176,7 +177,7 @@ export default function FormulationsSection({ onSelectProduct }) {
             </div>
 
             {/* Desktop Category List */}
-            <div className="hidden lg:block w-full">
+            <div className="formulations-desktop-list" style={{ width: "100%" }}>
               {featureCategories.map((cat, idx) => {
                 const isHoveredOrActive = activeIdx === idx;
                 const isDimmed = activeIdx !== null && activeIdx !== idx;
@@ -187,13 +188,14 @@ export default function FormulationsSection({ onSelectProduct }) {
                     key={cat.id}
                     onMouseEnter={() => setActiveIdx(idx)}
                     onClick={() => setActiveIdx(idx)}
-                    className="category-list-row cursor-pointer group"
+                    className="category-list-row cursor-pointer"
                     style={{
                       padding: "2.35rem 0",
                       borderBottom: "1px solid rgba(184, 146, 74, 0.25)",
                       borderTop: idx === 0 ? "1px solid rgba(184, 146, 74, 0.25)" : "none",
                       opacity: isDimmed ? 0.35 : 1,
                       transition: "opacity 0.4s ease",
+                      cursor: "pointer",
                     }}
                   >
                     {/* Small Numeral 01-04 */}
@@ -214,7 +216,7 @@ export default function FormulationsSection({ onSelectProduct }) {
                     <h3
                       style={{
                         fontFamily: "var(--font-serif-display, 'Cormorant Garamond', serif)",
-                        fontSize: "clamp(36px, 4.4vw, 56px)",
+                        fontSize: "clamp(36px, 4.2vw, 56px)",
                         lineHeight: 1.08,
                         fontWeight: 400,
                         letterSpacing: "-0.015em",
@@ -230,7 +232,7 @@ export default function FormulationsSection({ onSelectProduct }) {
             </div>
 
             {/* Mobile Stacked Accordion List */}
-            <div className="lg:hidden flex flex-col w-full border-t border-b border-[#b8924a]/30">
+            <div className="formulations-mobile-list" style={{ display: "none", flexDirection: "column", width: "100%", borderTop: "1px solid rgba(184, 146, 74, 0.3)", borderBottom: "1px solid rgba(184, 146, 74, 0.3)" }}>
               {featureCategories.map((cat, idx) => {
                 const isOpen = mobileExpandedIdx === idx;
                 const numeral = `0${idx + 1}`;
@@ -249,7 +251,17 @@ export default function FormulationsSection({ onSelectProduct }) {
                     <button
                       type="button"
                       onClick={() => setMobileExpandedIdx(isOpen ? -1 : idx)}
-                      className="w-full py-5 text-left flex items-center justify-between"
+                      style={{
+                        width: "100%",
+                        padding: "1.35rem 0",
+                        textAlign: "left",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                        background: "none",
+                        border: "none",
+                        cursor: "pointer",
+                      }}
                     >
                       <div>
                         <div
@@ -290,7 +302,7 @@ export default function FormulationsSection({ onSelectProduct }) {
 
                     {/* Accordion Expanded Body */}
                     {isOpen && (
-                      <div className="pb-8 pt-2 flex flex-col items-center text-center">
+                      <div style={{ paddingBottom: "2rem", paddingTop: "0.5rem", display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
                         <div
                           style={{
                             position: "relative",
@@ -306,7 +318,7 @@ export default function FormulationsSection({ onSelectProduct }) {
                             viewBox="0 0 280 320"
                             fill="none"
                             xmlns="http://www.w3.org/2000/svg"
-                            className="absolute inset-0 w-full h-full pointer-events-none"
+                            style={{ position: "absolute", inset: 0, width: "100%", height: "100%", pointerEvents: "none" }}
                           >
                             <path
                               d="M 25 310 L 25 125 A 115 115 0 0 1 255 125 L 255 310"
@@ -381,6 +393,7 @@ export default function FormulationsSection({ onSelectProduct }) {
                             paddingBottom: "3px",
                             background: "none",
                             border: "none",
+                            cursor: "pointer",
                           }}
                         >
                           <span>View range</span>
@@ -397,7 +410,7 @@ export default function FormulationsSection({ onSelectProduct }) {
           {/* =================================================================
               RIGHT COLUMN: STICKY PRODUCT STAGE WITH ARCH OUTLINE & CONTACT SHADOW
               ================================================================= */}
-          <div className="hidden lg:col-span-5 lg:flex flex-col items-center">
+          <div className="formulations-desktop-stage" style={{ display: "flex", flexDirection: "column", alignItems: "center", width: "100%" }}>
             <div
               style={{
                 position: "sticky",
@@ -426,8 +439,7 @@ export default function FormulationsSection({ onSelectProduct }) {
                   viewBox="0 0 360 450"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
-                  className="absolute inset-0 w-full h-full pointer-events-none"
-                  style={{ overflow: "visible" }}
+                  style={{ position: "absolute", inset: 0, width: "100%", height: "100%", pointerEvents: "none", overflow: "visible" }}
                 >
                   {/* Outer Arch */}
                   <path
@@ -503,8 +515,15 @@ export default function FormulationsSection({ onSelectProduct }) {
 
               {/* Under the Stage: 2-line Description & View Range Link with Underline Draw */}
               <div
-                className="w-full flex flex-col items-center text-center mt-5"
-                style={{ maxWidth: "380px" }}
+                style={{
+                  width: "100%",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  textAlign: "center",
+                  marginTop: "1.25rem",
+                  maxWidth: "380px",
+                }}
               >
                 <p
                   style={{
@@ -538,6 +557,7 @@ export default function FormulationsSection({ onSelectProduct }) {
                     paddingBottom: "3px",
                     background: "none",
                     border: "none",
+                    cursor: "pointer",
                   }}
                 >
                   <span>View range</span>
@@ -575,7 +595,7 @@ export default function FormulationsSection({ onSelectProduct }) {
       </div>
 
       {/* =====================================================================
-          SCOPED STYLES: Underline Draw and Arrow Nudge
+          SCOPED STYLES: Underline Draw, Arrow Nudge, Responsive Layouts
           ===================================================================== */}
       <style>{`
         .stage-view-link:hover .stage-underline {
@@ -584,6 +604,20 @@ export default function FormulationsSection({ onSelectProduct }) {
 
         .stage-view-link:hover .stage-arrow {
           transform: translateX(6px) !important;
+        }
+
+        @media (max-width: 1024px) {
+          .formulations-main-grid {
+            grid-template-columns: 1fr !important;
+            gap: 2.5rem !important;
+          }
+          .formulations-desktop-list,
+          .formulations-desktop-stage {
+            display: none !important;
+          }
+          .formulations-mobile-list {
+            display: flex !important;
+          }
         }
       `}</style>
     </section>
