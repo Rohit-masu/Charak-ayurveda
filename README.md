@@ -1,16 +1,34 @@
-# React + Vite
+# Charak Ayurveda — landing page
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+React 18 + Vite + Tailwind, animated with GSAP (ScrollTrigger, SplitText) and Lenis smooth scroll.
 
-Currently, two official plugins are available:
+```bash
+npm install
+npm run dev      # http://localhost:5174
+npm run lint
+npm run build    # static files in dist/ — upload to Hostinger public_html
+```
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Run these with Node from inside WSL (nvm), not the Windows install — `node_modules` built on one
+OS will not run on the other.
 
-## React Compiler
+## Where to edit
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+| What | File |
+| --- | --- |
+| Brand copy, contact details, nav, FAQ, disclaimer | `src/data/site.js` |
+| Products, packs, ingredients, botanicals | `src/data/products.js` |
+| Colours and fonts | `tailwind.config.js` |
+| Product images (WebP, transparent) | `src/assets/img/` |
 
-## Expanding the Oxlint configuration
+Page order lives in `src/App.jsx`. Reusable animation pieces (split text, scroll-velocity marquee,
+scroll reveal, magnet, circular text, spotlight card, cursor) are in `src/components/bits/`.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+## Content rules
+
+Product wording comes only from what is printed on the packs. Do not add benefits, prices,
+certifications or testimonials unless the client supplies them — see `docs/brand-brief.md` for the
+full compliance rules. The contact details in `site.js` still need client confirmation. The enquiry
+form opens WhatsApp with a prefilled message; there is no form backend yet.
+
+The previous v1 site and the earlier v2 draft are preserved under the `v1-archive` git tag.

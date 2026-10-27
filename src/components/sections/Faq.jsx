@@ -1,70 +1,59 @@
-import React, { useState } from 'react';
-import { ChevronDown } from 'lucide-react';
-import clsx from 'clsx';
-import { Container } from '../ui/Container';
-import { SectionHeading } from '../ui/SectionHeading';
-import { Reveal } from '../ui/Reveal';
-import { faqs } from '../../data/faq';
-import { content } from '../../data/content';
+import { useState } from "react";
+import { Plus } from "lucide-react";
+import SplitText from "../bits/SplitText";
+import { faqs } from "../../data/site";
 
-export function Faq() {
-  const [openIndex, setOpenIndex] = useState(0);
-
-  const toggleItem = (idx) => {
-    setOpenIndex(openIndex === idx ? -1 : idx);
-  };
+export default function Faq() {
+  const [open, setOpen] = useState(0);
 
   return (
-    <section id="faq" className="py-20 sm:py-28 bg-paper border-b border-gold/20">
-      <Container>
-        <Reveal>
-          <SectionHeading
-            eyebrow="Knowledge & Queries"
-            title={content.faq.title}
-            subtitle={content.faq.subtitle}
-          />
-        </Reveal>
-
-        <div className="max-w-3xl mx-auto space-y-4">
-          {faqs.map((faq, idx) => {
-            const isOpen = openIndex === idx;
+    <section id="faq" className="bg-ivory pb-28 text-ink sm:pb-40">
+      <div className="shell grid gap-12 border-t border-ink/10 pt-24 lg:grid-cols-12">
+        <div className="lg:col-span-4">
+          <p className="label text-gold-dark">Questions</p>
+          <SplitText className="display mt-6 text-[clamp(2.6rem,4.4vw,4.6rem)]">
+            Good to <em className="font-normal italic text-gold-dark">know.</em>
+          </SplitText>
+        </div>
+        <ul className="lg:col-span-7 lg:col-start-6">
+          {faqs.map((f, i) => {
+            const isOpen = open === i;
             return (
-              <Reveal key={idx} delay={idx * 50}>
-                <div className="border border-gold/30 rounded-2xl bg-paper overflow-hidden transition-all hover:border-gold shadow-2xs">
+              <li key={f.q} className="border-b border-ink/10">
+                <h3>
                   <button
                     type="button"
-                    onClick={() => toggleItem(idx)}
+                    id={`faq-${i}`}
                     aria-expanded={isOpen}
-                    aria-controls={`faq-answer-${idx}`}
-                    className="w-full px-6 py-4.5 sm:py-5 flex items-center justify-between gap-4 text-left font-display text-base sm:text-lg text-neem font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-soft"
+                    aria-controls={`faq-panel-${i}`}
+                    onClick={() => setOpen(isOpen ? -1 : i)}
+                    className="flex w-full items-center justify-between gap-6 py-7 text-left font-display text-2xl leading-snug transition-colors hover:text-gold-dark sm:text-[1.7rem]"
                   >
-                    <span>{faq.q}</span>
-                    <ChevronDown
-                      className={clsx(
-                        'w-5 h-5 text-gold flex-shrink-0 transition-transform duration-200',
-                        isOpen && 'rotate-180'
-                      )}
-                    />
+                    {f.q}
+                    <span
+                      className={`grid h-10 w-10 shrink-0 place-items-center rounded-full border transition-all duration-500 ease-lux ${
+                        isOpen ? "rotate-45 border-ink bg-ink text-ivory" : "border-ink/20"
+                      }`}
+                    >
+                      <Plus size={16} />
+                    </span>
                   </button>
-
-                  <div
-                    id={`faq-answer-${idx}`}
-                    role="region"
-                    className={clsx(
-                      'transition-all duration-300 ease-in-out px-6 overflow-hidden',
-                      isOpen ? 'max-h-96 pb-5 opacity-100' : 'max-h-0 pb-0 opacity-0'
-                    )}
-                  >
-                    <p className="font-body text-sm sm:text-base text-ink/75 leading-relaxed pt-2 border-t border-gold/15">
-                      {faq.a}
-                    </p>
+                </h3>
+                <div
+                  id={`faq-panel-${i}`}
+                  role="region"
+                  aria-labelledby={`faq-${i}`}
+                  className={`grid transition-[grid-template-rows] duration-700 ease-lux ${isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}
+                >
+                  <div className="overflow-hidden">
+                    <p className="max-w-xl pb-8 text-[15px] leading-relaxed text-ink/65">{f.a}</p>
                   </div>
                 </div>
-              </Reveal>
+              </li>
             );
           })}
-        </div>
-      </Container>
+        </ul>
+      </div>
     </section>
   );
 }

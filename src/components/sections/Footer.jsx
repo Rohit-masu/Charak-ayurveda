@@ -5,6 +5,8 @@ import { gsap, prefersReducedMotion, scrollToHash, useGsap } from "../../lib/mot
 import { contact, nav, site } from "../../data/site";
 import { products } from "../../data/products";
 
+const year = new Date().getFullYear();
+
 export default function Footer({ onOpen }) {
   const ref = useGsap((el) => {
     if (prefersReducedMotion()) return;
@@ -96,7 +98,7 @@ export default function Footer({ onOpen }) {
 
       <div className="shell flex items-center justify-between py-6 text-[11px] uppercase tracking-[0.2em] text-ivory/40">
         <span>
-          © {new Date().getFullYear()} {site.brand}
+          © {year} {site.brand}
         </span>
         <a href="#top" onClick={(e) => go(e, "#top")} className="inline-flex items-center gap-2 hover:text-gold">
           Back to top <ArrowUp size={13} />

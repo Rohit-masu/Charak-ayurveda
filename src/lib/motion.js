@@ -18,7 +18,7 @@ export function useGsap(setup, deps = []) {
     if (!scope.current) return undefined;
     const ctx = gsap.context(() => setup(scope.current), scope);
     return () => ctx.revert();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- deps are passed through by the caller
   }, deps);
   return scope;
 }

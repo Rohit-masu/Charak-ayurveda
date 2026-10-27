@@ -1,89 +1,88 @@
-export const categories = [
-  { id: "all",         name: "All Products" },
-  { id: "capsules",    name: "Capsules" },
-  { id: "massage-oil", name: "Massage Oil" },
-  { id: "majun",       name: "Majun" },
-  { id: "supplements", name: "Supplements" }
-];
+// Product wording is taken only from what is printed on the packs.
+// Do not add benefits, claims, prices or certifications here unless the client supplies them.
+import bottle60 from "../assets/img/rati-shakti-bottle-60.webp";
+import bottle30 from "../assets/img/rati-shakti-bottle-30.webp";
+import box30 from "../assets/img/rati-shakti-box-30.webp";
+import trial15 from "../assets/img/rati-shakti-trial-15.webp";
+import oil30 from "../assets/img/rati-shakti-oil-30ml.webp";
+import majun100 from "../assets/img/rati-shakti-majun-100g.webp";
+import maharaja90 from "../assets/img/rati-shakti-maharaja-90.webp";
+import lineupGreen from "../assets/img/hero-lineup-green.webp";
+import lineupBlack from "../assets/img/hero-lineup-black.webp";
+import garden from "../assets/img/garden.webp";
+
+export const images = { lineupGreen, lineupBlack, garden };
 
 export const products = [
   {
-    id: "rati-shakti-capsules",
+    id: "capsules",
+    numeral: "I",
     name: "Rati Shakti Capsules",
-    shortName: "Rati Shakti",
-    category: "capsules",
-    status: "live",
-    line: "Natural vitality and strength",
-    labelText: [
-      "100% Ayurvedic",
-      "Herbal supplement • Natural • Vegetarian",
-      "A proprietary Ayurvedic medicine"
-    ],
+    category: "Capsules",
+    line: "Natural vitality & strength",
+    labels: ["100% Ayurvedic", "Herbal supplement", "Natural", "Vegetarian"],
     ingredients: ["Shilajit", "Ashwagandha", "Safed Musli", "Kaunch Beej", "Gokshura"],
-    dosage: "Take 1-2 capsules twice daily with warm milk or water, or as directed by an Ayurvedic physician.",
-    storage: "Store in a cool, dry place away from direct sunlight. Keep out of reach of children.",
+    directions: "Take 1–2 capsules twice daily with warm milk or water, or as directed by an Ayurvedic physician.",
+    tone: "forest",
     packs: [
-      { label: "60 capsules, bottle (1000 mg)", file: "rati-shakti-bottle-60.png", transparent: true },
-      { label: "30 capsules, box",              file: "rati-shakti-box-30.png",    transparent: true },
-      { label: "30 capsules, bottle",           file: "rati-shakti-bottle-30.png", transparent: true },
-      { label: "15 capsules, trial pack",       file: "rati-shakti-trial-15.png",  transparent: true }
-    ]
+      { label: "60 capsules · bottle", image: bottle60 },
+      { label: "30 capsules · box", image: box30 },
+      { label: "30 capsules · bottle", image: bottle30 },
+      { label: "15 capsules · trial pack", image: trial15 },
+    ],
   },
   {
-    id: "rati-shakti-oil",
+    id: "oil",
+    numeral: "II",
     name: "Rati Shakti Ayurvedic Massage Oil",
-    shortName: "Massage Oil",
-    category: "massage-oil",
-    status: "live",
-    line: "Traditional Ayurvedic formulation for vitality and wellness",
-    labelText: [
-      "Traditional Ayurvedic Formulation",
-      "Premium strength • 100% Natural",
-      "For external use only"
-    ],
+    category: "Massage Oil",
+    line: "Traditional Ayurvedic formulation",
+    labels: ["Premium strength", "100% Natural", "For external use only"],
     ingredients: ["Ashwagandha Oil", "Shilajit", "Clove Oil", "Jaiphal"],
-    dosage: "Gently massage a few drops onto the desired area in circular motions, or as directed by an Ayurvedic practitioner.",
-    storage: "Store in a cool, dry place away from direct heat and sunlight. Keep container tightly closed.",
-    packs: [
-      { label: "30 ml pump bottle & carton", file: "rati-shakti-oil-30ml.png", transparent: true }
-    ]
+    directions: "For external use only. Use as directed on the pack or by an Ayurvedic practitioner.",
+    tone: "amber",
+    packs: [{ label: "30 ml · pump bottle & carton", image: oil30 }],
   },
   {
-    id: "rati-shakti-majun",
+    id: "majun",
+    numeral: "III",
     name: "Rati Shakti Majun",
-    shortName: "Majun",
-    category: "majun",
-    status: "live",
-    line: "Classic herbal formulation prepared in authentic Ayurvedic majun paste",
-    labelText: [
-      "100% Ayurvedic",
-      "Traditional Herbal Formulation",
-      "A proprietary Ayurvedic medicine"
-    ],
+    category: "Majun",
+    line: "A classical Ayurvedic majun",
+    labels: ["100% Ayurvedic", "Proprietary Ayurvedic medicine"],
     ingredients: ["Shilajit", "Safed Musli", "Ashwagandha", "Kesar", "Akarkara"],
-    dosage: "Take 3-5 grams (half a teaspoon) twice daily with lukewarm milk, or as directed by an Ayurvedic physician.",
-    storage: "Store in a cool, dry place. Keep jar tightly closed after each use.",
-    packs: [
-      { label: "100 gm amber jar", file: "rati-shakti-majun-100g.png", transparent: true }
-    ]
+    directions: "Use as directed on the pack or by an Ayurvedic physician.",
+    tone: "forest",
+    packs: [{ label: "100 gm · jar", image: majun100 }],
   },
   {
-    id: "rati-shakti-maharaja",
+    id: "maharaja",
+    numeral: "IV",
     name: "Rati Shakti Maharaja Kit",
-    shortName: "Maharaja Kit",
-    category: "supplements",
-    status: "live",
-    line: "Complete 90-capsule Ayurvedic regimen for vitality & stamina",
-    labelText: [
-      "Ayurvedic Medicine • 90 Capsules",
-      "Herbal Supplement • Vitality & Strength",
-      "Natural • Safe • Effective • Since 1947"
-    ],
+    category: "Supplements",
+    line: "Ayurvedic medicine · 90 capsules",
+    labels: ["Traditional Ayurvedic formulation", "Herbal supplement", "Net content: 90 capsules"],
     ingredients: ["Shilajit", "Ashwagandha", "Safed Musli", "Kaunch Beej", "Gokshura"],
-    dosage: "Take 1-2 capsules daily after meals with warm milk, or as advised by an Ayurvedic physician.",
-    storage: "Store in a cool, dark place away from moisture and heat. Keep out of reach of children.",
-    packs: [
-      { label: "90 capsules, Maharaja bottle", file: "rati-shakti-maharaja-90.png", transparent: true }
-    ]
-  }
+    directions: "Use as directed on the pack or by an Ayurvedic physician.",
+    tone: "noir",
+    packs: [{ label: "90 capsules · Maharaja bottle", image: maharaja90 }],
+  },
 ];
+
+// Names and Devanagari spellings only — no therapeutic descriptions.
+export const botanicals = [
+  { name: "Shilajit", deva: "शिलाजीत", latin: "Asphaltum punjabianum" },
+  { name: "Ashwagandha", deva: "अश्वगंधा", latin: "Withania somnifera" },
+  { name: "Safed Musli", deva: "सफ़ेद मूसली", latin: "Chlorophytum borivilianum" },
+  { name: "Kaunch Beej", deva: "कौंच बीज", latin: "Mucuna pruriens" },
+  { name: "Gokshura", deva: "गोक्षुर", latin: "Tribulus terrestris" },
+  { name: "Kesar", deva: "केसर", latin: "Crocus sativus" },
+  { name: "Akarkara", deva: "अकरकरा", latin: "Anacyclus pyrethrum" },
+  { name: "Clove", deva: "लौंग", latin: "Syzygium aromaticum", match: "Clove Oil" },
+  { name: "Jaiphal", deva: "जायफल", latin: "Myristica fragrans" },
+];
+
+export function productsWith(botanical) {
+  const key = botanical.match || botanical.name;
+  return products.filter((p) => p.ingredients.some((i) => i === key || i.startsWith(key + " ")));
+}

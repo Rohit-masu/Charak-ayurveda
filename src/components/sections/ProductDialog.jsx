@@ -21,11 +21,12 @@ export default function ProductDialog({ product, initialPack = 0, onClose }) {
   useEffect(() => {
     window.lenis?.stop();
     const opener = document.activeElement;
+    const dialog = root.current;
     closeBtn.current?.focus();
     const onKey = (e) => {
       if (e.key === "Escape") onClose();
       if (e.key === "Tab") {
-        const nodes = root.current.querySelectorAll("button, a[href]");
+        const nodes = dialog.querySelectorAll("button, a[href]");
         const first = nodes[0];
         const last = nodes[nodes.length - 1];
         if (e.shiftKey && document.activeElement === first) {
@@ -43,7 +44,7 @@ export default function ProductDialog({ product, initialPack = 0, onClose }) {
       window.lenis?.start();
       opener?.focus?.();
     };
-  }, [onClose]);
+  }, [onClose, root]);
 
   return (
     <div ref={root} className="fixed inset-0 z-[80] flex items-end justify-center sm:items-center sm:p-6" role="dialog" aria-modal="true" aria-labelledby="dlg-title">

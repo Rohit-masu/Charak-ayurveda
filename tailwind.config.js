@@ -1,31 +1,28 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
+  content: ["./index.html", "./src/**/*.{js,jsx}"],
   theme: {
     extend: {
       colors: {
-        neem: "#0F2E21",
-        forest: "#1B4332",
-        gold: "#B8923F",
-        "gold-soft": "#DDBF73",
-        paper: "#FCFBF7",
-        mist: "#E8F0EA",
-        ink: "#16251C",
+        ink: "#06150F",
+        forest: { DEFAULT: "#0B2A1D", light: "#143D2B" },
+        ivory: { DEFAULT: "#F4EFE3", deep: "#EAE2CF" },
+        gold: { DEFAULT: "#C9A45C", light: "#E9D4A1", dark: "#9C7A3C" },
+        noir: "#0B0B09",
+        sage: "#8FA597",
       },
       fontFamily: {
-        display: ["Cinzel", "Marcellus", "serif"],
-        body: ["Outfit", "Hind", "sans-serif"],
+        display: ["'Cormorant Garamond'", "Georgia", "serif"],
+        sans: ["'Manrope Variable'", "system-ui", "sans-serif"],
+        deva: ["'Tiro Devanagari Sanskrit'", "serif"],
       },
-      boxShadow: {
-        stage: "0 10px 30px -10px rgba(15, 46, 33, 0.08)",
+      letterSpacing: {
+        label: "0.32em",
       },
-      borderRadius: {
-        arch: "999px 999px 1rem 1rem",
+      transitionTimingFunction: {
+        lux: "cubic-bezier(0.22, 1, 0.36, 1)",
       },
     },
   },
   plugins: [],
-}
+};

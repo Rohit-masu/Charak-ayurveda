@@ -10,7 +10,7 @@ const craft = [
 ];
 
 export default function Heritage() {
-  const ref = useGsap((el) => {
+  const ref = useGsap(() => {
     if (prefersReducedMotion()) return;
     gsap
       .timeline({

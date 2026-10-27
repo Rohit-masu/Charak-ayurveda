@@ -11,12 +11,11 @@ function markReady() {
 
 export default function Preloader() {
   const root = useRef(null);
-  const [done, setDone] = useState(false);
+  const [done, setDone] = useState(prefersReducedMotion);
 
   useLayoutEffect(() => {
     if (prefersReducedMotion()) {
       markReady();
-      setDone(true);
       return undefined;
     }
     window.lenis?.stop();
