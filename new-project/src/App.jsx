@@ -1,151 +1,73 @@
-import React, { useState, useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Lenis from "lenis";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
-import BotanicalCanvas from "./components/BotanicalCanvas";
-import Navbar from "./components/Navbar";
-import Hero from "./components/Hero";
-import ManifestoSection from "./components/ManifestoSection";
-import GoldDiamondDivider from "./components/GoldDiamondDivider";
-import FormulationsSection from "./components/FormulationsSection";
-import ProductModal from "./components/ProductModal";
-import DoshaQuiz from "./components/DoshaQuiz";
-import ExtractionJourney from "./components/ExtractionJourney";
-import IngredientSynergyMatrix from "./components/IngredientSynergyMatrix";
-import RegimenPlanner from "./components/RegimenPlanner";
-import EditorialStory from "./components/EditorialStory";
-import BotanicalExplorer from "./components/BotanicalExplorer";
-import PractitionerB2B from "./components/PractitionerB2B";
-import EnquirySection from "./components/EnquirySection";
-import FaqSection from "./components/FaqSection";
-import Footer from "./components/Footer";
-import QuickEnquiryModal from "./components/QuickEnquiryModal";
+import { gsap, ScrollTrigger, prefersReducedMotion } from "./lib/motion";
+import { enquiryTypes } from "./data/site";
+import Cursor from "./components/bits/Cursor";
+import Preloader from "./components/sections/Preloader";
+import Navbar from "./components/sections/Navbar";
+import Hero from "./components/sections/Hero";
+import Tapes from "./components/sections/Tapes";
+import Manifesto from "./components/sections/Manifesto";
+import Collection from "./components/sections/Collection";
+import Botanicals from "./components/sections/Botanicals";
+import Heritage from "./components/sections/Heritage";
+import Professionals from "./components/sections/Professionals";
+import Contact from "./components/sections/Contact";
+import Faq from "./components/sections/Faq";
+import Footer from "./components/sections/Footer";
+import ProductDialog from "./components/sections/ProductDialog";
 
 export default function App() {
-  const [selectedProduct, setSelectedProduct] = useState(null);
-  const [enquiryModalOpen, setEnquiryModalOpen] = useState(false);
-  const [enquiryInitialType, setEnquiryInitialType] = useState("Doctor / Clinical Practice");
+  const [dialog, setDialog] = useState(null);
+  const [enquiryType, setEnquiryType] = useState(enquiryTypes[0]);
 
-  // Luxury Smooth Scrolling with Lenis synchronized to GSAP ScrollTrigger
+  // Lenis smooth scroll driven by GSAP's ticker so ScrollTrigger stays in sync.
   useEffect(() => {
-    const isReduced =
-      typeof window !== "undefined" &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    if (isReduced) return;
-
-    const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      smoothWheel: true,
-    });
-
-    lenis.on("scroll", ScrollTrigger.update);
+    if (prefersReducedMotion()) return undefined;
+    const lenis = new Lenis({ duration: 1.25, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
     window.lenis = lenis;
-
-    const params = new URLSearchParams(window.location.search);
-    const scrollTarget = params.get("scroll");
-    if (scrollTarget) {
-      const pos = parseInt(scrollTarget, 10);
-      window.scrollTo(0, pos);
-      lenis.scrollTo(pos, { immediate: true });
-      ScrollTrigger.update();
-      setTimeout(() => {
-        window.scrollTo(0, pos);
-        lenis.scrollTo(pos, { immediate: true });
-        ScrollTrigger.update();
-      }, 100);
-    }
-
-    const updateRaf = (time) => {
-      lenis.raf(time * 1000);
-    };
-
-    gsap.ticker.add(updateRaf);
+    if (!document.documentElement.dataset.ready) lenis.stop();
+    lenis.on("scroll", ScrollTrigger.update);
+    const raf = (time) => lenis.raf(time * 1000);
+    gsap.ticker.add(raf);
     gsap.ticker.lagSmoothing(0);
-
     return () => {
-      gsap.ticker.remove(updateRaf);
+      gsap.ticker.remove(raf);
       lenis.destroy();
+      window.lenis = undefined;
     };
   }, []);
 
-  const handleOpenEnquiry = (type = "Doctor / Clinical Practice") => {
-    setEnquiryInitialType(type);
-    setEnquiryModalOpen(true);
-  };
+  // Pinned sections measure layout; re-measure once web fonts settle.
+  useEffect(() => {
+    document.fonts?.ready.then(() => ScrollTrigger.refresh());
+  }, []);
+
+  const openProduct = useCallback((product, pack = 0) => setDialog({ product, pack }), []);
+  const closeProduct = useCallback(() => setDialog(null), []);
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#051610] text-[#faf8f2] relative">
-      {/* Ambient Floating Golden Pollen / Spores Canvas */}
-      <BotanicalCanvas />
-
-      {/* Sticky Glass Navbar */}
-      <Navbar onOpenEnquiry={handleOpenEnquiry} />
-
-      {/* Page Content */}
-      <main id="main-content" style={{ position: "relative", zIndex: 10 }}>
-        {/* Asymmetrical Editorial Hero with Interactive Product Stage Switcher */}
-        <Hero onSelectProduct={setSelectedProduct} />
-
-        {/* STEP 2: Manifesto Section (Dark green #06150f, word scrub reveal, 4 count-up stats) */}
-        <ManifestoSection />
-
-        {/* STEP 4: Thin Gold Diamond SVG Divider that draws itself on scroll */}
-        <GoldDiamondDivider />
-
-        {/* STEP 3: Merged Formulations Section (Ivory #F4EFE3, huge list rows, sticky product stage) */}
-        <FormulationsSection onSelectProduct={setSelectedProduct} />
-
-        {/* Interactive Ayurvedic Constitution / Dosha Diagnostic Tool */}
-        <DoshaQuiz onOpenEnquiry={handleOpenEnquiry} />
-
-        {/* 4-Stage Sacred Extraction Timeline */}
-        <ExtractionJourney />
-
-        {/* Biochemical Botanical Synergy & Active Matrix */}
-        <IngredientSynergyMatrix onSelectProduct={setSelectedProduct} />
-
-        {/* 24-Hour Dinacharya Regimen Planner */}
-        <RegimenPlanner onOpenEnquiry={handleOpenEnquiry} />
-
-        {/* Brand Story & Philosophy ("Rooted in Tradition. Presented for Today.") */}
-        <EditorialStory />
-
-        {/* Foundational Botanicals Pharmacopoeia */}
-        <BotanicalExplorer />
-
-        {/* Dual Gateways for Doctors and Trade Distributors */}
-        <PractitionerB2B onOpenEnquiry={handleOpenEnquiry} />
-
-        {/* Official Desk, Interactive Form & Google Map */}
-        <EnquirySection key={enquiryInitialType} defaultType={enquiryInitialType} />
-
-        {/* Keyboard-Accessible FAQ Accordion */}
-        <FaqSection />
+    <>
+      <a href="#collection" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[110] focus:rounded-full focus:bg-gold focus:px-5 focus:py-3 focus:text-ink">
+        Skip to the collection
+      </a>
+      <Preloader />
+      <Cursor />
+      <div className="grain" aria-hidden="true" />
+      <Navbar />
+      <main>
+        <Hero />
+        <Tapes />
+        <Manifesto />
+        <Collection onOpen={openProduct} />
+        <Botanicals />
+        <Heritage />
+        <Professionals onChooseType={setEnquiryType} />
+        <Contact type={enquiryType} onTypeChange={setEnquiryType} />
+        <Faq />
       </main>
-
-      {/* Luxury Brand Footer */}
-      <Footer onOpenEnquiry={handleOpenEnquiry} />
-
-      {/* Product Formulation Dossier Modal with Pack Variant Switcher */}
-      {selectedProduct && (
-        <ProductModal
-          product={selectedProduct}
-          onClose={() => setSelectedProduct(null)}
-          onOpenEnquiry={handleOpenEnquiry}
-        />
-      )}
-
-      {/* Global Quick Enquiry Modal */}
-      <QuickEnquiryModal
-        key={enquiryModalOpen ? enquiryInitialType : "closed"}
-        isOpen={enquiryModalOpen}
-        initialType={enquiryInitialType}
-        onClose={() => setEnquiryModalOpen(false)}
-      />
-    </div>
+      <Footer onOpen={openProduct} />
+      {dialog && <ProductDialog product={dialog.product} initialPack={dialog.pack} onClose={closeProduct} />}
+    </>
   );
 }
