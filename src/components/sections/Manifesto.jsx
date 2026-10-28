@@ -35,15 +35,15 @@ export default function Manifesto() {
           <p className="font-deva text-lg text-gold-dark">चरक संहिता</p>
         </div>
 
-        <div className="col-span-12 lg:col-span-9">
+        <div className="col-span-12 lg:col-span-8">
           <ScrollReveal
-            className="font-display text-[clamp(2rem,4.4vw,4.4rem)] font-light leading-[1.08] tracking-[-0.015em]"
+            className="font-display text-[clamp(2rem,3.9vw,4rem)] font-light leading-[1.08] tracking-[-0.015em]"
             accent={["Charaka", "Samhita", "care"]}
             text="Our name comes from the Charaka Samhita, one of the foundational texts of Ayurveda. We carry its spirit into a focused range of proprietary formulations — and present each one with the care a classic deserves."
           />
         </div>
 
-        <div className="relative col-span-12 hidden lg:col-span-3 lg:block">
+        <div className="relative col-span-12 hidden lg:col-span-4 lg:col-start-9 lg:block">
           <img
             data-float-pack
             src={box.image}
@@ -51,13 +51,17 @@ export default function Manifesto() {
             width="1400"
             height="855"
             loading="lazy"
-            className="absolute right-[-30%] top-0 w-[150%] max-w-none drop-shadow-[0_40px_40px_rgba(6,21,15,0.25)]"
+            className="absolute right-[-14%] top-0 w-[114%] max-w-none drop-shadow-[0_40px_40px_rgba(6,21,15,0.25)]"
           />
         </div>
 
-        <div data-pillars className="col-span-12 grid gap-px overflow-hidden rounded-[28px] bg-ink/10 sm:grid-cols-3">
+        <div data-pillars className="col-span-12 grid overflow-hidden rounded-[28px] border border-ink/10 sm:grid-cols-3">
           {pillars.map((p, i) => (
-            <div key={p.title} data-pillar className="group bg-ivory p-8 transition-colors duration-700 hover:bg-ink sm:p-10">
+            <div
+              key={p.title}
+              data-pillar
+              className="group border-ink/10 p-8 transition-colors duration-700 hover:bg-ink [&:not(:first-child)]:border-t sm:p-10 sm:[&:not(:first-child)]:border-l sm:[&:not(:first-child)]:border-t-0"
+            >
               <span className="font-display text-5xl italic text-gold-dark transition-colors duration-700 group-hover:text-gold">
                 0{i + 1}
               </span>
