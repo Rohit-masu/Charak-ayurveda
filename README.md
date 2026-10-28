@@ -20,6 +20,9 @@ OS will not run on the other.
 | Products, packs, ingredients, botanicals | `src/data/products.js` |
 | Colours and fonts | `tailwind.config.js` |
 | Product images (WebP, transparent) | `src/assets/img/` |
+| Hero herb-wheel centre photo | `images.heroBotanical` in `src/data/products.js` |
+| Product hover video (optional, muted loop) | `video` field on a product in `src/data/products.js` |
+| Navbar mega-menu panels | `menu` key on `nav` items in `src/data/site.js` |
 
 Page order lives in `src/App.jsx`. Reusable animation pieces (split text, scroll-velocity marquee,
 scroll reveal, magnet, circular text, spotlight card, cursor) are in `src/components/bits/`.

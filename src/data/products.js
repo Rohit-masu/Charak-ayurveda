@@ -11,7 +11,11 @@ import lineupGreen from "../assets/img/hero-lineup-green.webp";
 import lineupBlack from "../assets/img/hero-lineup-black.webp";
 import garden from "../assets/img/garden.webp";
 
-export const images = { lineupGreen, lineupBlack, garden };
+// heroBotanical is the photo inside the hero's herb wheel — replace with a herb close-up when the client supplies one.
+export const images = { lineupGreen, lineupBlack, garden, heroBotanical: garden };
+
+// Each product may also take `video: "/videos/<file>.mp4"` (muted loop) — it plays on hover in the Collection.
+// Without one, the panel falls back to an animated botanical scene.
 
 export const products = [
   {

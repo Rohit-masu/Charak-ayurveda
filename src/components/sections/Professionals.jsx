@@ -1,28 +1,9 @@
-import { ArrowUpRight, Stethoscope, Store, Truck } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import SplitText from "../bits/SplitText";
 import SpotlightCard from "../bits/SpotlightCard";
+import { audienceIcons } from "../ui/audienceIcons";
 import { gsap, prefersReducedMotion, scrollToHash, useGsap } from "../../lib/motion";
-
-const audiences = [
-  {
-    icon: Stethoscope,
-    who: "Ayurvedic doctors & clinics",
-    text: "Request the product catalogue and a conversation with our team about the range.",
-    type: "Ayurvedic doctor / clinic",
-  },
-  {
-    icon: Store,
-    who: "Chemists & pharmacies",
-    text: "Ask about stocking the Rati Shakti range for customers in your area.",
-    type: "Chemist / pharmacy",
-  },
-  {
-    icon: Truck,
-    who: "Distributors & stockists",
-    text: "Tell us your region and network, and we will get in touch about distribution.",
-    type: "Distributor / stockist",
-  },
-];
+import { audiences } from "../../data/site";
 
 const steps = [
   { t: "Send your details", d: "Use the enquiry form or WhatsApp." },
@@ -75,7 +56,9 @@ export default function Professionals({ onChooseType }) {
         </div>
 
         <div data-cards className="mt-20 grid gap-5 md:grid-cols-3">
-          {audiences.map(({ icon: Icon, who, text, type }, i) => (
+          {audiences.map(({ icon, who, text, type }, i) => {
+            const Icon = audienceIcons[icon];
+            return (
             <SpotlightCard key={who} className="rounded-[28px] border border-gold/15 bg-ink/40">
               <button
                 type="button"
@@ -99,7 +82,8 @@ export default function Professionals({ onChooseType }) {
                 </div>
               </button>
             </SpotlightCard>
-          ))}
+            );
+          })}
         </div>
 
         <ol data-steps className="relative mt-24 grid gap-10 sm:grid-cols-3">

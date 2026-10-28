@@ -1,15 +1,47 @@
 import { useEffect, useRef, useState } from "react";
+import { ChevronDown } from "lucide-react";
 import Crest from "../ui/Crest";
 import ArrowLink from "../ui/ArrowLink";
-import { gsap, ScrollTrigger, scrollToHash } from "../../lib/motion";
+import MegaMenu from "./MegaMenu";
+import { gsap, ScrollTrigger, prefersReducedMotion, scrollToHash } from "../../lib/motion";
 import { contact, nav, site } from "../../data/site";
 
-export default function Navbar() {
+export default function Navbar({ onOpenProduct, onChooseType }) {
   const bar = useRef(null);
   const menu = useRef(null);
+  const panel = useRef(null);
+  const closeTimer = useRef(null);
   const [open, setOpen] = useState(false);
   const [solid, setSolid] = useState(false);
+  const [mega, setMega] = useState(null);
+  const [shown, setShown] = useState(null);
   const wasOpen = useRef(false);
+
+  const openMega = (key) => {
+    clearTimeout(closeTimer.current);
+    setMega(key);
+    if (key) setShown(key);
+  };
+  const closeMega = () => {
+    clearTimeout(closeTimer.current);
+    closeTimer.current = setTimeout(() => setMega(null), 160);
+  };
+
+  useEffect(() => {
+    if (!mega) return undefined;
+    if (!prefersReducedMotion()) {
+      gsap.fromTo(
+        panel.current.querySelectorAll("[data-mega-item]"),
+        { y: 24, opacity: 0 },
+        { y: 0, opacity: 1, stagger: 0.04, duration: 0.8, overwrite: true }
+      );
+    }
+    const onKey = (e) => e.key === "Escape" && setMega(null);
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [mega]);
+
+  useEffect(() => () => clearTimeout(closeTimer.current), []);
 
   // Hide on scroll down, reveal on scroll up; go solid once past the hero fold.
   useEffect(() => {
@@ -56,7 +88,16 @@ export default function Navbar() {
 
   const goTo = (href) => {
     setOpen(false);
+    setMega(null);
     setTimeout(() => scrollToHash(href), open ? 350 : 0);
+  };
+  const openProduct = (product, pack) => {
+    setMega(null);
+    onOpenProduct(product, pack);
+  };
+  const chooseType = (type) => {
+    onChooseType(type);
+    goTo("#contact");
   };
   const go = (e, href) => {
     e.preventDefault();
@@ -65,10 +106,14 @@ export default function Navbar() {
 
   return (
     <>
-      <header ref={bar} className="fixed inset-x-0 top-0 z-50">
+      <header ref={bar} className="fixed inset-x-0 top-0 z-50" onPointerLeave={closeMega}>
         <div
           className={`transition-[background-color,backdrop-filter,border-color] duration-700 ${
-            solid && !open ? "border-b border-gold/10 bg-ink/70 backdrop-blur-xl" : "border-b border-transparent"
+            mega
+              ? "border-b border-gold/15 bg-ink/95 backdrop-blur-xl"
+              : solid && !open
+                ? "border-b border-gold/10 bg-ink/70 backdrop-blur-xl"
+                : "border-b border-transparent"
           }`}
         >
           <nav className="shell flex h-20 items-center justify-between" aria-label="Primary">
@@ -80,19 +125,33 @@ export default function Navbar() {
               </span>
             </a>
 
-            <ul className="hidden items-center gap-9 lg:flex">
-              {nav.map((item) => (
-                <li key={item.href}>
-                  <a
-                    href={item.href}
-                    onClick={(e) => go(e, item.href)}
-                    className="group relative py-2 text-[11px] font-medium uppercase tracking-[0.22em] text-ivory/75 transition-colors hover:text-ivory"
-                  >
-                    {item.label}
-                    <span className="absolute inset-x-0 -bottom-0.5 h-px origin-right scale-x-0 bg-gold transition-transform duration-500 ease-lux group-hover:origin-left group-hover:scale-x-100" />
-                  </a>
-                </li>
-              ))}
+            <ul className="hidden items-center gap-8 lg:flex">
+              {nav.map((item) => {
+                const active = item.menu && mega === item.menu;
+                return (
+                  <li key={item.href} onPointerEnter={() => openMega(item.menu || null)} onFocus={() => openMega(item.menu || null)}>
+                    <a
+                      href={item.href}
+                      onClick={(e) => go(e, item.href)}
+                      aria-expanded={item.menu ? active : undefined}
+                      aria-haspopup={item.menu ? "true" : undefined}
+                      className={`group relative flex items-center gap-1.5 py-7 text-[11px] font-medium uppercase tracking-[0.22em] transition-colors hover:text-ivory ${
+                        active ? "text-ivory" : "text-ivory/75"
+                      }`}
+                    >
+                      {item.label}
+                      {item.menu && (
+                        <ChevronDown size={13} className={`text-gold transition-transform duration-500 ${active ? "rotate-180" : ""}`} />
+                      )}
+                      <span
+                        className={`absolute inset-x-0 bottom-6 h-px origin-right bg-gold transition-transform duration-500 ease-lux group-hover:origin-left group-hover:scale-x-100 ${
+                          active ? "scale-x-100" : "scale-x-0"
+                        }`}
+                      />
+                    </a>
+                  </li>
+                );
+              })}
             </ul>
 
             <div className="flex items-center gap-3">
@@ -116,8 +175,25 @@ export default function Navbar() {
               </button>
             </div>
           </nav>
+
+          <div
+            ref={panel}
+            onPointerEnter={() => clearTimeout(closeTimer.current)}
+            className={`hidden transition-[grid-template-rows,opacity] duration-700 ease-lux lg:grid ${
+              mega ? "grid-rows-[1fr] opacity-100" : "pointer-events-none grid-rows-[0fr] opacity-0"
+            }`}
+            aria-hidden={!mega}
+          >
+            <div className="overflow-hidden border-t border-ivory/10" inert={mega ? undefined : ""}>
+              <MegaMenu active={shown} onGo={goTo} onOpenProduct={openProduct} onChooseType={chooseType} />
+            </div>
+          </div>
         </div>
       </header>
+
+      {mega && (
+        <div aria-hidden="true" className="fixed inset-0 z-40 hidden bg-ink/50 backdrop-blur-sm lg:block" onPointerEnter={closeMega} />
+      )}
 
       <div
         ref={menu}

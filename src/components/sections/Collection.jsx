@@ -1,32 +1,100 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { ArrowUpRight, Plus } from "lucide-react";
 import SplitText from "../bits/SplitText";
 import { gsap, prefersReducedMotion, useGsap } from "../../lib/motion";
 import { productEnquiryUrl } from "../../lib/whatsapp";
-import { products } from "../../data/products";
+import { images, products } from "../../data/products";
 
 const tones = {
-  forest: { panel: "bg-forest", glow: "rgba(201,164,92,0.28)" },
-  amber: { panel: "bg-[#24160B]", glow: "rgba(214,142,60,0.32)" },
-  moss: { panel: "bg-forest-light", glow: "rgba(233,212,161,0.22)" },
-  noir: { panel: "bg-noir", glow: "rgba(201,164,92,0.3)" },
+  forest: {
+    panel: "bg-forest",
+    glow: "rgba(201,164,92,0.28)",
+    scene: "radial-gradient(circle at 50% 55%, rgba(11,42,29,0.35), rgba(11,42,29,0.92) 75%)",
+  },
+  amber: {
+    panel: "bg-[#24160B]",
+    glow: "rgba(214,142,60,0.32)",
+    scene: "radial-gradient(circle at 50% 55%, rgba(120,62,18,0.35), rgba(36,22,11,0.94) 75%)",
+  },
+  moss: {
+    panel: "bg-forest-light",
+    glow: "rgba(233,212,161,0.22)",
+    scene: "radial-gradient(circle at 50% 55%, rgba(20,61,43,0.3), rgba(20,61,43,0.92) 75%)",
+  },
+  noir: {
+    panel: "bg-noir",
+    glow: "rgba(201,164,92,0.3)",
+    scene: "radial-gradient(circle at 50% 55%, rgba(60,44,14,0.4), rgba(11,11,9,0.95) 75%)",
+  },
 };
+
+// Hover scene behind the product: the product's own video if supplied, otherwise a slow-panning botanical still.
+function StageScene({ product, tone, videoRef }) {
+  return (
+    <div
+      aria-hidden="true"
+      className="absolute inset-0 opacity-0 transition-opacity duration-1000 ease-lux group-hover/panel:opacity-100 group-focus-within/panel:opacity-100"
+    >
+      {product.video ? (
+        <video ref={videoRef} src={product.video} muted loop playsInline preload="none" className="h-full w-full object-cover" />
+      ) : (
+        <img
+          src={images.garden}
+          alt=""
+          loading="lazy"
+          className="h-full w-full scale-110 object-cover group-hover/panel:animate-[ken-burns_14s_ease-in-out_infinite_alternate]"
+        />
+      )}
+      <div className="absolute inset-0" style={{ background: tone.scene }} />
+    </div>
+  );
+}
+
+function IngredientOrbit({ items }) {
+  return (
+    <div
+      aria-hidden="true"
+      className="pointer-events-none absolute inset-[8%] z-20 scale-90 opacity-0 transition-all duration-1000 ease-lux group-hover/panel:scale-100 group-hover/panel:opacity-100"
+    >
+      <div className="relative h-full w-full animate-[spin-slow_60s_linear_infinite]">
+        {items.map((name, i) => {
+          const a = (i / items.length) * Math.PI * 2 - Math.PI / 2;
+          return (
+            <span
+              key={name}
+              className="absolute -translate-x-1/2 -translate-y-1/2"
+              style={{ left: `${50 + Math.cos(a) * 46}%`, top: `${50 + Math.sin(a) * 46}%` }}
+            >
+              <span className="block animate-[spin-slow_60s_linear_infinite_reverse] whitespace-nowrap rounded-full border border-gold/40 bg-ink/70 px-3 py-1.5 font-display text-sm italic text-gold-light backdrop-blur">
+                {name}
+              </span>
+            </span>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
 
 function ProductPanel({ product, index, onOpen }) {
   const [pack, setPack] = useState(0);
+  const video = useRef(null);
   const tone = tones[index === 2 ? "moss" : product.tone];
   const current = product.packs[pack];
 
   return (
     <article
       data-panel
-      className={`relative flex shrink-0 flex-col overflow-hidden rounded-[32px] border border-gold/15 ${tone.panel} lg:h-[78vh] lg:w-[86vw] lg:max-w-[1320px] lg:flex-row`}
+      onPointerEnter={() => video.current?.play().catch(() => {})}
+      onPointerLeave={() => video.current?.pause()}
+      className={`group/panel relative flex shrink-0 flex-col overflow-hidden rounded-[32px] border border-gold/15 ${tone.panel} lg:h-[78vh] lg:w-[86vw] lg:max-w-[1320px] lg:flex-row`}
     >
       {/* image stage */}
       <div className="relative flex min-h-[380px] items-center justify-center overflow-hidden lg:h-full lg:w-[52%]">
+        <StageScene product={product} tone={tone} videoRef={video} />
         <span
           aria-hidden="true"
-          className="absolute -left-4 top-1/2 -translate-y-1/2 select-none font-display text-[46vw] font-light leading-none text-transparent lg:text-[24vw]"
+          className="absolute -left-4 top-1/2 -translate-y-1/2 select-none font-display text-[46vw] font-light leading-none text-transparent transition-opacity duration-700 group-hover/panel:opacity-0 lg:text-[24vw]"
           style={{ WebkitTextStroke: "1px rgba(201,164,92,0.22)" }}
         >
           {product.numeral}
@@ -36,14 +104,18 @@ function ProductPanel({ product, index, onOpen }) {
           className="absolute inset-[12%] rounded-full blur-2xl"
           style={{ background: `radial-gradient(circle, ${tone.glow}, transparent 70%)` }}
         />
-        <img
-          data-panel-img
-          key={current.image}
-          src={current.image}
-          alt={`${product.name} — ${current.label}`}
-          loading="lazy"
-          className="relative z-10 max-h-[340px] w-auto max-w-[82%] object-contain drop-shadow-[0_45px_45px_rgba(0,0,0,0.55)] animate-[fade-up_0.9s_cubic-bezier(0.22,1,0.36,1)] lg:max-h-[62vh]"
-        />
+        <IngredientOrbit items={product.ingredients} />
+        <div className="relative z-10 flex h-full w-full items-center justify-center transition-transform duration-1000 ease-lux group-hover/panel:-translate-y-3 group-hover/panel:scale-[1.06]">
+          <div data-parallax className="flex h-full w-full items-center justify-center">
+            <img
+              key={current.image}
+              src={current.image}
+              alt={`${product.name} — ${current.label}`}
+              loading="lazy"
+              className="max-h-[300px] w-auto max-w-[70%] animate-[fade-up_0.9s_cubic-bezier(0.22,1,0.36,1)] object-contain drop-shadow-[0_45px_45px_rgba(0,0,0,0.6)] lg:max-h-[54vh]"
+            />
+          </div>
+        </div>
       </div>
 
       {/* details */}
@@ -149,10 +221,10 @@ export default function Collection({ onOpen }) {
       });
       el.querySelectorAll("[data-panel]").forEach((panel) => {
         gsap.fromTo(
-          panel.querySelector("[data-panel-img]")?.parentElement,
-          { xPercent: 18, rotate: 4 },
+          panel.querySelector("[data-parallax]"),
+          { xPercent: 14, rotate: 4 },
           {
-            xPercent: -10,
+            xPercent: -8,
             rotate: -2,
             ease: "none",
             scrollTrigger: { trigger: panel, containerAnimation: scroll, start: "left right", end: "right left", scrub: true },
@@ -180,7 +252,15 @@ export default function Collection({ onOpen }) {
               <em className="gold-text font-normal">One tradition.</em>
             </SplitText>
           </div>
-          <div className="mt-10 max-w-sm space-y-6">
+          <img
+            src={images.lineupGreen}
+            alt="Rati Shakti capsule bottles in four sizes"
+            width="1400"
+            height="981"
+            loading="lazy"
+            className="mt-8 w-full max-w-md drop-shadow-[0_30px_40px_rgba(0,0,0,0.5)] lg:mt-0"
+          />
+          <div className="mt-8 max-w-sm space-y-6 lg:mt-0">
             <p className="text-[15px] leading-relaxed text-ivory/65">
               Capsules, a massage oil, a classical majun and the Maharaja kit — each named Rati Shakti, each made by Charak
               Ayurveda.

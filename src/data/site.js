@@ -20,11 +20,12 @@ export const contact = {
   mapsUrl: "",
 };
 
+// `menu` opens a hover mega-panel in the desktop navbar.
 export const nav = [
-  { label: "Collection", href: "#collection" },
-  { label: "Botanicals", href: "#botanicals" },
+  { label: "Collection", href: "#collection", menu: "collection" },
+  { label: "Botanicals", href: "#botanicals", menu: "botanicals" },
   { label: "Heritage", href: "#heritage" },
-  { label: "For Professionals", href: "#professionals" },
+  { label: "For Professionals", href: "#professionals", menu: "professionals" },
   { label: "Contact", href: "#contact" },
 ];
 
@@ -33,6 +34,27 @@ export const enquiryTypes = [
   "Chemist / pharmacy",
   "Distributor / stockist",
   "Customer",
+];
+
+export const audiences = [
+  {
+    icon: "stethoscope",
+    who: "Ayurvedic doctors & clinics",
+    text: "Request the product catalogue and a conversation with our team about the range.",
+    type: enquiryTypes[0],
+  },
+  {
+    icon: "store",
+    who: "Chemists & pharmacies",
+    text: "Ask about stocking the Rati Shakti range for customers in your area.",
+    type: enquiryTypes[1],
+  },
+  {
+    icon: "truck",
+    who: "Distributors & stockists",
+    text: "Tell us your region and network, and we will get in touch about distribution.",
+    type: enquiryTypes[2],
+  },
 ];
 
 export const faqs = [

@@ -54,7 +54,7 @@ export default function App() {
       <Preloader />
       <Cursor />
       <div className="grain" aria-hidden="true" />
-      <Navbar />
+      <Navbar onOpenProduct={openProduct} onChooseType={setEnquiryType} />
       <main>
         <Hero />
         <Tapes />
