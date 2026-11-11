@@ -25,24 +25,18 @@ export default function Hero() {
   });
 
   return (
-    <section ref={scope} id="top" className="relative isolate overflow-hidden bg-sage-light pt-20">
+    <section ref={scope} id="top" className="surface-dark relative isolate overflow-hidden bg-leaf pt-20">
       <div
         aria-hidden="true"
-        className="absolute inset-0 -z-10 opacity-25"
+        className="absolute inset-0 -z-10 opacity-30"
         style={{ backgroundImage: `url(${images.garden})`, backgroundSize: "cover", backgroundPosition: "center" }}
       />
-      {/* light-green wash over the garden photo; fades to ivory so the tapes and Manifesto meet it cleanly */}
-      <div aria-hidden="true" className="absolute inset-0 -z-10 bg-gradient-to-b from-sage-light/60 via-sage-light/80 to-ivory" />
-      <div
-        aria-hidden="true"
-        className="absolute right-[-10%] top-[10%] -z-10 h-[70vmin] w-[70vmin] rounded-full blur-3xl"
-        style={{ background: "radial-gradient(circle, rgba(143,165,151,0.55), transparent 65%)" }}
-      />
+      <div aria-hidden="true" className="absolute inset-0 -z-10 bg-gradient-to-b from-leaf/55 via-leaf/80 to-leaf" />
 
       <div className="shell grid min-h-[calc(100svh-5rem)] items-center gap-12 py-12 lg:grid-cols-12 lg:gap-8 lg:py-0">
         <div data-hero-copy className="relative z-20 lg:col-span-6 xl:col-span-5">
-          <p data-hero-fade className="label flex items-center gap-4 text-gold-dark">
-            <span className="h-px w-10 bg-gold-dark" />
+          <p data-hero-fade className="label flex items-center gap-4 text-gold">
+            <span className="h-px w-10 bg-gold" />
             Inspired by the Charaka Samhita
           </p>
           <SplitText
@@ -50,7 +44,7 @@ export default function Hero() {
             trigger="ready"
             stagger={0.12}
             delay={0.15}
-            className="display mt-6 text-[clamp(2.9rem,5.4vw,5.6rem)] leading-[1] text-forest"
+            className="display mt-6 text-[clamp(2.9rem,5.4vw,5.6rem)] leading-[1] text-ivory"
           >
             The wisdom of
             <br />
@@ -58,26 +52,26 @@ export default function Hero() {
             <br />
             <em className="gold-text font-normal">forward.</em>
           </SplitText>
-          <p data-hero-fade className="mt-6 max-w-md text-[15px] leading-relaxed text-ink/70">
+          <p data-hero-fade className="mt-6 max-w-md text-[15px] leading-relaxed text-ivory/70">
             Proprietary Ayurvedic formulations from Charak Ayurveda — presented with the care of a classical text.
           </p>
           <div data-hero-fade className="mt-8 flex flex-wrap items-center gap-6">
-            <ArrowLink href="#collection">Explore the range</ArrowLink>
+            <ArrowLink href="#collection" variant="gold">Explore the range</ArrowLink>
             <a
               href="#professionals"
               onClick={(e) => {
                 e.preventDefault();
                 scrollToHash("#professionals");
               }}
-              className="text-[11px] font-semibold uppercase tracking-[0.22em] text-forest underline decoration-gold/60 underline-offset-8 transition-colors hover:text-gold-dark"
+              className="text-[11px] font-semibold uppercase tracking-[0.22em] text-ivory/70 underline decoration-gold/50 underline-offset-8 transition-colors hover:text-gold"
             >
               For professionals
             </a>
           </div>
-          <ul data-hero-fade className="mt-12 flex flex-wrap gap-x-6 gap-y-2 border-t border-ink/10 pt-6">
+          <ul data-hero-fade className="mt-12 flex flex-wrap gap-x-6 gap-y-2 border-t border-ivory/10 pt-6">
             {notes.map((n) => (
-              <li key={n} className="flex items-center gap-2 text-xs text-ink/60">
-                <span className="h-1 w-1 rotate-45 bg-gold-dark" />
+              <li key={n} className="flex items-center gap-2 text-xs text-ivory/55">
+                <span className="h-1 w-1 rotate-45 bg-gold" />
                 {n}
               </li>
             ))}

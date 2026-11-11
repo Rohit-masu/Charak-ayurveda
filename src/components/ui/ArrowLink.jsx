@@ -30,7 +30,7 @@ export default function ArrowLink({ href, children, variant = "forest", classNam
       >
         <span
           aria-hidden="true"
-          className={`absolute inset-0 origin-bottom scale-y-0 rounded-full transition-transform duration-700 ease-lux group-hover:scale-y-100 ${variant === "gold" ? "bg-ivory" : "bg-gold"}`}
+          className={`absolute inset-0 origin-bottom scale-y-0 rounded-full transition-transform duration-700 ease-lux group-hover:scale-y-100 ${variant === "gold" ? "bg-paper" : "bg-gold"}`}
         />
         <span className={`relative transition-colors duration-500 ${variant === "gold" ? "" : "group-hover:text-ink"}`}>{children}</span>
         <span

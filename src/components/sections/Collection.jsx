@@ -9,23 +9,23 @@ import { images, products } from "../../data/products";
 const tones = {
   forest: {
     panel: "bg-mist",
-    glow: "rgba(143,165,151,0.45)",
-    scene: "radial-gradient(circle at 50% 55%, rgba(233,239,231,0.25), rgba(233,239,231,0.92) 75%)",
+    glow: "rgba(47,106,76,0.25)",
+    scene: "radial-gradient(circle at 50% 55%, rgba(212,228,204,0.25), rgba(212,228,204,0.92) 75%)",
   },
   amber: {
-    panel: "bg-[#F5EAD9]",
+    panel: "bg-[#E3EBCF]",
     glow: "rgba(214,142,60,0.3)",
-    scene: "radial-gradient(circle at 50% 55%, rgba(245,234,217,0.25), rgba(245,234,217,0.93) 75%)",
+    scene: "radial-gradient(circle at 50% 55%, rgba(227,235,207,0.25), rgba(227,235,207,0.93) 75%)",
   },
   moss: {
-    panel: "bg-white",
+    panel: "bg-card",
     glow: "rgba(201,164,92,0.3)",
-    scene: "radial-gradient(circle at 50% 55%, rgba(255,255,255,0.25), rgba(255,255,255,0.92) 75%)",
+    scene: "radial-gradient(circle at 50% 55%, rgba(244,249,240,0.25), rgba(244,249,240,0.92) 75%)",
   },
   noir: {
-    panel: "bg-[#F1ECE1]",
+    panel: "bg-[#DCE8D7]",
     glow: "rgba(201,164,92,0.35)",
-    scene: "radial-gradient(circle at 50% 55%, rgba(241,236,225,0.25), rgba(241,236,225,0.93) 75%)",
+    scene: "radial-gradient(circle at 50% 55%, rgba(220,232,215,0.25), rgba(220,232,215,0.93) 75%)",
   },
 };
 
@@ -66,7 +66,7 @@ function IngredientOrbit({ items }) {
               className="absolute -translate-x-1/2 -translate-y-1/2"
               style={{ left: `${50 + Math.cos(a) * 46}%`, top: `${50 + Math.sin(a) * 46}%` }}
             >
-              <span className="block animate-[spin-slow_60s_linear_infinite_reverse] whitespace-nowrap rounded-full border border-gold/50 bg-white/85 px-3 py-1.5 font-display text-sm italic text-forest shadow-sm backdrop-blur">
+              <span className="block animate-[spin-slow_60s_linear_infinite_reverse] whitespace-nowrap rounded-full border border-gold/50 bg-card/85 px-3 py-1.5 font-display text-sm italic text-forest shadow-sm backdrop-blur">
                 {name}
               </span>
             </span>
@@ -88,7 +88,7 @@ function ProductPanel({ product, index, onOpen }) {
       data-panel
       onPointerEnter={() => video.current?.play().catch(() => {})}
       onPointerLeave={() => video.current?.pause()}
-      className={`group/panel relative flex shrink-0 flex-col overflow-hidden rounded-[32px] border border-gold/25 shadow-[0_30px_60px_-35px_rgba(11,42,29,0.35)] ${tone.panel} lg:h-[78vh] lg:w-[86vw] lg:max-w-[1320px] lg:flex-row`}
+      className={`group/panel relative flex shrink-0 flex-col overflow-hidden rounded-[32px] border border-gold/25 shadow-[0_30px_60px_-35px_rgba(11,42,29,0.35)] ${tone.panel} lg:h-[80vh] lg:w-[86vw] lg:max-w-[1320px] lg:flex-row`}
     >
       {/* image stage */}
       <div className="relative flex min-h-[380px] items-center justify-center overflow-hidden lg:h-full lg:w-[52%]">
@@ -120,7 +120,7 @@ function ProductPanel({ product, index, onOpen }) {
       </div>
 
       {/* details */}
-      <div className="relative flex flex-1 flex-col justify-between gap-10 border-t border-ink/10 p-7 sm:p-10 lg:border-l lg:border-t-0 lg:p-14">
+      <div className="relative flex flex-1 flex-col justify-between gap-6 border-t border-ink/10 p-7 sm:p-10 lg:border-l lg:border-t-0 lg:px-12 lg:py-10 [@media(min-width:1024px)_and_(max-height:820px)]:py-7">
         <div>
           <div className="flex items-center justify-between">
             <p className="label text-gold-dark">
@@ -128,26 +128,26 @@ function ProductPanel({ product, index, onOpen }) {
             </p>
             <p className="label text-ink/45">0{index + 1} / 0{products.length}</p>
           </div>
-          <h3 className="mt-6 font-display text-[clamp(2.4rem,4vw,4.2rem)] font-light leading-[0.98] text-forest">
+          <h3 className="mt-5 font-display text-[clamp(2.2rem,min(3.4vw,6.4vh),3.8rem)] font-light leading-[0.98] text-forest">
             {product.name}
           </h3>
-          <p className="mt-4 font-display text-2xl italic text-gold-dark">{product.line}</p>
+          <p className="mt-3 font-display text-xl italic text-gold-dark xl:text-2xl">{product.line}</p>
 
-          <ul className="mt-8 flex flex-wrap gap-2">
+          <ul className="mt-6 flex flex-wrap gap-2">
             {product.labels.map((l) => (
-              <li key={l} className="rounded-full border border-ink/15 bg-white/60 px-3.5 py-1.5 text-[11px] tracking-wide text-ink/75">
+              <li key={l} className="rounded-full border border-ink/15 bg-card/60 px-3.5 py-1.5 text-[11px] tracking-wide text-ink/75">
                 {l}
               </li>
             ))}
           </ul>
 
-          <div className="mt-10">
+          <div className="mt-7">
             <p className="label text-ink/45">Ingredients</p>
-            <p className="mt-3 font-display text-xl leading-snug text-ink/85">{product.ingredients.join("  ·  ")}</p>
+            <p className="mt-2 font-display text-lg leading-snug text-ink/85 xl:text-xl">{product.ingredients.join("  ·  ")}</p>
           </div>
         </div>
 
-        <div className="space-y-8">
+        <div className="space-y-5">
           {product.packs.length > 1 && (
             <div>
               <p className="label text-ink/45">Pack · {current.label}</p>
@@ -159,11 +159,11 @@ function ProductPanel({ product, index, onOpen }) {
                     onClick={() => setPack(i)}
                     aria-pressed={i === pack}
                     aria-label={p.label}
-                    className={`grid h-16 w-14 place-items-center rounded-2xl border transition-all duration-500 ${
-                      i === pack ? "border-gold-dark bg-white" : "border-ink/10 hover:border-ink/30"
+                    className={`grid h-14 w-12 place-items-center rounded-2xl border transition-all duration-500 ${
+                      i === pack ? "border-gold-dark bg-card" : "border-ink/10 hover:border-ink/30"
                     }`}
                   >
-                    <img src={p.image} alt="" loading="lazy" className="max-h-12 max-w-10 object-contain" />
+                    <img src={p.image} alt="" loading="lazy" className="max-h-10 max-w-9 object-contain" />
                   </button>
                 ))}
               </div>
@@ -241,7 +241,7 @@ export default function Collection({ onOpen }) {
   });
 
   return (
-    <section ref={ref} id="collection" className="relative overflow-hidden bg-ivory-deep py-24 lg:flex lg:h-screen lg:items-center lg:py-0">
+    <section ref={ref} id="collection" className="relative overflow-hidden bg-paper-deep py-24 lg:flex lg:h-screen lg:items-center lg:py-0">
       <div data-track className="flex flex-col gap-6 px-5 sm:px-8 lg:flex-row lg:items-center lg:gap-10 lg:pl-14 lg:pr-[7vw]">
         {/* intro panel */}
         <div className="flex shrink-0 flex-col justify-between pb-8 lg:h-[78vh] lg:w-[34vw] lg:pb-0">

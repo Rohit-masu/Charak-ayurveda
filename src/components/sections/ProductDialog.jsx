@@ -52,13 +52,13 @@ export default function ProductDialog({ product, initialPack = 0, onClose }) {
       <div
         data-dlg-sheet
         data-lenis-prevent
-        className="relative grid max-h-[92svh] w-full max-w-6xl overflow-y-auto rounded-t-[32px] border border-gold/30 bg-ivory text-ink shadow-[0_40px_80px_-30px_rgba(11,42,29,0.45)] sm:rounded-[32px] lg:grid-cols-2"
+        className="relative grid max-h-[92svh] w-full max-w-6xl overflow-y-auto rounded-t-[32px] border border-gold/30 bg-paper text-ink shadow-[0_40px_80px_-30px_rgba(11,42,29,0.45)] sm:rounded-[32px] lg:grid-cols-2"
       >
         <button
           ref={closeBtn}
           type="button"
           onClick={onClose}
-          className="absolute right-5 top-5 z-20 grid h-11 w-11 place-items-center rounded-full border border-ink/15 bg-white text-forest transition-colors hover:bg-forest hover:text-ivory"
+          className="absolute right-5 top-5 z-20 grid h-11 w-11 place-items-center rounded-full border border-ink/15 bg-card text-forest transition-colors hover:bg-forest hover:text-ivory"
         >
           <X size={18} />
           <span className="sr-only">Close</span>
@@ -98,7 +98,7 @@ export default function ProductDialog({ product, initialPack = 0, onClose }) {
                     onClick={() => setPack(i)}
                     aria-pressed={i === pack}
                     className={`rounded-full border px-4 py-2 text-xs transition-colors ${
-                      i === pack ? "border-forest bg-forest text-ivory" : "border-ink/15 bg-white text-ink/80 hover:border-gold-dark/60"
+                      i === pack ? "border-forest bg-forest text-ivory" : "border-ink/15 bg-card text-ink/80 hover:border-gold-dark/60"
                     }`}
                   >
                     {p.label}

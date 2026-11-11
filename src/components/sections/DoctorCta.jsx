@@ -38,7 +38,7 @@ export default function DoctorCta() {
         </div>
 
         <div className="lg:col-span-4 lg:col-start-9">
-          <div className="rounded-[28px] border border-gold/20 bg-ink/30 p-8 sm:p-10">
+          <div className="rounded-[28px] border border-gold/25 bg-forest/35 p-8 sm:p-10">
             <Crest className="h-14 w-14 text-gold" />
             <ul className="mt-8 space-y-5">
               {points.map(({ icon: Icon, text }) => (

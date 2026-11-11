@@ -56,7 +56,7 @@ export default function Contact({ type, onTypeChange }) {
   const err = (k) => (errors[k] ? { "aria-invalid": true, "aria-describedby": `${k}-error` } : {});
 
   return (
-    <section id="contact" className="relative bg-ivory py-28 text-ink sm:py-40">
+    <section id="contact" className="relative bg-paper py-28 text-ink sm:py-40">
       <div className="shell grid gap-20 lg:grid-cols-12">
         <div className="lg:col-span-5">
           <p className="label text-gold-dark">Chapter 06 — Enquire</p>
@@ -96,7 +96,7 @@ export default function Contact({ type, onTypeChange }) {
           </ul>
         </div>
 
-        <form onSubmit={submit} noValidate className="space-y-10 rounded-[32px] border border-gold/25 bg-white p-7 shadow-[0_30px_60px_-40px_rgba(11,42,29,0.35)] sm:p-12 lg:col-span-6 lg:col-start-7">
+        <form onSubmit={submit} noValidate className="space-y-10 rounded-[32px] border border-gold/25 bg-card p-7 shadow-[0_30px_60px_-40px_rgba(11,42,29,0.35)] sm:p-12 lg:col-span-6 lg:col-start-7">
           <fieldset>
             <legend className="label text-ink/50">I am a</legend>
             <div className="mt-4 flex flex-wrap gap-2">

@@ -17,7 +17,7 @@ export default function WhyChoose() {
   });
 
   return (
-    <section ref={ref} id="why" className="bg-ivory-deep py-24 text-ink sm:py-32">
+    <section ref={ref} id="why" className="bg-paper-deep py-24 text-ink sm:py-32">
       <div className="shell">
         <div className="text-center">
           <p className="label text-gold-dark">Why {site.brand}</p>
@@ -36,7 +36,7 @@ export default function WhyChoose() {
               <li
                 key={r.title}
                 data-reason
-                className="group rounded-[24px] border border-gold/20 bg-white p-8 transition-[transform,border-color,box-shadow] duration-700 ease-lux hover:-translate-y-1 hover:border-gold/60 hover:shadow-[0_30px_50px_-35px_rgba(11,42,29,0.4)] sm:p-9"
+                className="group rounded-[24px] border border-gold/20 bg-card p-8 transition-[transform,border-color,box-shadow] duration-700 ease-lux hover:-translate-y-1 hover:border-gold/60 hover:shadow-[0_30px_50px_-35px_rgba(11,42,29,0.4)] sm:p-9"
               >
                 <span className="grid h-14 w-14 place-items-center rounded-full border border-gold/40 text-gold-dark transition-colors duration-500 group-hover:border-forest group-hover:bg-forest group-hover:text-gold">
                   <Icon size={24} strokeWidth={1.3} />

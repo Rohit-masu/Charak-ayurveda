@@ -42,7 +42,7 @@ export default function Botanicals() {
   }, [active]);
 
   return (
-    <section ref={ref} id="botanicals" className="relative bg-ivory py-28 text-ink sm:py-40">
+    <section ref={ref} id="botanicals" className="relative bg-paper py-28 text-ink sm:py-40">
       <div className="shell">
         <div className="grid gap-10 lg:grid-cols-12">
           <div className="lg:col-span-7">

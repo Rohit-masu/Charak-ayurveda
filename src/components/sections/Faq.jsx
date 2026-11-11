@@ -7,7 +7,7 @@ export default function Faq() {
   const [open, setOpen] = useState(0);
 
   return (
-    <section id="faq" className="bg-white py-24 text-ink sm:py-32">
+    <section id="faq" className="bg-card py-24 text-ink sm:py-32">
       <div className="shell">
         <div className="text-center">
           <p className="label text-gold-dark">Questions</p>

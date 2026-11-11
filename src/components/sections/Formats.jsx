@@ -15,7 +15,7 @@ export default function Formats({ onOpen }) {
   });
 
   return (
-    <section ref={ref} id="formats" className="bg-white py-24 text-ink sm:py-32">
+    <section ref={ref} id="formats" className="bg-card py-24 text-ink sm:py-32">
       <div className="shell text-center">
         <p className="label text-gold-dark">Shop by format</p>
         <SplitText className="display mx-auto mt-6 max-w-3xl text-[clamp(2.4rem,4.6vw,4.6rem)] text-forest">

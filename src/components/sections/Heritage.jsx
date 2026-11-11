@@ -39,7 +39,7 @@ export default function Heritage() {
   });
 
   return (
-    <section ref={ref} id="heritage" className="relative bg-ivory-deep text-ink">
+    <section ref={ref} id="heritage" className="relative bg-paper-deep text-ink">
       <div data-reveal className="surface-dark relative h-[100svh] overflow-hidden">
         <p
           data-reveal-title
@@ -50,7 +50,7 @@ export default function Heritage() {
         </p>
         <div data-reveal-img className="absolute inset-0 overflow-hidden">
           <img src={images.garden} alt="A herb garden in morning light" loading="lazy" className="h-full w-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-t from-forest via-forest/40 to-forest/10" />
+          <div className="absolute inset-0 bg-gradient-to-t from-leaf via-leaf/40 to-leaf/10" />
         </div>
         <div data-reveal-copy className="shell absolute inset-x-0 bottom-0 z-10 pb-16 sm:pb-24">
           <p className="label text-gold">Chapter 04 — Heritage</p>

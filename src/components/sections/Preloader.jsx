@@ -42,7 +42,7 @@ export default function Preloader() {
   return (
     <div
       ref={root}
-      className="fixed inset-0 z-[100] grid place-items-center bg-ivory"
+      className="fixed inset-0 z-[100] grid place-items-center bg-paper"
       style={{ clipPath: "inset(0 0 0 0)" }}
       aria-hidden="true"
     >

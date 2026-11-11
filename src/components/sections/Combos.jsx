@@ -23,7 +23,7 @@ function ComboCard({ combo }) {
   return (
     <article
       data-combo
-      className="group flex flex-col overflow-hidden rounded-[28px] border border-gold/25 bg-white shadow-[0_30px_60px_-45px_rgba(11,42,29,0.4)] transition-[transform,border-color] duration-700 ease-lux hover:-translate-y-1.5 hover:border-gold/60"
+      className="group flex flex-col overflow-hidden rounded-[28px] border border-gold/25 bg-card shadow-[0_30px_60px_-45px_rgba(11,42,29,0.4)] transition-[transform,border-color] duration-700 ease-lux hover:-translate-y-1.5 hover:border-gold/60"
     >
       <div className="relative flex h-64 items-end justify-center gap-2 overflow-hidden bg-mist px-6 pb-6 pt-10">
         <div
@@ -97,7 +97,7 @@ export default function Combos() {
   if (!combos.length) return null;
 
   return (
-    <section ref={ref} id="combos" className="bg-ivory py-24 text-ink sm:py-32">
+    <section ref={ref} id="combos" className="bg-paper py-24 text-ink sm:py-32">
       <div className="shell">
         <div className="grid gap-8 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-7">

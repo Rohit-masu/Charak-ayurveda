@@ -55,7 +55,7 @@ export default function HerbWheel({ className = "" }) {
 
       {/* rotating name ring */}
       <div data-depth="-10" className="absolute inset-0">
-        <svg data-names viewBox="0 0 200 200" className="h-full w-full text-gold-dark/70" aria-hidden="true">
+        <svg data-names viewBox="0 0 200 200" className="h-full w-full text-gold/55" aria-hidden="true">
           <defs>
             <path id={id} d="M100,100 m-94,0 a94,94 0 1,1 188,0 a94,94 0 1,1 -188,0" />
           </defs>
@@ -70,7 +70,7 @@ export default function HerbWheel({ className = "" }) {
 
       {/* orbiting botanicals */}
       <div data-depth="14" className="absolute inset-[9%]">
-        <div data-orbit className="relative h-full w-full rounded-full border border-dashed border-gold-dark/30">
+        <div data-orbit className="relative h-full w-full rounded-full border border-dashed border-gold/25">
           {botanicals.map((b, i) => {
             const a = (i / botanicals.length) * Math.PI * 2 - Math.PI / 2;
             return (
@@ -82,7 +82,7 @@ export default function HerbWheel({ className = "" }) {
                 <div
                   data-orbit-item
                   title={b.name}
-                  className="grid h-full w-full place-items-center rounded-full border border-gold/40 bg-white/90 p-[9%] text-forest shadow-[0_10px_30px_rgba(11,42,29,0.14)] backdrop-blur"
+                  className="grid h-full w-full place-items-center rounded-full border border-gold/30 bg-forest/85 p-[9%] text-gold shadow-[0_10px_30px_rgba(6,21,15,0.35)] backdrop-blur"
                 >
                   <HerbIcon name={b.name} className="h-full w-full" />
                 </div>
@@ -94,7 +94,7 @@ export default function HerbWheel({ className = "" }) {
 
       {/* centre porthole */}
       <div data-depth="24" className="absolute inset-[22%]">
-        <div data-porthole className="relative h-full w-full overflow-hidden rounded-full border border-gold/60 shadow-[0_30px_70px_rgba(11,42,29,0.28)]">
+        <div data-porthole className="relative h-full w-full overflow-hidden rounded-full border border-gold/50 shadow-[0_30px_80px_rgba(6,21,15,0.45)]">
           <img
             src={images.heroBotanical}
             alt="Ayurvedic herbs growing in a garden"
@@ -104,10 +104,10 @@ export default function HerbWheel({ className = "" }) {
             className="h-full w-full object-cover"
             style={{ objectPosition: "52% 78%" }}
           />
-          <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle,transparent_55%,rgba(11,42,29,0.35))]" />
-          <span className="absolute inset-[5%] rounded-full border border-ivory/40" />
+          <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle,transparent_45%,rgba(11,42,29,0.55))]" />
+          <span className="absolute inset-[5%] rounded-full border border-gold/25" />
         </div>
-        <div className="absolute -bottom-[7%] left-1/2 grid h-[24%] w-[24%] -translate-x-1/2 place-items-center rounded-full border border-gold/60 bg-forest text-gold shadow-[0_12px_30px_rgba(11,42,29,0.3)]">
+        <div className="absolute -bottom-[7%] left-1/2 grid h-[24%] w-[24%] -translate-x-1/2 place-items-center rounded-full border border-gold/50 bg-forest text-gold">
           <Crest className="h-[70%] w-[70%]" />
         </div>
       </div>
@@ -119,7 +119,7 @@ export default function HerbWheel({ className = "" }) {
         "left-[8%] bottom-[10%] h-7 w-7",
         "right-[10%] bottom-[4%] h-11 w-11",
       ].map((pos, i) => (
-        <svg key={pos} data-float data-depth={30 + i * 6} viewBox="0 0 24 24" className={`absolute ${pos} text-gold-dark/60`} aria-hidden="true">
+        <svg key={pos} data-float data-depth={30 + i * 6} viewBox="0 0 24 24" className={`absolute ${pos} text-gold/70`} aria-hidden="true">
           <path d="M12 22 C 4 16, 4 6, 12 2 C 20 6, 20 16, 12 22 Z M12 22 L12 4" fill="none" stroke="currentColor" strokeWidth="1" />
         </svg>
       ))}

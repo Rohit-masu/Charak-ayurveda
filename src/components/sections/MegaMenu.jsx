@@ -49,7 +49,7 @@ export default function MegaMenu({ active, onGo, onOpenProduct, onChooseType }) 
               <button
                 type="button"
                 onClick={() => onOpenProduct(p, 0)}
-                className="group/card relative flex h-full w-full flex-col overflow-hidden rounded-3xl border border-ink/10 bg-white p-5 text-left transition-colors duration-700 hover:border-gold/40"
+                className="group/card relative flex h-full w-full flex-col overflow-hidden rounded-3xl border border-ink/10 bg-card p-5 text-left transition-colors duration-700 hover:border-gold/40"
               >
                 <span className="absolute inset-0 origin-bottom scale-y-0 bg-gradient-to-t from-gold/20 via-mist to-mist transition-transform duration-700 ease-lux group-hover/card:scale-y-100" />
                 <span className="relative block h-36">
@@ -82,7 +82,7 @@ export default function MegaMenu({ active, onGo, onOpenProduct, onChooseType }) 
                   e.preventDefault();
                   onGo("#botanicals");
                 }}
-                className="group/herb flex items-center gap-4 rounded-2xl p-3 transition-colors duration-500 hover:bg-white"
+                className="group/herb flex items-center gap-4 rounded-2xl p-3 transition-colors duration-500 hover:bg-card"
               >
                 <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full border border-gold/30 p-2 text-gold-dark transition-colors duration-500 group-hover/herb:bg-gold group-hover/herb:text-ink">
                   <HerbIcon name={b.name} className="h-full w-full" />
@@ -106,7 +106,7 @@ export default function MegaMenu({ active, onGo, onOpenProduct, onChooseType }) 
                 <button
                   type="button"
                   onClick={() => onChooseType(a.type)}
-                  className="group/aud flex h-full w-full flex-col rounded-3xl border border-ink/10 bg-white p-6 text-left transition-colors duration-500 hover:border-gold/50 hover:bg-mist"
+                  className="group/aud flex h-full w-full flex-col rounded-3xl border border-ink/10 bg-card p-6 text-left transition-colors duration-500 hover:border-gold/50 hover:bg-mist"
                 >
                   <span className="grid h-12 w-12 place-items-center rounded-full border border-gold/30 text-gold-dark transition-colors duration-500 group-hover/aud:bg-gold group-hover/aud:text-ink">
                     <Icon size={20} strokeWidth={1.3} />
