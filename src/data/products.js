@@ -73,9 +73,22 @@ export const products = [
   },
 ];
 
-// "Shop by format" circles — one per product format. Health-concern navigation is deliberately not used
-// (claims risk, and every product today is in the Rati Shakti range).
-export const formats = products.map((p) => ({ id: p.id, label: p.category, product: p, image: p.packs[0].image }));
+// "Shop by concern" circles (client's reference layout). `products` lists product ids from above.
+// A concern with no products shows "Coming soon" and is not clickable — add ids here as new products arrive.
+// `icon` keys map to lucide icons in components/sections/Concerns.jsx.
+// Keep labels to general wellness areas; never name a disease or promise a result (Drugs & Magic Remedies Act).
+export const concerns = [
+  { id: "vitality", label: "Strength & Vitality", icon: "flame", products: ["capsules", "oil", "majun", "maharaja"] },
+  { id: "digestive", label: "Digestive Health", icon: "digestive", products: [] },
+  { id: "joint", label: "Joint Care", icon: "joint", products: [] },
+  { id: "energy", label: "Stress & Energy", icon: "energy", products: [] },
+  { id: "balance", label: "Body Balance", icon: "balance", products: [] },
+  { id: "hair", label: "Hair Care", icon: "hair", products: [] },
+  { id: "kids", label: "Kids Nutrition", icon: "kids", products: [] },
+  { id: "weight", label: "Weight Management", icon: "weight", products: [] },
+];
+
+export const productsFor = (concern) => concern.products.map((id) => products.find((p) => p.id === id)).filter(Boolean);
 
 // Combo offers. DRAFT pairings until the client confirms the combos.
 // `price` and `mrp` are optional numbers in rupees: with both, the card shows the discount; with neither,

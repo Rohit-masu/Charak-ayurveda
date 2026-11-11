@@ -4,7 +4,8 @@ import SplitText from "../bits/SplitText";
 import { faqIntro, faqs } from "../../data/site";
 
 export default function Faq() {
-  const [open, setOpen] = useState(0);
+  // All questions start closed.
+  const [open, setOpen] = useState(null);
 
   return (
     <section id="faq" className="bg-ivory py-24 text-ink sm:py-32">
@@ -29,7 +30,7 @@ export default function Faq() {
                     id={`faq-${i}`}
                     aria-expanded={isOpen}
                     aria-controls={`faq-panel-${i}`}
-                    onClick={() => setOpen(isOpen ? -1 : i)}
+                    onClick={() => setOpen(isOpen ? null : i)}
                     className="flex w-full items-center justify-between gap-6 py-6 text-left font-display text-[1.45rem] leading-snug text-forest transition-colors hover:text-gold-dark sm:text-[1.6rem]"
                   >
                     {f.q}

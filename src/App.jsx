@@ -8,7 +8,7 @@ import Navbar from "./components/sections/Navbar";
 import Hero from "./components/sections/Hero";
 import Tapes from "./components/sections/Tapes";
 import Manifesto from "./components/sections/Manifesto";
-import Formats from "./components/sections/Formats";
+import Concerns from "./components/sections/Concerns";
 import Collection from "./components/sections/Collection";
 import Combos from "./components/sections/Combos";
 import DoctorCta from "./components/sections/DoctorCta";
@@ -64,7 +64,7 @@ export default function App() {
         <Hero />
         <Tapes />
         <Manifesto />
-        <Formats onOpen={openProduct} />
+        <Concerns onOpen={openProduct} />
         <Collection onOpen={openProduct} />
         <Combos />
         <DoctorCta />
