@@ -42,7 +42,7 @@ export default function Botanicals() {
   }, [active]);
 
   return (
-    <section ref={ref} id="botanicals" className="relative bg-ivory-deep py-28 text-ink sm:py-40">
+    <section ref={ref} id="botanicals" className="relative bg-ivory py-28 text-ink sm:py-40">
       <div className="shell">
         <div className="grid gap-10 lg:grid-cols-12">
           <div className="lg:col-span-7">
@@ -70,7 +70,7 @@ export default function Botanicals() {
               >
                 <span
                   aria-hidden="true"
-                  className="absolute inset-0 origin-bottom scale-y-0 bg-ink transition-transform duration-700 ease-lux group-hover:scale-y-100"
+                  className="absolute inset-0 origin-bottom scale-y-0 bg-forest transition-transform duration-700 ease-lux group-hover:scale-y-100"
                 />
                 <span className="relative col-span-2 font-sans text-xs text-ink/40 transition-colors duration-500 group-hover:text-gold sm:col-span-1 sm:pl-4">
                   {String(i + 1).padStart(2, "0")}

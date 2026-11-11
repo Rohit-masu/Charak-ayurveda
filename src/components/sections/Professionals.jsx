@@ -33,7 +33,7 @@ export default function Professionals({ onChooseType }) {
   };
 
   return (
-    <section ref={ref} id="professionals" className="relative overflow-hidden bg-forest py-28 sm:py-40">
+    <section ref={ref} id="professionals" className="surface-dark relative overflow-hidden py-28 sm:py-40">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute -right-40 -top-40 h-[620px] w-[620px] rounded-full opacity-60 blur-3xl"

@@ -24,13 +24,13 @@ export default function Footer({ onOpen }) {
   };
 
   return (
-    <footer ref={ref} className="relative overflow-hidden bg-ink pt-24">
+    <footer ref={ref} className="surface-dark relative overflow-hidden pt-24">
       <div className="shell">
         <div className="flex flex-col justify-between gap-10 border-b border-ivory/10 pb-16 lg:flex-row lg:items-end">
           <p className="display max-w-2xl text-[clamp(2.4rem,4.6vw,4.6rem)]">
             Bring the range to your <em className="gold-text font-normal">clinic or counter.</em>
           </p>
-          <ArrowLink href="#contact">Send an enquiry</ArrowLink>
+          <ArrowLink href="#contact" variant="gold">Send an enquiry</ArrowLink>
         </div>
 
         <div className="grid gap-12 py-16 sm:grid-cols-2 lg:grid-cols-12">

@@ -1,16 +1,10 @@
 import ScrollReveal from "../bits/ScrollReveal";
-import SplitText from "../bits/SplitText";
 import { gsap, prefersReducedMotion, useGsap } from "../../lib/motion";
 import { products } from "../../data/products";
 
-const pillars = [
-  { title: "100% Ayurvedic", text: "As printed on every pack in the range." },
-  { title: "Herbal & vegetarian", text: "Capsules labelled herbal, natural and vegetarian." },
-  { title: "Made by Charak Ayurveda", text: "Proprietary formulations under our own name." },
-];
-
 const box = products[0].packs[1];
 
+// The pack facts that used to sit here as three pillars now live in the "Why choose" grid (WhyChoose.jsx).
 export default function Manifesto() {
   const ref = useGsap((el) => {
     if (prefersReducedMotion()) return;
@@ -19,12 +13,6 @@ export default function Manifesto() {
       { yPercent: 25, rotate: -10 },
       { yPercent: -25, rotate: 4, ease: "none", scrollTrigger: { trigger: el, start: "top bottom", end: "bottom top", scrub: true } }
     );
-    gsap.from("[data-pillar]", {
-      y: 40,
-      opacity: 0,
-      stagger: 0.12,
-      scrollTrigger: { trigger: "[data-pillars]", start: "top 85%", once: true },
-    });
   });
 
   return (
@@ -53,26 +41,6 @@ export default function Manifesto() {
             loading="lazy"
             className="absolute right-[-14%] top-0 w-[114%] max-w-none drop-shadow-[0_40px_40px_rgba(6,21,15,0.25)]"
           />
-        </div>
-
-        <div data-pillars className="col-span-12 grid overflow-hidden rounded-[28px] border border-ink/10 sm:grid-cols-3">
-          {pillars.map((p, i) => (
-            <div
-              key={p.title}
-              data-pillar
-              className="group border-ink/10 p-8 transition-colors duration-700 hover:bg-ink [&:not(:first-child)]:border-t sm:p-10 sm:[&:not(:first-child)]:border-l sm:[&:not(:first-child)]:border-t-0"
-            >
-              <span className="font-display text-5xl italic text-gold-dark transition-colors duration-700 group-hover:text-gold">
-                0{i + 1}
-              </span>
-              <SplitText as="h3" className="mt-10 font-display text-3xl transition-colors duration-700 group-hover:text-ivory">
-                {p.title}
-              </SplitText>
-              <p className="mt-3 text-sm leading-relaxed text-ink/60 transition-colors duration-700 group-hover:text-ivory/60">
-                {p.text}
-              </p>
-            </div>
-          ))}
         </div>
       </div>
     </section>

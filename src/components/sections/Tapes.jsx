@@ -24,7 +24,7 @@ export default function Tapes() {
         items={front}
         baseSpeed={45}
         separator={<Star className="text-ink" />}
-        className="absolute left-[-5%] top-1/2 w-[110%] -translate-y-1/2 -rotate-[2.5deg] bg-gold py-4 text-[13px] font-bold uppercase tracking-[0.28em] text-ink shadow-[0_20px_50px_-10px_rgba(0,0,0,0.6)] sm:text-sm"
+        className="absolute left-[-5%] top-1/2 w-[110%] -translate-y-1/2 -rotate-[2.5deg] bg-gold py-4 text-[13px] font-bold uppercase tracking-[0.28em] text-ink shadow-[0_18px_40px_-12px_rgba(11,42,29,0.35)] sm:text-sm"
       />
     </div>
   );

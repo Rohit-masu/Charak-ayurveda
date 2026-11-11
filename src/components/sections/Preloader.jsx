@@ -42,13 +42,13 @@ export default function Preloader() {
   return (
     <div
       ref={root}
-      className="fixed inset-0 z-[100] grid place-items-center bg-ink"
+      className="fixed inset-0 z-[100] grid place-items-center bg-ivory"
       style={{ clipPath: "inset(0 0 0 0)" }}
       aria-hidden="true"
     >
-      <div data-pre-inner className="flex flex-col items-center text-gold">
+      <div data-pre-inner className="flex flex-col items-center text-gold-dark">
         <Crest className="h-24 w-24 sm:h-28 sm:w-28" />
-        <p data-pre-word className="mt-8 flex overflow-hidden font-display text-3xl font-light tracking-[0.3em] text-ivory sm:text-4xl">
+        <p data-pre-word className="mt-8 flex overflow-hidden font-display text-3xl font-light tracking-[0.3em] text-forest sm:text-4xl">
           {site.brand.toUpperCase().split("").map((c, i) => (
             <span key={i} className="inline-block whitespace-pre">
               {c}
@@ -56,7 +56,7 @@ export default function Preloader() {
           ))}
         </p>
         <span data-pre-line className="hairline mt-6 block w-56" />
-        <p className="mt-5 font-deva text-lg text-gold/80">{site.sanskrit}</p>
+        <p className="mt-5 font-deva text-lg text-gold-dark/80">{site.sanskrit}</p>
       </div>
     </div>
   );

@@ -73,6 +73,47 @@ export const products = [
   },
 ];
 
+// "Shop by format" circles — one per product format. Health-concern navigation is deliberately not used
+// (claims risk, and every product today is in the Rati Shakti range).
+export const formats = products.map((p) => ({ id: p.id, label: p.category, product: p, image: p.packs[0].image }));
+
+// Combo offers. DRAFT pairings until the client confirms the combos.
+// `price` and `mrp` are optional numbers in rupees: with both, the card shows the discount; with neither,
+// it shows "Price on request". Never fill these in without the client's confirmed figures.
+const byId = Object.fromEntries(products.map((p) => [p.id, p]));
+export const combos = [
+  {
+    id: "capsules-oil",
+    name: "Capsules + Massage Oil",
+    items: [
+      { product: byId.capsules, pack: 0 },
+      { product: byId.oil, pack: 0 },
+    ],
+    price: null,
+    mrp: null,
+  },
+  {
+    id: "capsules-majun",
+    name: "Capsules + Majun",
+    items: [
+      { product: byId.capsules, pack: 1 },
+      { product: byId.majun, pack: 0 },
+    ],
+    price: null,
+    mrp: null,
+  },
+  {
+    id: "maharaja-oil",
+    name: "Maharaja Kit + Massage Oil",
+    items: [
+      { product: byId.maharaja, pack: 0 },
+      { product: byId.oil, pack: 0 },
+    ],
+    price: null,
+    mrp: null,
+  },
+];
+
 // Names and Devanagari spellings only — no therapeutic descriptions.
 export const botanicals = [
   { name: "Shilajit", deva: "शिलाजीत", latin: "Asphaltum punjabianum" },

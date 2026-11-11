@@ -8,7 +8,12 @@ import Navbar from "./components/sections/Navbar";
 import Hero from "./components/sections/Hero";
 import Tapes from "./components/sections/Tapes";
 import Manifesto from "./components/sections/Manifesto";
+import Formats from "./components/sections/Formats";
 import Collection from "./components/sections/Collection";
+import Combos from "./components/sections/Combos";
+import DoctorCta from "./components/sections/DoctorCta";
+import WhyChoose from "./components/sections/WhyChoose";
+import FloatingDoctor from "./components/sections/FloatingDoctor";
 import Botanicals from "./components/sections/Botanicals";
 import Heritage from "./components/sections/Heritage";
 import Professionals from "./components/sections/Professionals";
@@ -59,7 +64,11 @@ export default function App() {
         <Hero />
         <Tapes />
         <Manifesto />
+        <Formats onOpen={openProduct} />
         <Collection onOpen={openProduct} />
+        <Combos />
+        <DoctorCta />
+        <WhyChoose />
         <Botanicals />
         <Heritage />
         <Professionals onChooseType={setEnquiryType} />
@@ -67,6 +76,7 @@ export default function App() {
         <Faq />
       </main>
       <Footer onOpen={openProduct} />
+      <FloatingDoctor />
       {dialog && <ProductDialog product={dialog.product} initialPack={dialog.pack} onClose={closeProduct} />}
     </>
   );

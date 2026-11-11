@@ -2,10 +2,12 @@ import { ArrowUpRight } from "lucide-react";
 import Magnet from "../bits/Magnet";
 import { scrollToHash } from "../../lib/motion";
 
-// Pill CTA with a sliding gold fill. In-page hashes scroll smoothly via Lenis.
-export default function ArrowLink({ href, children, variant = "gold", className = "", onClick, external }) {
+// Pill CTA with a sliding fill. In-page hashes scroll smoothly via Lenis.
+// "gold" suits dark bands; "forest" is the primary button on light sections.
+export default function ArrowLink({ href, children, variant = "forest", className = "", onClick, external }) {
   const styles = {
     gold: "bg-gold text-ink",
+    forest: "bg-forest text-ivory",
     ghost: "border border-ivory/25 text-ivory",
     dark: "bg-ink text-ivory",
   };

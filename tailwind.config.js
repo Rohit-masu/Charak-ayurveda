@@ -6,8 +6,11 @@ export default {
       colors: {
         ink: "#06150F",
         forest: { DEFAULT: "#0B2A1D", light: "#143D2B" },
-        ivory: { DEFAULT: "#F4EFE3", deep: "#EAE2CF" },
-        gold: { DEFAULT: "#C9A45C", light: "#E9D4A1", dark: "#9C7A3C" },
+        // Light theme: cream page, white cards, forest + gold accents.
+        ivory: { DEFAULT: "#F7F2E8", deep: "#EFE7D6" },
+        mist: "#E9EFE7",
+        // gold-dark is the text gold on light backgrounds (AA on ivory).
+        gold: { DEFAULT: "#C9A45C", light: "#E9D4A1", dark: "#7F6128" },
         noir: "#0B0B09",
         sage: "#8FA597",
       },
