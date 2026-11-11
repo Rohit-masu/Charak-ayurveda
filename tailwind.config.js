@@ -9,6 +9,8 @@ export default {
         // Light theme: cream page, white cards, forest + gold accents.
         ivory: { DEFAULT: "#F7F2E8", deep: "#EFE7D6" },
         mist: "#E9EFE7",
+        // hero background: a light green, never the dark forest
+        "sage-light": "#DDE9DA",
         // gold-dark is the text gold on light backgrounds (AA on ivory).
         gold: { DEFAULT: "#C9A45C", light: "#E9D4A1", dark: "#7F6128" },
         noir: "#0B0B09",

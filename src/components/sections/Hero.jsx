@@ -25,17 +25,18 @@ export default function Hero() {
   });
 
   return (
-    <section ref={scope} id="top" className="relative isolate overflow-hidden bg-ivory pt-20">
+    <section ref={scope} id="top" className="relative isolate overflow-hidden bg-sage-light pt-20">
       <div
         aria-hidden="true"
-        className="absolute inset-0 -z-10 opacity-[0.12]"
+        className="absolute inset-0 -z-10 opacity-25"
         style={{ backgroundImage: `url(${images.garden})`, backgroundSize: "cover", backgroundPosition: "center" }}
       />
-      <div aria-hidden="true" className="absolute inset-0 -z-10 bg-gradient-to-b from-ivory/60 via-ivory/85 to-ivory" />
+      {/* light-green wash over the garden photo; fades to ivory so the tapes and Manifesto meet it cleanly */}
+      <div aria-hidden="true" className="absolute inset-0 -z-10 bg-gradient-to-b from-sage-light/60 via-sage-light/80 to-ivory" />
       <div
         aria-hidden="true"
         className="absolute right-[-10%] top-[10%] -z-10 h-[70vmin] w-[70vmin] rounded-full blur-3xl"
-        style={{ background: "radial-gradient(circle, rgba(143,165,151,0.35), transparent 65%)" }}
+        style={{ background: "radial-gradient(circle, rgba(143,165,151,0.55), transparent 65%)" }}
       />
 
       <div className="shell grid min-h-[calc(100svh-5rem)] items-center gap-12 py-12 lg:grid-cols-12 lg:gap-8 lg:py-0">
