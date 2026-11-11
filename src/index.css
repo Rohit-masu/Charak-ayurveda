@@ -19,18 +19,15 @@
     overflow: hidden;
   }
   body {
-    @apply bg-paper font-sans text-ink;
+    @apply bg-ink font-sans text-ivory;
     overflow-x: clip;
   }
   ::selection {
     @apply bg-gold text-ink;
   }
   :focus-visible {
-    outline: 2px solid theme("colors.gold.dark");
+    outline: 1px solid theme("colors.gold.DEFAULT");
     outline-offset: 4px;
-  }
-  .surface-dark :focus-visible {
-    outline-color: theme("colors.gold.DEFAULT");
   }
   img {
     user-select: none;
@@ -48,21 +45,13 @@
   .display {
     @apply font-display font-light leading-[0.95] tracking-[-0.02em];
   }
-  /* Deep gold sheen for light surfaces; `.surface-dark` swaps in the bright version. */
   .gold-text {
-    background: linear-gradient(100deg, #6f5420 0%, #a8843f 28%, #7f6128 52%, #b8924a 70%, #6f5420 100%);
+    background: linear-gradient(100deg, #9c7a3c 0%, #e9d4a1 28%, #c9a45c 52%, #f6e7bf 70%, #9c7a3c 100%);
     background-size: 220% 100%;
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
     animation: gold-sheen 7s ease-in-out infinite;
-  }
-  .surface-dark .gold-text {
-    background-image: linear-gradient(100deg, #9c7a3c 0%, #e9d4a1 28%, #c9a45c 52%, #f6e7bf 70%, #9c7a3c 100%);
-  }
-  /* Dark accent band (Professionals, footer, photo reveals). */
-  .surface-dark {
-    @apply bg-leaf text-ivory;
   }
   .hairline {
     background: linear-gradient(90deg, transparent, rgba(201, 164, 92, 0.55), transparent);
@@ -74,7 +63,7 @@
     position: fixed;
     inset: -50%;
     z-index: 90;
-    opacity: 0.035;
+    opacity: 0.07;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     animation: grain 1.2s steps(6) infinite;
   }

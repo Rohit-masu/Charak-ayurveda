@@ -33,7 +33,7 @@ export default function Professionals({ onChooseType }) {
   };
 
   return (
-    <section ref={ref} id="professionals" className="surface-dark relative overflow-hidden py-28 sm:py-40">
+    <section ref={ref} id="professionals" className="relative overflow-hidden bg-forest py-28 sm:py-40">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute -right-40 -top-40 h-[620px] w-[620px] rounded-full opacity-60 blur-3xl"
@@ -59,7 +59,7 @@ export default function Professionals({ onChooseType }) {
           {audiences.map(({ icon, who, text, type }, i) => {
             const Icon = audienceIcons[icon];
             return (
-            <SpotlightCard key={who} className="rounded-[28px] border border-gold/20 bg-forest/35">
+            <SpotlightCard key={who} className="rounded-[28px] border border-gold/15 bg-ink/40">
               <button
                 type="button"
                 data-card
@@ -87,7 +87,7 @@ export default function Professionals({ onChooseType }) {
         </div>
 
         <ol data-steps className="relative mt-24 grid gap-10 sm:grid-cols-3">
-          <span aria-hidden="true" className="absolute left-0 right-0 top-[11px] hidden h-px bg-paper/10 sm:block">
+          <span aria-hidden="true" className="absolute left-0 right-0 top-[11px] hidden h-px bg-ivory/10 sm:block">
             <span data-step-line className="block h-full origin-left bg-gold" />
           </span>
           {steps.map((s, i) => (

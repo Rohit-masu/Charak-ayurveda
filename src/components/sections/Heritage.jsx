@@ -39,8 +39,8 @@ export default function Heritage() {
   });
 
   return (
-    <section ref={ref} id="heritage" className="relative bg-paper-deep text-ink">
-      <div data-reveal className="surface-dark relative h-[100svh] overflow-hidden">
+    <section ref={ref} id="heritage" className="relative bg-ink">
+      <div data-reveal className="relative h-[100svh] overflow-hidden">
         <p
           data-reveal-title
           aria-hidden="true"
@@ -50,7 +50,7 @@ export default function Heritage() {
         </p>
         <div data-reveal-img className="absolute inset-0 overflow-hidden">
           <img src={images.garden} alt="A herb garden in morning light" loading="lazy" className="h-full w-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-t from-leaf via-leaf/40 to-leaf/10" />
+          <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/40 to-ink/10" />
         </div>
         <div data-reveal-copy className="shell absolute inset-x-0 bottom-0 z-10 pb-16 sm:pb-24">
           <p className="label text-gold">Chapter 04 — Heritage</p>
@@ -72,7 +72,7 @@ export default function Heritage() {
             <div
               aria-hidden="true"
               className="absolute inset-[8%] rounded-full blur-3xl"
-              style={{ background: "radial-gradient(circle, rgba(201,164,92,0.3), transparent 70%)" }}
+              style={{ background: "radial-gradient(circle, rgba(201,164,92,0.22), transparent 70%)" }}
             />
             <img
               data-craft-img
@@ -81,21 +81,21 @@ export default function Heritage() {
               width="1400"
               height="874"
               loading="lazy"
-              className="relative w-full drop-shadow-[0_35px_40px_rgba(11,42,29,0.3)]"
+              className="relative w-full drop-shadow-[0_40px_50px_rgba(0,0,0,0.6)]"
             />
           </div>
           <div className="lg:col-span-5">
-            <Crest className="h-14 w-14 text-gold-dark" />
-            <SplitText className="display mt-8 text-[clamp(2.6rem,4.6vw,4.8rem)] text-forest">
+            <Crest className="h-14 w-14 text-gold" />
+            <SplitText className="display mt-8 text-[clamp(2.6rem,4.6vw,4.8rem)]">
               Made to be <em className="gold-text font-normal">kept.</em>
             </SplitText>
-            <dl className="mt-12 space-y-0 border-t border-ink/10">
+            <dl className="mt-12 space-y-0 border-t border-ivory/10">
               {craft.map((c, i) => (
-                <div key={c.k} data-craft-item className="grid grid-cols-[3rem_1fr] gap-4 border-b border-ink/10 py-6">
-                  <dt className="font-display text-2xl italic text-gold-dark">0{i + 1}</dt>
+                <div key={c.k} data-craft-item className="grid grid-cols-[3rem_1fr] gap-4 border-b border-ivory/10 py-6">
+                  <dt className="font-display text-2xl italic text-gold">0{i + 1}</dt>
                   <dd>
-                    <span className="block font-display text-2xl text-forest">{c.k}</span>
-                    <span className="mt-1 block text-sm leading-relaxed text-ink/60">{c.v}</span>
+                    <span className="block font-display text-2xl text-ivory">{c.k}</span>
+                    <span className="mt-1 block text-sm leading-relaxed text-ivory/60">{c.v}</span>
                   </dd>
                 </div>
               ))}

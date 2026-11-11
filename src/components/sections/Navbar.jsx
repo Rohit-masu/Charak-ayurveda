@@ -104,33 +104,24 @@ export default function Navbar({ onOpenProduct, onChooseType }) {
     goTo(href);
   };
 
-  // Transparent over the green hero (and over the open mobile menu): ivory text. Solid cream bar: dark text.
-  const light = open || (!solid && !mega);
-
   return (
     <>
       <header ref={bar} className="fixed inset-x-0 top-0 z-50" onPointerLeave={closeMega}>
         <div
           className={`transition-[background-color,backdrop-filter,border-color] duration-700 ${
             mega
-              ? "border-b border-gold/25 bg-paper/95 shadow-[0_20px_40px_-20px_rgba(11,42,29,0.25)] backdrop-blur-xl"
+              ? "border-b border-gold/15 bg-ink/95 backdrop-blur-xl"
               : solid && !open
-                ? "border-b border-gold/20 bg-paper/85 backdrop-blur-xl"
+                ? "border-b border-gold/10 bg-ink/70 backdrop-blur-xl"
                 : "border-b border-transparent"
           }`}
         >
           <nav className="shell flex h-20 items-center justify-between" aria-label="Primary">
-            <a
-              href="#top"
-              onClick={(e) => go(e, "#top")}
-              className={`flex items-center gap-3 transition-colors duration-500 ${light ? "text-gold" : "text-gold-dark"}`}
-            >
+            <a href="#top" onClick={(e) => go(e, "#top")} className="flex items-center gap-3 text-gold">
               <Crest className="h-10 w-10" />
               <span className="leading-none">
-                <span className={`block font-display text-[19px] tracking-[0.22em] transition-colors duration-500 ${light ? "text-ivory" : "text-forest"}`}>
-                  CHARAK
-                </span>
-                <span className="label mt-1 block text-[8.5px]">Ayurveda</span>
+                <span className="block font-display text-[19px] tracking-[0.22em] text-ivory">CHARAK</span>
+                <span className="label mt-1 block text-[8.5px] text-gold">Ayurveda</span>
               </span>
             </a>
 
@@ -144,13 +135,13 @@ export default function Navbar({ onOpenProduct, onChooseType }) {
                       onClick={(e) => go(e, item.href)}
                       aria-expanded={item.menu ? active : undefined}
                       aria-haspopup={item.menu ? "true" : undefined}
-                      className={`group relative flex items-center gap-1.5 py-7 text-[11px] font-semibold uppercase tracking-[0.22em] transition-colors ${
-                        light ? "text-ivory/80 hover:text-ivory" : active ? "text-forest" : "text-ink/70 hover:text-forest"
+                      className={`group relative flex items-center gap-1.5 py-7 text-[11px] font-medium uppercase tracking-[0.22em] transition-colors hover:text-ivory ${
+                        active ? "text-ivory" : "text-ivory/75"
                       }`}
                     >
                       {item.label}
                       {item.menu && (
-                        <ChevronDown size={13} className={`transition-transform duration-500 ${light ? "text-gold" : "text-gold-dark"} ${active ? "rotate-180" : ""}`} />
+                        <ChevronDown size={13} className={`text-gold transition-transform duration-500 ${active ? "rotate-180" : ""}`} />
                       )}
                       <span
                         className={`absolute inset-x-0 bottom-6 h-px origin-right bg-gold transition-transform duration-500 ease-lux group-hover:origin-left group-hover:scale-x-100 ${
@@ -167,9 +158,7 @@ export default function Navbar({ onOpenProduct, onChooseType }) {
               <a
                 href="#contact"
                 onClick={(e) => go(e, "#contact")}
-                className={`hidden rounded-full px-5 py-2.5 text-[10.5px] font-semibold uppercase tracking-[0.24em] transition-colors duration-500 sm:inline-block ${
-                  light ? "bg-gold text-ink hover:bg-paper" : "bg-forest text-ivory hover:bg-gold hover:text-ink"
-                }`}
+                className="hidden rounded-full border border-gold/50 px-5 py-2.5 text-[10.5px] font-semibold uppercase tracking-[0.24em] text-gold transition-colors duration-500 hover:bg-gold hover:text-ink sm:inline-block"
               >
                 Enquire
               </a>
@@ -178,9 +167,7 @@ export default function Navbar({ onOpenProduct, onChooseType }) {
                 onClick={() => setOpen((v) => !v)}
                 aria-expanded={open}
                 aria-controls="site-menu"
-                className={`relative z-[60] grid h-12 w-12 place-items-center rounded-full border transition-colors duration-500 lg:hidden ${
-                  light ? "border-ivory/25 text-ivory" : "border-forest/25 text-forest"
-                }`}
+                className="relative z-[60] grid h-12 w-12 place-items-center rounded-full border border-ivory/20 text-ivory lg:hidden"
               >
                 <span className="sr-only">{open ? "Close menu" : "Open menu"}</span>
                 <span className={`absolute h-px w-5 bg-current transition-transform duration-500 ${open ? "rotate-45" : "-translate-y-1"}`} />
@@ -197,7 +184,7 @@ export default function Navbar({ onOpenProduct, onChooseType }) {
             }`}
             aria-hidden={!mega}
           >
-            <div className="overflow-hidden border-t border-ink/10" inert={mega ? undefined : ""}>
+            <div className="overflow-hidden border-t border-ivory/10" inert={mega ? undefined : ""}>
               <MegaMenu active={shown} onGo={goTo} onOpenProduct={openProduct} onChooseType={chooseType} />
             </div>
           </div>
@@ -205,13 +192,13 @@ export default function Navbar({ onOpenProduct, onChooseType }) {
       </header>
 
       {mega && (
-        <div aria-hidden="true" className="fixed inset-0 z-40 hidden bg-forest/25 backdrop-blur-sm lg:block" onPointerEnter={closeMega} />
+        <div aria-hidden="true" className="fixed inset-0 z-40 hidden bg-ink/50 backdrop-blur-sm lg:block" onPointerEnter={closeMega} />
       )}
 
       <div
         ref={menu}
         id="site-menu"
-        className="surface-dark invisible fixed inset-0 z-[45] flex flex-col justify-between px-6 pb-10 pt-28"
+        className="invisible fixed inset-0 z-[45] flex flex-col justify-between bg-forest px-6 pb-10 pt-28"
         style={{ clipPath: "circle(0% at 100% 0%)" }}
         aria-hidden={!open}
       >
@@ -232,7 +219,7 @@ export default function Navbar({ onOpenProduct, onChooseType }) {
           ))}
         </ul>
         <div className="space-y-6">
-          <ArrowLink href="#contact" variant="gold" onClick={() => goTo("#contact")}>
+          <ArrowLink href="#contact" onClick={() => goTo("#contact")}>
             Send an enquiry
           </ArrowLink>
           <p className="text-sm text-ivory/60">

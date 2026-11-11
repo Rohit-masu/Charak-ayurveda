@@ -17,12 +17,12 @@ export default function WhyChoose() {
   });
 
   return (
-    <section ref={ref} id="why" className="bg-paper-deep py-24 text-ink sm:py-32">
+    <section ref={ref} id="why" className="bg-ivory py-24 text-ink sm:py-32">
       <div className="shell">
         <div className="text-center">
           <p className="label text-gold-dark">Why {site.brand}</p>
           <SplitText className="display mx-auto mt-6 max-w-4xl text-[clamp(2.4rem,4.6vw,4.6rem)] text-forest">
-            Why choose <em className="gold-text font-normal">Charak Ayurveda?</em>
+            Why choose <em className="font-normal italic text-gold-dark">Charak Ayurveda?</em>
           </SplitText>
           <p className="mx-auto mt-5 max-w-xl text-[15px] leading-relaxed text-ink/60">
             A classical Ayurvedic tradition, carried into a focused range made for everyday life.
@@ -36,7 +36,7 @@ export default function WhyChoose() {
               <li
                 key={r.title}
                 data-reason
-                className="group rounded-[24px] border border-gold/20 bg-card p-8 transition-[transform,border-color,box-shadow] duration-700 ease-lux hover:-translate-y-1 hover:border-gold/60 hover:shadow-[0_30px_50px_-35px_rgba(11,42,29,0.4)] sm:p-9"
+                className="group rounded-[24px] border border-gold/25 bg-ivory-deep p-8 transition-[transform,border-color,box-shadow] duration-700 ease-lux hover:-translate-y-1 hover:border-gold/60 hover:shadow-[0_30px_50px_-35px_rgba(11,42,29,0.4)] sm:p-9"
               >
                 <span className="grid h-14 w-14 place-items-center rounded-full border border-gold/40 text-gold-dark transition-colors duration-500 group-hover:border-forest group-hover:bg-forest group-hover:text-gold">
                   <Icon size={24} strokeWidth={1.3} />

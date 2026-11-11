@@ -16,7 +16,7 @@ export default function Manifesto() {
   });
 
   return (
-    <section ref={ref} id="about" className="relative overflow-hidden bg-paper py-28 text-ink sm:py-40">
+    <section ref={ref} id="about" className="relative overflow-hidden bg-ivory py-28 text-ink sm:py-40">
       <div className="shell grid grid-cols-12 gap-y-16">
         <div className="col-span-12 flex items-center justify-between lg:col-span-12">
           <p className="label text-gold-dark">Chapter 01 — The Name</p>

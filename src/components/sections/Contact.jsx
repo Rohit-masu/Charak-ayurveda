@@ -56,7 +56,7 @@ export default function Contact({ type, onTypeChange }) {
   const err = (k) => (errors[k] ? { "aria-invalid": true, "aria-describedby": `${k}-error` } : {});
 
   return (
-    <section id="contact" className="relative bg-paper py-28 text-ink sm:py-40">
+    <section id="contact" className="relative bg-ivory py-28 text-ink sm:py-40">
       <div className="shell grid gap-20 lg:grid-cols-12">
         <div className="lg:col-span-5">
           <p className="label text-gold-dark">Chapter 06 — Enquire</p>
@@ -96,7 +96,7 @@ export default function Contact({ type, onTypeChange }) {
           </ul>
         </div>
 
-        <form onSubmit={submit} noValidate className="space-y-10 rounded-[32px] border border-gold/25 bg-card p-7 shadow-[0_30px_60px_-40px_rgba(11,42,29,0.35)] sm:p-12 lg:col-span-6 lg:col-start-7">
+        <form onSubmit={submit} noValidate className="space-y-10 rounded-[32px] bg-ivory-deep p-7 sm:p-12 lg:col-span-6 lg:col-start-7">
           <fieldset>
             <legend className="label text-ink/50">I am a</legend>
             <div className="mt-4 flex flex-wrap gap-2">
@@ -104,7 +104,7 @@ export default function Contact({ type, onTypeChange }) {
                 <label
                   key={t}
                   className={`cursor-pointer rounded-full border px-4 py-2.5 text-[13px] transition-colors duration-300 has-[:focus-visible]:outline has-[:focus-visible]:outline-1 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-gold ${
-                    t === type ? "border-forest bg-forest text-ivory" : "border-ink/15 text-ink/70 hover:border-ink/40"
+                    t === type ? "border-ink bg-ink text-ivory" : "border-ink/15 text-ink/70 hover:border-ink/40"
                   }`}
                 >
                   <input type="radio" name="type" value={t} checked={t === type} onChange={() => onTypeChange(t)} className="sr-only" />
@@ -133,7 +133,7 @@ export default function Contact({ type, onTypeChange }) {
             <Magnet strength={0.2}>
               <button
                 type="submit"
-                className="group inline-flex h-14 items-center gap-3 rounded-full bg-forest pl-7 pr-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-ivory transition-colors duration-500 hover:bg-ink"
+                className="group inline-flex h-14 items-center gap-3 rounded-full bg-ink pl-7 pr-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-ivory transition-colors duration-500 hover:bg-forest"
               >
                 Continue on WhatsApp
                 <span className="grid h-10 w-10 place-items-center rounded-full bg-gold text-ink transition-transform duration-500 group-hover:rotate-45">

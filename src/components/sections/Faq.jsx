@@ -7,12 +7,12 @@ export default function Faq() {
   const [open, setOpen] = useState(0);
 
   return (
-    <section id="faq" className="bg-card py-24 text-ink sm:py-32">
+    <section id="faq" className="bg-ivory py-24 text-ink sm:py-32">
       <div className="shell">
         <div className="text-center">
           <p className="label text-gold-dark">Questions</p>
           <SplitText className="display mt-6 text-[clamp(2.4rem,4.4vw,4.4rem)] text-forest">
-            Frequently asked <em className="gold-text font-normal">questions.</em>
+            Frequently asked <em className="font-normal italic text-gold-dark">questions.</em>
           </SplitText>
           <p className="mx-auto mt-5 max-w-lg text-[15px] leading-relaxed text-ink/60">{faqIntro}</p>
         </div>

@@ -4,18 +4,12 @@ export default {
   theme: {
     extend: {
       colors: {
-        ink: "#06150F",
-        forest: { DEFAULT: "#0B2A1D", light: "#143D2B" },
-        // Light theme: cream page, white cards, forest + gold accents.
-        ivory: { DEFAULT: "#F7F2E8", deep: "#EFE7D6" },
-        // Light-green surfaces (client: greenish everywhere, no plain white/cream). `ivory` stays as text-on-green.
-        paper: { DEFAULT: "#EAF2E5", deep: "#DDE9D6" },
-        card: "#F4F9F0",
-        mist: "#D4E4CC",
-        // hero background: a lighter, leafier green than forest, with ivory text on top
-        leaf: "#2F6A4C",
-        // gold-dark is the text gold on light backgrounds (AA on ivory).
-        gold: { DEFAULT: "#C9A45C", light: "#E9D4A1", dark: "#7F6128" },
+        // Main's dark palette, lifted a step brighter (client: "dark green thoda bright").
+        // Was ink #06150F, forest #0B2A1D, forest-light #143D2B.
+        ink: "#0B2419",
+        forest: { DEFAULT: "#13402C", light: "#1C553B" },
+        ivory: { DEFAULT: "#F4EFE3", deep: "#EAE2CF" },
+        gold: { DEFAULT: "#C9A45C", light: "#E9D4A1", dark: "#9C7A3C" },
         noir: "#0B0B09",
         sage: "#8FA597",
       },

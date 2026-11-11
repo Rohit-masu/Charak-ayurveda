@@ -14,7 +14,7 @@ const points = [
 // "Ask our doctor" band. Copy is kept to the client's approved wording in data/site.js.
 export default function DoctorCta() {
   return (
-    <section id="doctor" className="surface-dark relative overflow-hidden py-24 sm:py-32">
+    <section id="doctor" className="relative bg-forest overflow-hidden py-24 sm:py-32">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute -left-32 top-1/2 h-[520px] w-[520px] -translate-y-1/2 rounded-full blur-3xl"
@@ -38,7 +38,7 @@ export default function DoctorCta() {
         </div>
 
         <div className="lg:col-span-4 lg:col-start-9">
-          <div className="rounded-[28px] border border-gold/25 bg-forest/35 p-8 sm:p-10">
+          <div className="rounded-[28px] border border-gold/20 bg-ink/40 p-8 sm:p-10">
             <Crest className="h-14 w-14 text-gold" />
             <ul className="mt-8 space-y-5">
               {points.map(({ icon: Icon, text }) => (

@@ -2,12 +2,10 @@ import { ArrowUpRight } from "lucide-react";
 import Magnet from "../bits/Magnet";
 import { scrollToHash } from "../../lib/motion";
 
-// Pill CTA with a sliding fill. In-page hashes scroll smoothly via Lenis.
-// "gold" suits dark bands; "forest" is the primary button on light sections.
-export default function ArrowLink({ href, children, variant = "forest", className = "", onClick, external }) {
+// Pill CTA with a sliding gold fill. In-page hashes scroll smoothly via Lenis.
+export default function ArrowLink({ href, children, variant = "gold", className = "", onClick, external }) {
   const styles = {
     gold: "bg-gold text-ink",
-    forest: "bg-forest text-ivory",
     ghost: "border border-ivory/25 text-ivory",
     dark: "bg-ink text-ivory",
   };
@@ -30,7 +28,7 @@ export default function ArrowLink({ href, children, variant = "forest", classNam
       >
         <span
           aria-hidden="true"
-          className={`absolute inset-0 origin-bottom scale-y-0 rounded-full transition-transform duration-700 ease-lux group-hover:scale-y-100 ${variant === "gold" ? "bg-paper" : "bg-gold"}`}
+          className={`absolute inset-0 origin-bottom scale-y-0 rounded-full transition-transform duration-700 ease-lux group-hover:scale-y-100 ${variant === "gold" ? "bg-ivory" : "bg-gold"}`}
         />
         <span className={`relative transition-colors duration-500 ${variant === "gold" ? "" : "group-hover:text-ink"}`}>{children}</span>
         <span

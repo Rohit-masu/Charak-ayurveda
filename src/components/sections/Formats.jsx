@@ -15,11 +15,11 @@ export default function Formats({ onOpen }) {
   });
 
   return (
-    <section ref={ref} id="formats" className="bg-card py-24 text-ink sm:py-32">
+    <section ref={ref} id="formats" className="bg-ivory-deep py-24 text-ink sm:py-32">
       <div className="shell text-center">
         <p className="label text-gold-dark">Shop by format</p>
         <SplitText className="display mx-auto mt-6 max-w-3xl text-[clamp(2.4rem,4.6vw,4.6rem)] text-forest">
-          Find your <em className="gold-text font-normal">Rati Shakti.</em>
+          Find your <em className="font-normal italic text-gold-dark">Rati Shakti.</em>
         </SplitText>
         <p className="mx-auto mt-5 max-w-xl text-[15px] leading-relaxed text-ink/60">
           Capsules, a massage oil, a classical majun and the Maharaja kit. Tap a format to see its packs and ingredients.

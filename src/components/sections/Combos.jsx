@@ -23,16 +23,16 @@ function ComboCard({ combo }) {
   return (
     <article
       data-combo
-      className="group flex flex-col overflow-hidden rounded-[28px] border border-gold/25 bg-card shadow-[0_30px_60px_-45px_rgba(11,42,29,0.4)] transition-[transform,border-color] duration-700 ease-lux hover:-translate-y-1.5 hover:border-gold/60"
+      className="group flex flex-col overflow-hidden rounded-[28px] border border-gold/25 bg-ivory-deep shadow-[0_30px_60px_-45px_rgba(11,42,29,0.4)] transition-[transform,border-color] duration-700 ease-lux hover:-translate-y-1.5 hover:border-gold/60"
     >
-      <div className="relative flex h-64 items-end justify-center gap-2 overflow-hidden bg-mist px-6 pb-6 pt-10">
+      <div className="relative flex h-64 items-end justify-center gap-2 overflow-hidden bg-forest px-6 pb-6 pt-10">
         <div
           aria-hidden="true"
           className="absolute inset-x-[15%] inset-y-[10%] rounded-full blur-2xl"
           style={{ background: "radial-gradient(circle, rgba(201,164,92,0.35), transparent 70%)" }}
         />
         {off > 0 && (
-          <span className="absolute left-5 top-5 rounded-full bg-forest px-3 py-1 text-[11px] font-semibold tracking-wide text-ivory">
+          <span className="absolute left-5 top-5 rounded-full bg-gold px-3 py-1 text-[11px] font-semibold tracking-wide text-ink">
             {off}% off
           </span>
         )}
@@ -42,7 +42,7 @@ function ComboCard({ combo }) {
             src={product.packs[pack].image}
             alt={`${product.name} — ${product.packs[pack].label}`}
             loading="lazy"
-            className={`relative max-h-full w-auto max-w-[46%] object-contain drop-shadow-[0_20px_18px_rgba(11,42,29,0.28)] transition-transform duration-700 ease-lux ${
+            className={`relative max-h-full w-auto max-w-[46%] object-contain drop-shadow-[0_20px_18px_rgba(0,0,0,0.45)] transition-transform duration-700 ease-lux ${
               i === 0 ? "group-hover:-translate-x-1 group-hover:-rotate-3" : "group-hover:translate-x-1 group-hover:rotate-3"
             }`}
           />
@@ -97,13 +97,13 @@ export default function Combos() {
   if (!combos.length) return null;
 
   return (
-    <section ref={ref} id="combos" className="bg-paper py-24 text-ink sm:py-32">
+    <section ref={ref} id="combos" className="bg-ivory py-24 text-ink sm:py-32">
       <div className="shell">
         <div className="grid gap-8 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-7">
             <p className="label text-gold-dark">Combos</p>
             <SplitText className="display mt-6 text-[clamp(2.6rem,5vw,5.2rem)] text-forest">
-              Better <em className="gold-text font-normal">together.</em>
+              Better <em className="font-normal italic text-gold-dark">together.</em>
             </SplitText>
           </div>
           <p className="max-w-sm text-[15px] leading-relaxed text-ink/60 lg:col-span-4 lg:col-start-9">

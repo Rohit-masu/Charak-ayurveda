@@ -82,7 +82,7 @@ export default function HerbWheel({ className = "" }) {
                 <div
                   data-orbit-item
                   title={b.name}
-                  className="grid h-full w-full place-items-center rounded-full border border-gold/30 bg-forest/85 p-[9%] text-gold shadow-[0_10px_30px_rgba(6,21,15,0.35)] backdrop-blur"
+                  className="grid h-full w-full place-items-center rounded-full border border-gold/30 bg-ink/85 p-[9%] text-gold shadow-[0_10px_30px_rgba(0,0,0,0.45)] backdrop-blur"
                 >
                   <HerbIcon name={b.name} className="h-full w-full" />
                 </div>
@@ -94,7 +94,7 @@ export default function HerbWheel({ className = "" }) {
 
       {/* centre porthole */}
       <div data-depth="24" className="absolute inset-[22%]">
-        <div data-porthole className="relative h-full w-full overflow-hidden rounded-full border border-gold/50 shadow-[0_30px_80px_rgba(6,21,15,0.45)]">
+        <div data-porthole className="relative h-full w-full overflow-hidden rounded-full border border-gold/50 shadow-[0_30px_80px_rgba(0,0,0,0.6)]">
           <img
             src={images.heroBotanical}
             alt="Ayurvedic herbs growing in a garden"
@@ -104,10 +104,10 @@ export default function HerbWheel({ className = "" }) {
             className="h-full w-full object-cover"
             style={{ objectPosition: "52% 78%" }}
           />
-          <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle,transparent_45%,rgba(11,42,29,0.55))]" />
+          <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle,transparent_45%,rgba(6,21,15,0.7))]" />
           <span className="absolute inset-[5%] rounded-full border border-gold/25" />
         </div>
-        <div className="absolute -bottom-[7%] left-1/2 grid h-[24%] w-[24%] -translate-x-1/2 place-items-center rounded-full border border-gold/50 bg-forest text-gold">
+        <div className="absolute -bottom-[7%] left-1/2 grid h-[24%] w-[24%] -translate-x-1/2 place-items-center rounded-full border border-gold/50 bg-ink text-gold">
           <Crest className="h-[70%] w-[70%]" />
         </div>
       </div>

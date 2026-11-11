@@ -25,13 +25,13 @@ export default function Hero() {
   });
 
   return (
-    <section ref={scope} id="top" className="surface-dark relative isolate overflow-hidden bg-leaf pt-20">
+    <section ref={scope} id="top" className="relative isolate overflow-hidden bg-ink pt-20">
       <div
         aria-hidden="true"
-        className="absolute inset-0 -z-10 opacity-30"
+        className="absolute inset-0 -z-10 opacity-20"
         style={{ backgroundImage: `url(${images.garden})`, backgroundSize: "cover", backgroundPosition: "center" }}
       />
-      <div aria-hidden="true" className="absolute inset-0 -z-10 bg-gradient-to-b from-leaf/55 via-leaf/80 to-leaf" />
+      <div aria-hidden="true" className="absolute inset-0 -z-10 bg-gradient-to-b from-ink/70 via-ink/90 to-ink" />
 
       <div className="shell grid min-h-[calc(100svh-5rem)] items-center gap-12 py-12 lg:grid-cols-12 lg:gap-8 lg:py-0">
         <div data-hero-copy className="relative z-20 lg:col-span-6 xl:col-span-5">
@@ -56,7 +56,7 @@ export default function Hero() {
             Proprietary Ayurvedic formulations from Charak Ayurveda — presented with the care of a classical text.
           </p>
           <div data-hero-fade className="mt-8 flex flex-wrap items-center gap-6">
-            <ArrowLink href="#collection" variant="gold">Explore the range</ArrowLink>
+            <ArrowLink href="#collection">Explore the range</ArrowLink>
             <a
               href="#professionals"
               onClick={(e) => {
