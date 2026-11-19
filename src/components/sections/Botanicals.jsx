@@ -1,7 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import SplitText from "../bits/SplitText";
 import { gsap, prefersReducedMotion, useGsap } from "../../lib/motion";
-import { botanicals, productsWith } from "../../data/products";
+import { listedBotanicals, productsWith } from "../../data/products";
+
+// Only botanicals that a product actually lists appear; with none, the section renders nothing.
+const botanicals = listedBotanicals();
 
 export default function Botanicals() {
   const preview = useRef(null);
@@ -33,6 +36,7 @@ export default function Botanicals() {
   }, []);
 
   useEffect(() => {
+    if (!preview.current) return;
     gsap.to(preview.current, {
       scale: active === null ? 0 : 1,
       opacity: active === null ? 0 : 1,
@@ -41,24 +45,26 @@ export default function Botanicals() {
     });
   }, [active]);
 
+  if (!botanicals.length) return null;
+
   return (
-    <section ref={ref} id="botanicals" className="relative bg-ivory-deep py-28 text-ink sm:py-40">
+    <section ref={ref} id="botanicals" className="relative bg-sand py-28 text-charcoal sm:py-40">
       <div className="shell">
         <div className="grid gap-10 lg:grid-cols-12">
           <div className="lg:col-span-7">
-            <p className="label text-gold-dark">Chapter 03 — The Botanicals</p>
+            <p className="label text-bronze-dark">Chapter 03 — The Botanicals</p>
             <SplitText className="display mt-8 text-[clamp(3rem,6.5vw,7rem)]">
               Read from
               <br />
-              <em className="font-normal italic text-gold-dark">the label.</em>
+              <em className="font-normal italic text-bronze-dark">the label.</em>
             </SplitText>
           </div>
-          <p className="self-end text-[15px] leading-relaxed text-ink/60 lg:col-span-4 lg:col-start-9">
-            Nine botanicals named across the Rati Shakti range. Hover over each one to see which formulations list it.
+          <p className="self-end text-[15px] leading-relaxed text-charcoal/60 lg:col-span-4 lg:col-start-9">
+            Botanicals named on the labels of the range. Hover over each one to see which formulations list it.
           </p>
         </div>
 
-        <ul data-rows className="mt-20 border-t border-ink/15" onPointerLeave={() => setActive(null)}>
+        <ul data-rows className="mt-20 border-t border-charcoal/15" onPointerLeave={() => setActive(null)}>
           {botanicals.map((b, i) => {
             const used = productsWith(b);
             return (
@@ -66,25 +72,25 @@ export default function Botanicals() {
                 key={b.name}
                 data-row
                 onPointerEnter={() => setActive(i)}
-                className="group relative grid cursor-default grid-cols-12 items-baseline gap-x-4 gap-y-2 border-b border-ink/15 py-6 sm:py-8"
+                className="group relative grid cursor-default grid-cols-12 items-baseline gap-x-4 gap-y-2 border-b border-charcoal/15 py-6 sm:py-8"
               >
                 <span
                   aria-hidden="true"
-                  className="absolute inset-0 origin-bottom scale-y-0 bg-ink transition-transform duration-700 ease-lux group-hover:scale-y-100"
+                  className="absolute inset-0 origin-bottom scale-y-0 bg-charcoal transition-transform duration-700 ease-lux group-hover:scale-y-100"
                 />
-                <span className="relative col-span-2 font-sans text-xs text-ink/40 transition-colors duration-500 group-hover:text-gold sm:col-span-1 sm:pl-4">
+                <span className="relative col-span-2 font-sans text-xs text-charcoal/40 transition-colors duration-500 group-hover:text-bronze sm:col-span-1 sm:pl-4">
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <span className="relative col-span-10 font-display text-[clamp(2rem,4.6vw,4.4rem)] font-light leading-none transition-[color,transform] duration-700 ease-lux group-hover:translate-x-3 group-hover:text-ivory sm:col-span-5">
                   {b.name}
                 </span>
-                <span className="relative col-span-6 col-start-3 font-deva text-xl text-gold-dark transition-colors duration-500 group-hover:text-gold sm:col-span-2 sm:col-start-auto">
+                <span className="relative col-span-6 col-start-3 font-deva text-xl text-bronze-dark transition-colors duration-500 group-hover:text-bronze sm:col-span-2 sm:col-start-auto">
                   {b.deva}
                 </span>
-                <span className="relative col-span-4 text-right font-display text-lg italic text-ink/50 transition-colors duration-500 group-hover:text-ivory/60 sm:col-span-2 sm:text-left">
+                <span className="relative col-span-4 text-right font-display text-lg italic text-charcoal/50 transition-colors duration-500 group-hover:text-ivory/60 sm:col-span-2 sm:text-left">
                   {b.latin}
                 </span>
-                <span className="relative col-span-10 col-start-3 text-xs uppercase tracking-[0.18em] text-ink/45 transition-colors duration-500 group-hover:text-ivory/70 sm:col-span-2 sm:col-start-auto sm:pr-4 sm:text-right">
+                <span className="relative col-span-10 col-start-3 text-xs uppercase tracking-[0.18em] text-charcoal/45 transition-colors duration-500 group-hover:text-ivory/70 sm:col-span-2 sm:col-start-auto sm:pr-4 sm:text-right">
                   {used.length} {used.length === 1 ? "formulation" : "formulations"}
                 </span>
               </li>
@@ -100,11 +106,11 @@ export default function Botanicals() {
         className="pointer-events-none fixed left-0 top-0 z-40 hidden opacity-0 [@media(pointer:fine)]:block"
         style={{ transform: "scale(0)" }}
       >
-        <div className="-translate-y-1/2 translate-x-10 rounded-[24px] border border-gold/30 bg-forest p-4 shadow-2xl">
+        <div className="-translate-y-1/2 translate-x-10 rounded-[24px] border border-bronze/30 bg-graphite p-4 shadow-2xl">
           <div className="flex items-end gap-3">
             {activeProducts.map((p) => (
               <figure key={p.id} className="flex w-24 flex-col items-center">
-                <img src={p.packs[0].image} alt="" className="h-28 w-auto object-contain" />
+                <img src={p.images.light} alt="" className="h-28 w-24 rounded-xl object-cover" />
                 <figcaption className="mt-2 text-center text-[10px] leading-tight text-ivory/70">{p.category}</figcaption>
               </figure>
             ))}

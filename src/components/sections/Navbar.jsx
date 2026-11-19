@@ -67,6 +67,8 @@ export default function Navbar({ onOpenProduct, onChooseType }) {
     wasOpen.current = open;
     if (open) {
       window.lenis?.stop();
+      // The bar may have slid away on scroll; bring it back so the close button is reachable.
+      gsap.to(bar.current, { yPercent: 0, duration: 0.4, overwrite: true });
       gsap
         .timeline()
         .set(el, { visibility: "visible" })
@@ -97,7 +99,7 @@ export default function Navbar({ onOpenProduct, onChooseType }) {
   };
   const chooseType = (type) => {
     onChooseType(type);
-    goTo("#contact");
+    goTo("#connect");
   };
   const go = (e, href) => {
     e.preventDefault();
@@ -110,22 +112,22 @@ export default function Navbar({ onOpenProduct, onChooseType }) {
         <div
           className={`transition-[background-color,backdrop-filter,border-color] duration-700 ${
             mega
-              ? "border-b border-gold/15 bg-ink/95 backdrop-blur-xl"
+              ? "border-b border-charcoal/10 bg-ivory/95 backdrop-blur-xl"
               : solid && !open
-                ? "border-b border-gold/10 bg-ink/70 backdrop-blur-xl"
+                ? "border-b border-charcoal/10 bg-ivory/95 backdrop-blur-xl"
                 : "border-b border-transparent"
           }`}
         >
           <nav className="shell flex h-20 items-center justify-between" aria-label="Primary">
-            <a href="#top" onClick={(e) => go(e, "#top")} className="flex items-center gap-3 text-gold">
+            <a href="#top" onClick={(e) => go(e, "#top")} className="flex items-center gap-3 text-bronze">
               <Crest className="h-10 w-10" />
               <span className="leading-none">
-                <span className="block font-display text-[19px] tracking-[0.22em] text-ivory">CHARAK</span>
-                <span className="label mt-1 block text-[8.5px] text-gold">Ayurveda</span>
+                <span className="block font-display text-[19px] tracking-[0.22em] text-charcoal">CHARAK</span>
+                <span className="label mt-1 block text-[8.5px] text-bronze-dark">Ayurveda</span>
               </span>
             </a>
 
-            <ul className="hidden items-center gap-8 lg:flex">
+            <ul className="hidden items-center gap-6 lg:flex xl:gap-8">
               {nav.map((item) => {
                 const active = item.menu && mega === item.menu;
                 return (
@@ -135,16 +137,16 @@ export default function Navbar({ onOpenProduct, onChooseType }) {
                       onClick={(e) => go(e, item.href)}
                       aria-expanded={item.menu ? active : undefined}
                       aria-haspopup={item.menu ? "true" : undefined}
-                      className={`group relative flex items-center gap-1.5 py-7 text-[11px] font-medium uppercase tracking-[0.22em] transition-colors hover:text-ivory ${
-                        active ? "text-ivory" : "text-ivory/75"
+                      className={`group relative flex items-center gap-1.5 py-7 text-[11px] font-medium uppercase tracking-[0.22em] transition-colors hover:text-charcoal ${
+                        active ? "text-charcoal" : "text-charcoal/70"
                       }`}
                     >
                       {item.label}
                       {item.menu && (
-                        <ChevronDown size={13} className={`text-gold transition-transform duration-500 ${active ? "rotate-180" : ""}`} />
+                        <ChevronDown size={13} className={`text-bronze-dark transition-transform duration-500 ${active ? "rotate-180" : ""}`} />
                       )}
                       <span
-                        className={`absolute inset-x-0 bottom-6 h-px origin-right bg-gold transition-transform duration-500 ease-lux group-hover:origin-left group-hover:scale-x-100 ${
+                        className={`absolute inset-x-0 bottom-6 h-px origin-right bg-bronze transition-transform duration-500 ease-lux group-hover:origin-left group-hover:scale-x-100 ${
                           active ? "scale-x-100" : "scale-x-0"
                         }`}
                       />
@@ -156,9 +158,9 @@ export default function Navbar({ onOpenProduct, onChooseType }) {
 
             <div className="flex items-center gap-3">
               <a
-                href="#contact"
-                onClick={(e) => go(e, "#contact")}
-                className="hidden rounded-full border border-gold/50 px-5 py-2.5 text-[10.5px] font-semibold uppercase tracking-[0.24em] text-gold transition-colors duration-500 hover:bg-gold hover:text-ink sm:inline-block"
+                href="#connect"
+                onClick={(e) => go(e, "#connect")}
+                className="hidden rounded-full border border-charcoal/25 px-5 py-2.5 text-[10.5px] font-semibold uppercase tracking-[0.24em] text-charcoal transition-colors duration-500 hover:bg-charcoal hover:text-ivory sm:inline-block lg:hidden xl:inline-block"
               >
                 Enquire
               </a>
@@ -167,7 +169,7 @@ export default function Navbar({ onOpenProduct, onChooseType }) {
                 onClick={() => setOpen((v) => !v)}
                 aria-expanded={open}
                 aria-controls="site-menu"
-                className="relative z-[60] grid h-12 w-12 place-items-center rounded-full border border-ivory/20 text-ivory lg:hidden"
+                className="relative z-[60] grid h-12 w-12 place-items-center rounded-full border border-charcoal/20 text-charcoal lg:hidden"
               >
                 <span className="sr-only">{open ? "Close menu" : "Open menu"}</span>
                 <span className={`absolute h-px w-5 bg-current transition-transform duration-500 ${open ? "rotate-45" : "-translate-y-1"}`} />
@@ -184,7 +186,7 @@ export default function Navbar({ onOpenProduct, onChooseType }) {
             }`}
             aria-hidden={!mega}
           >
-            <div className="overflow-hidden border-t border-ivory/10" inert={mega ? undefined : ""}>
+            <div className="overflow-hidden border-t border-charcoal/10" inert={mega ? undefined : ""}>
               <MegaMenu active={shown} onGo={goTo} onOpenProduct={openProduct} onChooseType={chooseType} />
             </div>
           </div>
@@ -192,13 +194,13 @@ export default function Navbar({ onOpenProduct, onChooseType }) {
       </header>
 
       {mega && (
-        <div aria-hidden="true" className="fixed inset-0 z-40 hidden bg-ink/50 backdrop-blur-sm lg:block" onPointerEnter={closeMega} />
+        <div aria-hidden="true" className="fixed inset-0 z-40 hidden bg-charcoal/25 backdrop-blur-sm lg:block" onPointerEnter={closeMega} />
       )}
 
       <div
         ref={menu}
         id="site-menu"
-        className="invisible fixed inset-0 z-[45] flex flex-col justify-between bg-forest px-6 pb-10 pt-28"
+        className="invisible fixed inset-0 z-[45] flex flex-col justify-between bg-sand px-6 pb-10 pt-28"
         style={{ clipPath: "circle(0% at 100% 0%)" }}
         aria-hidden={!open}
       >
@@ -210,19 +212,19 @@ export default function Navbar({ onOpenProduct, onChooseType }) {
                 href={item.href}
                 tabIndex={open ? 0 : -1}
                 onClick={(e) => go(e, item.href)}
-                className="flex items-baseline gap-4 font-display text-[13vw] font-light leading-[1.05] text-ivory sm:text-6xl"
+                className="flex items-baseline gap-4 font-display text-[10.5vw] font-light leading-[1.1] text-charcoal sm:text-6xl"
               >
-                <span className="font-sans text-xs text-gold">0{i + 1}</span>
+                <span className="font-sans text-xs text-bronze-dark">0{i + 1}</span>
                 {item.label}
               </a>
             </li>
           ))}
         </ul>
         <div className="space-y-6">
-          <ArrowLink href="#contact" onClick={() => goTo("#contact")}>
+          <ArrowLink href="#connect" onClick={() => goTo("#connect")}>
             Send an enquiry
           </ArrowLink>
-          <p className="text-sm text-ivory/60">
+          <p className="text-sm text-charcoal/60">
             {contact.email}
             <br />
             {site.sanskrit}

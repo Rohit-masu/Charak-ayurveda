@@ -1,7 +1,7 @@
 import { gsap, prefersReducedMotion, useGsap } from "../../lib/motion";
 
 // Words brighten one by one as the paragraph scrolls through the viewport.
-export default function ScrollReveal({ text, accent = [], className = "" }) {
+export default function ScrollReveal({ text, accent = [], className = "", accentClassName = "accent-text italic" }) {
   const ref = useGsap((el) => {
     if (prefersReducedMotion()) return;
     gsap.fromTo(
@@ -23,7 +23,7 @@ export default function ScrollReveal({ text, accent = [], className = "" }) {
         <span
           key={i}
           data-word
-          className={`inline-block ${accent.includes(word.replace(/[.,]/g, "")) ? "gold-text italic" : ""}`}
+          className={`inline-block ${accent.includes(word.replace(/[.,]/g, "")) ? accentClassName : ""}`}
         >
           {word}&nbsp;
         </span>

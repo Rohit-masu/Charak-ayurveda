@@ -1,22 +1,20 @@
 import { ArrowUpRight } from "lucide-react";
-import HerbIcon from "../ui/HerbIcons";
 import { audienceIcons } from "../ui/audienceIcons";
-import { botanicals, products } from "../../data/products";
+import { products, productVars } from "../../data/products";
 import { audiences } from "../../data/site";
 
 const intro = {
-  collection: ["The Collection", "Four formats of Rati Shakti — capsules, oil, majun and the Maharaja kit."],
-  botanicals: ["The Botanicals", "Nine botanicals named across the labels of the range."],
-  professionals: ["For Professionals", "Doctors, chemists and distributors — choose your path."],
+  products: ["The Products", "Rati Shakti for men and for women, from Charak Ayurveda. More formulations are on the way."],
+  associate: ["Associate with us", "Doctors, chemists and distributors: choose your path."],
 };
 
 function Intro({ id, onGo, href }) {
   const [title, text] = intro[id];
   return (
-    <div className="flex flex-col justify-between border-r border-ivory/10 pr-10">
+    <div className="flex flex-col justify-between border-r border-charcoal/10 pr-10">
       <div>
-        <p className="font-display text-4xl font-light text-ivory">{title}</p>
-        <p className="mt-3 max-w-[16rem] text-sm leading-relaxed text-ivory/55">{text}</p>
+        <p className="font-display text-4xl font-light text-charcoal">{title}</p>
+        <p className="mt-3 max-w-[16rem] text-sm leading-relaxed text-charcoal/60">{text}</p>
       </div>
       <a
         href={href}
@@ -24,7 +22,7 @@ function Intro({ id, onGo, href }) {
           e.preventDefault();
           onGo(href);
         }}
-        className="group mt-8 inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-gold"
+        className="group mt-8 inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-bronze-dark"
       >
         View section
         <ArrowUpRight size={14} className="transition-transform duration-500 group-hover:rotate-45" />
@@ -35,36 +33,35 @@ function Intro({ id, onGo, href }) {
 
 // Desktop hover panel under the navbar. `active` is the nav item's `menu` key.
 export default function MegaMenu({ active, onGo, onOpenProduct, onChooseType }) {
-  if (!active) return null;
+  if (!active || !intro[active]) return null;
   const href = `#${active}`;
 
   return (
     <div className="shell grid grid-cols-[260px_1fr] gap-10 py-10">
       <Intro id={active} href={href} onGo={onGo} />
 
-      {active === "collection" && (
+      {active === "products" && (
         <ul className="grid grid-cols-4 gap-4">
-          {products.map((p, i) => (
-            <li key={p.id} data-mega-item>
+          {products.map((p) => (
+            <li key={p.id} data-mega-item style={productVars(p)}>
               <button
                 type="button"
                 onClick={() => onOpenProduct(p, 0)}
-                className="group/card relative flex h-full w-full flex-col overflow-hidden rounded-3xl border border-ivory/10 bg-ivory/[0.03] p-5 text-left transition-colors duration-700 hover:border-gold/40"
+                className="group/card relative flex h-full w-full flex-col overflow-hidden rounded-3xl border border-sandstone bg-sand text-left transition-colors duration-700 hover:border-bronze/60"
               >
-                <span className="absolute inset-0 origin-bottom scale-y-0 bg-gradient-to-t from-gold/25 via-forest-light to-forest-light transition-transform duration-700 ease-lux group-hover/card:scale-y-100" />
-                <span className="relative block h-36">
+                <span className="relative block aspect-square overflow-hidden">
                   <img
-                    src={p.packs[0].image}
+                    src={p.images.light}
                     alt=""
-                    className="h-full w-full object-contain drop-shadow-[0_20px_20px_rgba(0,0,0,0.5)] transition-transform duration-700 ease-lux group-hover/card:-translate-y-2 group-hover/card:scale-110"
+                    className="h-full w-full object-cover transition-transform duration-700 ease-lux group-hover/card:scale-105"
                   />
+                  <span className="absolute inset-x-0 bottom-0 h-1 origin-left scale-x-0 bg-[var(--p-deep)] transition-transform duration-700 ease-lux group-hover/card:scale-x-100" />
                 </span>
-                <span className="label relative mt-4 text-[9.5px] text-gold">
-                  {p.numeral} — {p.category}
-                </span>
-                <span className="relative mt-1.5 font-display text-xl leading-tight text-ivory">{p.name}</span>
-                <span className="relative mt-auto pt-3 text-xs text-ivory/45 transition-colors group-hover/card:text-ivory/80">
-                  {i === 0 ? `${p.packs.length} packs` : p.packs[0].label}
+                <span className="block p-5">
+                  <span className="label block text-[9.5px] text-bronze-dark">
+                    {p.numeral} — {p.category}
+                  </span>
+                  <span className="mt-1.5 block font-display text-xl leading-tight text-charcoal">{p.name}</span>
                 </span>
               </button>
             </li>
@@ -72,32 +69,7 @@ export default function MegaMenu({ active, onGo, onOpenProduct, onChooseType }) 
         </ul>
       )}
 
-      {active === "botanicals" && (
-        <ul className="grid grid-cols-3 gap-x-6 gap-y-2">
-          {botanicals.map((b) => (
-            <li key={b.name} data-mega-item>
-              <a
-                href="#botanicals"
-                onClick={(e) => {
-                  e.preventDefault();
-                  onGo("#botanicals");
-                }}
-                className="group/herb flex items-center gap-4 rounded-2xl p-3 transition-colors duration-500 hover:bg-ivory/[0.05]"
-              >
-                <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full border border-gold/30 p-2 text-gold transition-colors duration-500 group-hover/herb:bg-gold group-hover/herb:text-ink">
-                  <HerbIcon name={b.name} className="h-full w-full" />
-                </span>
-                <span>
-                  <span className="block font-display text-xl text-ivory">{b.name}</span>
-                  <span className="block font-deva text-sm text-gold/70">{b.deva}</span>
-                </span>
-              </a>
-            </li>
-          ))}
-        </ul>
-      )}
-
-      {active === "professionals" && (
+      {active === "associate" && (
         <ul className="grid grid-cols-3 gap-4">
           {audiences.map((a) => {
             const Icon = audienceIcons[a.icon];
@@ -106,14 +78,14 @@ export default function MegaMenu({ active, onGo, onOpenProduct, onChooseType }) 
                 <button
                   type="button"
                   onClick={() => onChooseType(a.type)}
-                  className="group/aud flex h-full w-full flex-col rounded-3xl border border-ivory/10 p-6 text-left transition-colors duration-500 hover:border-gold/40 hover:bg-ivory/[0.04]"
+                  className="group/aud flex h-full w-full flex-col rounded-3xl border border-charcoal/10 p-6 text-left transition-colors duration-500 hover:border-bronze/50 hover:bg-sand"
                 >
-                  <span className="grid h-12 w-12 place-items-center rounded-full border border-gold/30 text-gold transition-colors duration-500 group-hover/aud:bg-gold group-hover/aud:text-ink">
+                  <span className="grid h-12 w-12 place-items-center rounded-full border border-bronze/40 text-bronze-dark transition-colors duration-500 group-hover/aud:bg-charcoal group-hover/aud:text-bronze">
                     <Icon size={20} strokeWidth={1.3} />
                   </span>
-                  <span className="mt-6 font-display text-2xl leading-tight text-ivory">{a.who}</span>
-                  <span className="mt-2 text-sm leading-relaxed text-ivory/55">{a.text}</span>
-                  <span className="mt-auto inline-flex items-center gap-2 pt-5 text-[11px] font-semibold uppercase tracking-[0.22em] text-gold">
+                  <span className="mt-6 font-display text-2xl leading-tight text-charcoal">{a.who}</span>
+                  <span className="mt-2 text-sm leading-relaxed text-charcoal/60">{a.text}</span>
+                  <span className="mt-auto inline-flex items-center gap-2 pt-5 text-[11px] font-semibold uppercase tracking-[0.22em] text-bronze-dark">
                     Start an enquiry <ArrowUpRight size={14} />
                   </span>
                 </button>

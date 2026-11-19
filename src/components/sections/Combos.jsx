@@ -8,11 +8,11 @@ const rupees = (n) => `₹${n.toLocaleString("en-IN")}`;
 const discount = ({ price, mrp }) => (price != null && mrp > price ? Math.round(((mrp - price) / mrp) * 100) : 0);
 
 function Price({ combo }) {
-  if (combo.price == null) return <p className="font-display text-2xl text-forest">Price on request</p>;
+  if (combo.price == null) return <p className="font-display text-2xl text-charcoal">Price on request</p>;
   return (
     <p className="flex items-baseline gap-3">
-      <span className="font-display text-3xl text-forest">{rupees(combo.price)}</span>
-      {discount(combo) > 0 && <span className="text-sm text-ink/45 line-through">{rupees(combo.mrp)}</span>}
+      <span className="font-display text-3xl text-charcoal">{rupees(combo.price)}</span>
+      {discount(combo) > 0 && <span className="text-sm text-charcoal/45 line-through">{rupees(combo.mrp)}</span>}
     </p>
   );
 }
@@ -23,16 +23,16 @@ function ComboCard({ combo }) {
   return (
     <article
       data-combo
-      className="group flex flex-col overflow-hidden rounded-[28px] border border-gold/25 bg-ivory-deep shadow-[0_30px_60px_-45px_rgba(11,42,29,0.4)] transition-[transform,border-color] duration-700 ease-lux hover:-translate-y-1.5 hover:border-gold/60"
+      className="group flex flex-col overflow-hidden rounded-[28px] border border-bronze/25 bg-sand shadow-[0_30px_60px_-45px_rgba(30,28,26,0.4)] transition-[transform,border-color] duration-700 ease-lux hover:-translate-y-1.5 hover:border-bronze/60"
     >
-      <div className="relative flex h-64 items-end justify-center gap-2 overflow-hidden bg-forest px-6 pb-6 pt-10">
+      <div className="relative flex h-64 items-end justify-center gap-2 overflow-hidden bg-charcoal px-6 pb-6 pt-10">
         <div
           aria-hidden="true"
           className="absolute inset-x-[15%] inset-y-[10%] rounded-full blur-2xl"
-          style={{ background: "radial-gradient(circle, rgba(201,164,92,0.35), transparent 70%)" }}
+          style={{ background: "radial-gradient(circle, rgba(179,144,95,0.35), transparent 70%)" }}
         />
         {off > 0 && (
-          <span className="absolute left-5 top-5 rounded-full bg-gold px-3 py-1 text-[11px] font-semibold tracking-wide text-ink">
+          <span className="absolute left-5 top-5 rounded-full bg-bronze px-3 py-1 text-[11px] font-semibold tracking-wide text-charcoal">
             {off}% off
           </span>
         )}
@@ -50,16 +50,16 @@ function ComboCard({ combo }) {
       </div>
 
       <div className="flex flex-1 flex-col p-7">
-        <h3 className="font-display text-[1.7rem] leading-tight text-forest">{combo.name}</h3>
-        <ul className="mt-4 space-y-2 border-t border-ink/10 pt-4">
+        <h3 className="font-display text-[1.7rem] leading-tight text-charcoal">{combo.name}</h3>
+        <ul className="mt-4 space-y-2 border-t border-charcoal/10 pt-4">
           {combo.items.map(({ product, pack }, i) => (
-            <li key={product.id} className="flex items-start gap-3 text-sm text-ink/70">
-              <span className="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full border border-gold/50 text-gold-dark">
+            <li key={product.id} className="flex items-start gap-3 text-sm text-charcoal/70">
+              <span className="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full border border-bronze/50 text-bronze-dark">
                 {i === 0 ? <span className="h-1 w-1 rounded-full bg-current" /> : <Plus size={11} />}
               </span>
               <span>
                 {product.name}
-                <span className="block text-xs text-ink/45">{product.packs[pack].label}</span>
+                <span className="block text-xs text-charcoal/45">{product.packs[pack].label}</span>
               </span>
             </li>
           ))}
@@ -70,10 +70,10 @@ function ComboCard({ combo }) {
             href={comboEnquiryUrl(combo)}
             target="_blank"
             rel="noopener noreferrer"
-            className="group/btn inline-flex h-11 items-center gap-2 rounded-full bg-forest pl-5 pr-1.5 text-[10.5px] font-semibold uppercase tracking-[0.2em] text-ivory transition-colors duration-500 hover:bg-gold hover:text-ink"
+            className="group/btn inline-flex h-11 items-center gap-2 rounded-full bg-charcoal pl-5 pr-1.5 text-[10.5px] font-semibold uppercase tracking-[0.2em] text-ivory transition-colors duration-500 hover:bg-bronze hover:text-charcoal"
           >
             Order on WhatsApp
-            <span className="grid h-8 w-8 place-items-center rounded-full bg-gold text-ink transition-transform duration-500 group-hover/btn:rotate-45">
+            <span className="grid h-8 w-8 place-items-center rounded-full bg-bronze text-charcoal transition-transform duration-500 group-hover/btn:rotate-45">
               <ArrowUpRight size={14} />
             </span>
           </a>
@@ -97,16 +97,16 @@ export default function Combos() {
   if (!combos.length) return null;
 
   return (
-    <section ref={ref} id="combos" className="bg-ivory py-24 text-ink sm:py-32">
+    <section ref={ref} id="combos" className="bg-ivory py-24 text-charcoal sm:py-32">
       <div className="shell">
         <div className="grid gap-8 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-7">
-            <p className="label text-gold-dark">Combos</p>
-            <SplitText className="display mt-6 text-[clamp(2.6rem,5vw,5.2rem)] text-forest">
-              Better <em className="font-normal italic text-gold-dark">together.</em>
+            <p className="label text-bronze-dark">Combos</p>
+            <SplitText className="display mt-6 text-[clamp(2.6rem,5vw,5.2rem)] text-charcoal">
+              Better <em className="font-normal italic text-bronze-dark">together.</em>
             </SplitText>
           </div>
-          <p className="max-w-sm text-[15px] leading-relaxed text-ink/60 lg:col-span-4 lg:col-start-9">
+          <p className="max-w-sm text-[15px] leading-relaxed text-charcoal/60 lg:col-span-4 lg:col-start-9">
             Two formats from the Rati Shakti range, packed as one order. Message us on WhatsApp to order or to ask about
             availability.
           </p>

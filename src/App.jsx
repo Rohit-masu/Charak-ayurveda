@@ -16,6 +16,7 @@ import WhyChoose from "./components/sections/WhyChoose";
 import FloatingDoctor from "./components/sections/FloatingDoctor";
 import Botanicals from "./components/sections/Botanicals";
 import Heritage from "./components/sections/Heritage";
+import Career from "./components/sections/Career";
 import Professionals from "./components/sections/Professionals";
 import Contact from "./components/sections/Contact";
 import Faq from "./components/sections/Faq";
@@ -53,8 +54,8 @@ export default function App() {
 
   return (
     <>
-      <a href="#collection" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[110] focus:rounded-full focus:bg-gold focus:px-5 focus:py-3 focus:text-ink">
-        Skip to the collection
+      <a href="#products" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[110] focus:rounded-full focus:bg-bronze focus:px-5 focus:py-3 focus:text-charcoal">
+        Skip to the products
       </a>
       <Preloader />
       <Cursor />
@@ -71,6 +72,7 @@ export default function App() {
         <WhyChoose />
         <Botanicals />
         <Heritage />
+        <Career onChooseType={setEnquiryType} />
         <Professionals onChooseType={setEnquiryType} />
         <Contact type={enquiryType} onTypeChange={setEnquiryType} />
         <Faq />

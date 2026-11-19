@@ -1,4 +1,5 @@
 // Single source of truth for brand copy and contact details.
+// Always write the brand as "Charak Ayurveda" — never "Charak" on its own (client, Nov 2026).
 // Phone/WhatsApp and address confirmed by the client (Nov 2026). The email is still the v1 placeholder.
 export const site = {
   brand: "Charak Ayurveda",
@@ -6,6 +7,7 @@ export const site = {
   tagline: "The Wisdom of Ayurveda, Carried Forward",
   disclaimer:
     "These products are Ayurvedic proprietary medicines. Use as directed by an Ayurvedic physician. Individual results may vary. Keep out of reach of children.",
+  conceptNote: "Concept visual — final packaging may differ.",
 };
 
 export const contact = {
@@ -29,14 +31,14 @@ export const doctor = {
   line: "Rati Shakti supports strength & vitality.",
 };
 
-// `menu` opens a hover mega-panel in the desktop navbar.
+// `menu` opens a hover mega-panel in the desktop navbar (keys handled in MegaMenu.jsx).
 export const nav = [
-  { label: "Collection", href: "#collection", menu: "collection" },
-  { label: "Combos", href: "#combos" },
-  { label: "Botanicals", href: "#botanicals", menu: "botanicals" },
-  { label: "Heritage", href: "#heritage" },
-  { label: "For Professionals", href: "#professionals", menu: "professionals" },
-  { label: "Contact", href: "#contact" },
+  { label: "Home", href: "#top" },
+  { label: "About", href: "#about" },
+  { label: "Products", href: "#products", menu: "products" },
+  { label: "Career", href: "#career" },
+  { label: "Associate", href: "#associate", menu: "associate" },
+  { label: "Connect With Us", href: "#connect" },
 ];
 
 export const enquiryTypes = [
@@ -44,7 +46,10 @@ export const enquiryTypes = [
   "Chemist / pharmacy",
   "Distributor / stockist",
   "Customer",
+  "Career / MR application",
 ];
+
+export const careerType = enquiryTypes[4];
 
 export const audiences = [
   {
@@ -67,6 +72,19 @@ export const audiences = [
   },
 ];
 
+// Career section. `roles` stays empty until the client confirms openings — the list hides while empty.
+// Role shape: { title: "Medical Representative", place: "Delhi NCR", note: "" }
+export const careers = {
+  intro:
+    "Charak Ayurveda is building its field team. If you would like to represent our range to doctors and chemists in your city, share your details and our team will be in touch.",
+  roles: [],
+  steps: [
+    { t: "Share your details", d: "Choose “Career / MR application” in the form below." },
+    { t: "We review", d: "Our team looks at your experience and city." },
+    { t: "We call you", d: "If there is a fit, we arrange a conversation." },
+  ],
+};
+
 // "Why choose Charak Ayurveda" cards. Facts only from the packs or from the client — no health claims.
 // `icon` keys map to lucide icons in components/sections/WhyChoose.jsx.
 export const reasons = [
@@ -76,19 +94,19 @@ export const reasons = [
     text: "Our name and our crest come from one of the classical texts of Ayurveda.",
   },
   {
-    icon: "leaf",
-    title: "100% Ayurvedic",
+    icon: "flask",
+    title: "Ayurvedic formulations",
     text: "Proprietary Ayurvedic formulations, made and packed under the Charak Ayurveda name.",
   },
   {
-    icon: "sprout",
-    title: "Herbal & vegetarian",
-    text: "Rati Shakti capsules are labelled herbal, natural and vegetarian.",
+    icon: "users",
+    title: "For men and for women",
+    text: "Rati Shakti comes as two separate formulations — one for men, one for women.",
   },
   {
     icon: "scroll",
     title: "Ingredients on the label",
-    text: "Every botanical in the range is printed plainly on its pack, so you know what is inside.",
+    text: "Every ingredient is printed plainly on its pack, so you know what is inside.",
   },
   {
     icon: "stethoscope",
@@ -98,7 +116,7 @@ export const reasons = [
   {
     icon: "handshake",
     title: "Direct from the maker",
-    text: "Doctors, chemists and distributors deal directly with our own team.",
+    text: "Doctors, chemists and distributors deal directly with the Charak Ayurveda team.",
   },
 ];
 
@@ -107,7 +125,11 @@ export const faqIntro = "What customers, doctors and trade partners usually ask 
 export const faqs = [
   {
     q: "Can I buy Charak Ayurveda products on this website?",
-    a: "Orders are taken on WhatsApp. Message us with the product or combo you want, and our team will confirm the price and availability, or tell you where the products are available near you.",
+    a: "Orders are taken on WhatsApp. Message us with the product you want, and our team will confirm the price and availability, or tell you where the products are available near you.",
+  },
+  {
+    q: "What is the difference between Rati Shakti Men and Rati Shakti Women?",
+    a: "They are two separate formulations in the Rati Shakti range — one made for men and one made for women. Each pack carries its own ingredients and directions.",
   },
   {
     q: "I am a doctor, chemist or distributor. How do I get the catalogue?",
@@ -118,23 +140,15 @@ export const faqs = [
     a: "Each pack carries its own directions. Use as directed on the label or by an Ayurvedic physician.",
   },
   {
-    q: "Is the massage oil for internal use?",
-    a: "No. Rati Shakti Ayurvedic Massage Oil is for external use only, as printed on the pack.",
-  },
-  {
     q: "Can I speak to a doctor before choosing a product?",
     a: "Yes. Tap “Ask our doctor” to start a free WhatsApp consultation with our BAMS doctor.",
   },
   {
-    q: "Are the Rati Shakti capsules vegetarian?",
-    a: "Yes. The capsule packs are labelled herbal, natural and vegetarian.",
-  },
-  {
-    q: "Do you offer combo packs?",
-    a: "Yes. See the combos section above and message us on WhatsApp for the current price and availability.",
-  },
-  {
     q: "How do I become a stockist or distributor?",
     a: "Choose “Distributor / stockist” in the enquiry form, tell us your city and region, and our team will contact you.",
+  },
+  {
+    q: "How do I apply to join as a medical representative?",
+    a: "Choose “Career / MR application” in the enquiry form, add your city and a short note about your experience, and our team will get in touch.",
   },
 ];

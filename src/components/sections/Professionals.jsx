@@ -29,24 +29,24 @@ export default function Professionals({ onChooseType }) {
 
   const choose = (type) => {
     onChooseType(type);
-    scrollToHash("#contact");
+    scrollToHash("#connect");
   };
 
   return (
-    <section ref={ref} id="professionals" className="relative overflow-hidden bg-forest py-28 sm:py-40">
+    <section ref={ref} id="associate" className="relative overflow-hidden bg-charcoal py-28 text-ivory sm:py-40">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute -right-40 -top-40 h-[620px] w-[620px] rounded-full opacity-60 blur-3xl"
-        style={{ background: "radial-gradient(circle, rgba(201,164,92,0.18), transparent 65%)" }}
+        style={{ background: "radial-gradient(circle, rgba(179,144,95,0.18), transparent 65%)" }}
       />
       <div className="shell relative">
         <div className="grid gap-10 lg:grid-cols-12">
           <div className="lg:col-span-8">
-            <p className="label text-gold">Chapter 05 — For Professionals</p>
+            <p className="label text-bronze">Chapter 06 — Associate</p>
             <SplitText className="display mt-8 text-[clamp(3rem,6.2vw,6.8rem)]">
               For doctors, chemists
               <br />
-              <em className="gold-text font-normal">&amp; distributors.</em>
+              <em className="accent-text font-normal">&amp; distributors.</em>
             </SplitText>
           </div>
           <p className="self-end text-[15px] leading-relaxed text-ivory/65 lg:col-span-3 lg:col-start-10">
@@ -59,7 +59,7 @@ export default function Professionals({ onChooseType }) {
           {audiences.map(({ icon, who, text, type }, i) => {
             const Icon = audienceIcons[icon];
             return (
-            <SpotlightCard key={who} className="rounded-[28px] border border-gold/15 bg-ink/40">
+            <SpotlightCard key={who} className="rounded-[28px] border border-bronze/15 bg-graphite">
               <button
                 type="button"
                 data-card
@@ -67,7 +67,7 @@ export default function Professionals({ onChooseType }) {
                 className="relative flex h-full min-h-[340px] w-full flex-col justify-between p-8 text-left sm:p-10"
               >
                 <div className="flex items-start justify-between">
-                  <span className="grid h-14 w-14 place-items-center rounded-full border border-gold/30 text-gold transition-colors duration-500 group-hover:bg-gold group-hover:text-ink">
+                  <span className="grid h-14 w-14 place-items-center rounded-full border border-bronze/30 text-bronze transition-colors duration-500 group-hover:bg-bronze group-hover:text-charcoal">
                     <Icon size={22} strokeWidth={1.3} />
                   </span>
                   <span className="font-display text-6xl font-light italic text-ivory/10">0{i + 1}</span>
@@ -75,7 +75,7 @@ export default function Professionals({ onChooseType }) {
                 <div>
                   <h3 className="font-display text-3xl leading-tight text-ivory">{who}</h3>
                   <p className="mt-4 text-sm leading-relaxed text-ivory/60">{text}</p>
-                  <span className="mt-8 inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-gold">
+                  <span className="mt-8 inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-bronze">
                     Start an enquiry
                     <ArrowUpRight size={15} className="transition-transform duration-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                   </span>
@@ -88,11 +88,11 @@ export default function Professionals({ onChooseType }) {
 
         <ol data-steps className="relative mt-24 grid gap-10 sm:grid-cols-3">
           <span aria-hidden="true" className="absolute left-0 right-0 top-[11px] hidden h-px bg-ivory/10 sm:block">
-            <span data-step-line className="block h-full origin-left bg-gold" />
+            <span data-step-line className="block h-full origin-left bg-bronze" />
           </span>
           {steps.map((s, i) => (
             <li key={s.t} className="relative">
-              <span className="relative z-10 grid h-6 w-6 place-items-center rounded-full bg-gold text-[10px] font-bold text-ink">
+              <span className="relative z-10 grid h-6 w-6 place-items-center rounded-full bg-bronze text-[10px] font-bold text-charcoal">
                 {i + 1}
               </span>
               <p className="mt-6 font-display text-2xl text-ivory">{s.t}</p>

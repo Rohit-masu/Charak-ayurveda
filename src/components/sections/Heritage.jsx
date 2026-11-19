@@ -3,10 +3,12 @@ import Crest from "../ui/Crest";
 import { gsap, prefersReducedMotion, useGsap } from "../../lib/motion";
 import { images } from "../../data/products";
 
+// Statements about the name and the range only. Nothing here describes packaging or materials,
+// because real pack details are not confirmed yet.
 const craft = [
-  { k: "The crest", v: "An open book beneath a neem sprig — the text and the tree, on every pack." },
-  { k: "The glass", v: "Forest-green, amber and black bottles, each sealed with a gold cap." },
-  { k: "The label", v: "Gold-foil detailing, with ingredients printed plainly on the pack." },
+  { k: "The text", v: "The Charaka Samhita, one of the classical texts of Ayurveda." },
+  { k: "The name", v: "Charak Ayurveda carries that name, and its crest, into a modern range." },
+  { k: "The range", v: "Rati Shakti for men and for women, with more formulations to follow." },
 ];
 
 export default function Heritage() {
@@ -27,8 +29,8 @@ export default function Heritage() {
 
     gsap.fromTo(
       "[data-craft-img]",
-      { yPercent: 12 },
-      { yPercent: -12, ease: "none", scrollTrigger: { trigger: "[data-craft]", start: "top bottom", end: "bottom top", scrub: true } }
+      { yPercent: -8, scale: 1.15 },
+      { yPercent: 8, scale: 1.15, ease: "none", scrollTrigger: { trigger: "[data-craft]", start: "top bottom", end: "bottom top", scrub: true } }
     );
     gsap.from("[data-craft-item]", {
       x: -40,
@@ -39,7 +41,7 @@ export default function Heritage() {
   });
 
   return (
-    <section ref={ref} id="heritage" className="relative bg-ink">
+    <section ref={ref} id="heritage" className="relative bg-charcoal text-ivory">
       <div data-reveal className="relative h-[100svh] overflow-hidden">
         <p
           data-reveal-title
@@ -49,18 +51,24 @@ export default function Heritage() {
           HERITAGE
         </p>
         <div data-reveal-img className="absolute inset-0 overflow-hidden">
-          <img src={images.garden} alt="A herb garden in morning light" loading="lazy" className="h-full w-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/40 to-ink/10" />
+          <img
+            src={images.manuscript}
+            alt="A palm-leaf manuscript beside a bronze mortar on a stone table"
+            loading="lazy"
+            className="h-full w-full object-cover"
+            style={{ objectPosition: "65% 50%" }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/55 to-charcoal/5" />
         </div>
         <div data-reveal-copy className="shell absolute inset-x-0 bottom-0 z-10 pb-16 sm:pb-24">
-          <p className="label text-gold">Chapter 04 — Heritage</p>
+          <p className="label text-bronze-light">Chapter 04 — Heritage</p>
           <div className="mt-6 grid gap-8 lg:grid-cols-12 lg:items-end">
             <h2 className="display text-[clamp(2.8rem,6vw,6.5rem)] lg:col-span-7">
-              Rooted in a <em className="gold-text font-normal">living</em> tradition.
+              Rooted in a <em className="accent-text font-normal">living</em> tradition.
             </h2>
-            <p className="max-w-md text-[15px] leading-relaxed text-ivory/75 lg:col-span-4 lg:col-start-9">
+            <p className="max-w-md text-[15px] leading-relaxed text-ivory/80 lg:col-span-4 lg:col-start-9">
               The Charaka Samhita is one of the principal classical texts of Ayurveda, traditionally attributed to the physician
-              Charaka. Charak Ayurveda takes its name — and its crest — from that tradition.
+              Charaka. Charak Ayurveda takes its name, and its crest, from that tradition.
             </p>
           </div>
         </div>
@@ -68,34 +76,31 @@ export default function Heritage() {
 
       <div data-craft className="relative overflow-hidden py-28 sm:py-40">
         <div className="shell grid items-center gap-16 lg:grid-cols-12">
-          <div className="relative lg:col-span-7">
-            <div
-              aria-hidden="true"
-              className="absolute inset-[8%] rounded-full blur-3xl"
-              style={{ background: "radial-gradient(circle, rgba(201,164,92,0.22), transparent 70%)" }}
-            />
-            <img
-              data-craft-img
-              src={images.lineupBlack}
-              alt="Rati Shakti black and gold bottles in four sizes"
-              width="1400"
-              height="874"
-              loading="lazy"
-              className="relative w-full drop-shadow-[0_40px_50px_rgba(0,0,0,0.6)]"
-            />
+          <div className="relative lg:col-span-6">
+            <div className="relative mx-auto aspect-[4/5] max-w-[520px] overflow-hidden arch border border-bronze/25">
+              <img
+                data-craft-img
+                src={images.craft}
+                alt="Dried herbs on a bronze apothecary scale beside amber jars"
+                width="1600"
+                height="2000"
+                loading="lazy"
+                className="h-full w-full object-cover"
+              />
+            </div>
           </div>
-          <div className="lg:col-span-5">
-            <Crest className="h-14 w-14 text-gold" />
+          <div className="lg:col-span-5 lg:col-start-8">
+            <Crest className="h-14 w-14 text-bronze" />
             <SplitText className="display mt-8 text-[clamp(2.6rem,4.6vw,4.8rem)]">
-              Made to be <em className="gold-text font-normal">kept.</em>
+              A classic, <em className="accent-text font-normal">carried forward.</em>
             </SplitText>
             <dl className="mt-12 space-y-0 border-t border-ivory/10">
               {craft.map((c, i) => (
                 <div key={c.k} data-craft-item className="grid grid-cols-[3rem_1fr] gap-4 border-b border-ivory/10 py-6">
-                  <dt className="font-display text-2xl italic text-gold">0{i + 1}</dt>
+                  <dt className="font-display text-2xl italic text-bronze">0{i + 1}</dt>
                   <dd>
                     <span className="block font-display text-2xl text-ivory">{c.k}</span>
-                    <span className="mt-1 block text-sm leading-relaxed text-ivory/60">{c.v}</span>
+                    <span className="mt-1 block text-sm leading-relaxed text-ivory/65">{c.v}</span>
                   </dd>
                 </div>
               ))}

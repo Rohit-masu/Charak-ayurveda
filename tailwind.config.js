@@ -4,17 +4,20 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Main's dark palette, lifted a step brighter (client: "dark green thoda bright").
-        // Was ink #06150F, forest #0B2A1D, forest-light #143D2B.
-        ink: "#0B2419",
-        forest: { DEFAULT: "#13402C", light: "#1C553B" },
-        ivory: { DEFAULT: "#F4EFE3", deep: "#EAE2CF" },
-        gold: { DEFAULT: "#C9A45C", light: "#E9D4A1", dark: "#9C7A3C" },
-        noir: "#0B0B09",
-        sage: "#8FA597",
+        // v3 palette: warm ivory + deep charcoal + muted bronze (see docs/REDESIGN_PLAN.md).
+        // Product colours do not live here — each product carries its own `theme` in src/data/products.js.
+        ivory: "#F7F3EC",
+        paper: "#FCFAF6",
+        sand: "#EEE6D9",
+        sandstone: "#DCCDB6",
+        charcoal: "#1E1C1A",
+        graphite: { DEFAULT: "#2A2724", light: "#36322E" },
+        onyx: "#121110",
+        stone: "#6F675E",
+        bronze: { DEFAULT: "#B3905F", light: "#D8BF96", dark: "#7A5A33" },
       },
       fontFamily: {
-        display: ["'Cormorant Garamond'", "Georgia", "serif"],
+        display: ["'Fraunces Variable'", "Georgia", "serif"],
         sans: ["'Manrope Variable'", "system-ui", "sans-serif"],
         deva: ["'Tiro Devanagari Sanskrit'", "serif"],
       },

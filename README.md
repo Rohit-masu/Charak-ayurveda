@@ -17,11 +17,12 @@ OS will not run on the other.
 | What | File |
 | --- | --- |
 | Brand copy, contact details, nav, FAQ, disclaimer | `src/data/site.js` |
-| Products, packs, ingredients, botanicals | `src/data/products.js` |
-| Colours and fonts | `tailwind.config.js` |
-| Product images (WebP, transparent) | `src/assets/img/` |
-| Hero herb-wheel centre photo | `images.heroBotanical` in `src/data/products.js` |
-| Product hover video (optional, muted loop) | `video` field on a product in `src/data/products.js` |
+| Products, packs, ingredients, botanicals, combos, concerns | `src/data/products.js` |
+| A product's own colours (panel, accent, stage) | `theme` on the product in `src/data/products.js` |
+| Career openings and steps | `careers` in `src/data/site.js` |
+| Site colours (ivory / charcoal / bronze) and fonts | `tailwind.config.js` |
+| Product and section images (WebP) | `src/assets/img/v3/` — see `docs/GEMINI_ASSET_BRIEF.md` |
+| Hero herb-wheel centre photo | `images.heroDuo` in `src/data/products.js` |
 | Navbar mega-menu panels | `menu` key on `nav` items in `src/data/site.js` |
 
 Page order lives in `src/App.jsx`. Reusable animation pieces (split text, scroll-velocity marquee,
@@ -34,4 +35,6 @@ certifications or testimonials unless the client supplies them — see `docs/bra
 full compliance rules. The contact details in `site.js` still need client confirmation. The enquiry
 form opens WhatsApp with a prefilled message; there is no form backend yet.
 
-The previous v1 site and the earlier v2 draft are preserved under the `v1-archive` git tag.
+The v3 re-theme plan is in `docs/REDESIGN_PLAN.md`. Product images are concept visuals until real photos arrive — set
+`concept: false` on a product once its real photos are in. The previous v1 site and the earlier v2 draft are preserved
+under the `v1-archive` git tag.

@@ -1,4 +1,5 @@
 import ScrollVelocity from "../bits/ScrollVelocity";
+import { products } from "../../data/products";
 
 const Star = ({ className }) => (
   <svg viewBox="0 0 20 20" className={`h-3.5 w-3.5 shrink-0 ${className}`} aria-hidden="true">
@@ -6,8 +7,8 @@ const Star = ({ className }) => (
   </svg>
 );
 
-const front = ["Rati Shakti Capsules", "Ayurvedic Massage Oil", "Rati Shakti Majun", "Maharaja Kit", "100% Ayurvedic"];
-const back = ["चरक संहिता", "Capsules", "Massage Oil", "Majun", "Supplements", "आयुर्वेद"];
+const front = [...products.map((p) => p.name), "Charak Ayurveda", "Inspired by the Charaka Samhita"];
+const back = ["चरक संहिता", "Ayurveda", "आयुर्वेद", "For him", "For her", "चरक आयुर्वेद", "Tradition"];
 
 // Two crossing tapes between the hero and the first chapter.
 export default function Tapes() {
@@ -17,14 +18,14 @@ export default function Tapes() {
         items={back}
         direction={-1}
         baseSpeed={30}
-        separator={<Star className="text-gold/60" />}
-        className="absolute left-[-5%] top-1/2 w-[110%] -translate-y-1/2 rotate-[3deg] border-y border-gold/20 bg-forest py-3 font-display text-xl italic text-ivory/70 sm:text-2xl"
+        separator={<Star className="text-bronze-light/70" />}
+        className="absolute left-[-5%] top-1/2 w-[110%] -translate-y-1/2 rotate-[3deg] border-y border-bronze/25 bg-charcoal py-3 font-display text-xl italic text-ivory/75 sm:text-2xl"
       />
       <ScrollVelocity
         items={front}
         baseSpeed={45}
-        separator={<Star className="text-ink" />}
-        className="absolute left-[-5%] top-1/2 w-[110%] -translate-y-1/2 -rotate-[2.5deg] bg-gold py-4 text-[13px] font-bold uppercase tracking-[0.28em] text-ink shadow-[0_20px_50px_-10px_rgba(0,0,0,0.6)] sm:text-sm"
+        separator={<Star className="text-charcoal" />}
+        className="absolute left-[-5%] top-1/2 w-[110%] -translate-y-1/2 -rotate-[2.5deg] bg-bronze py-4 text-[13px] font-bold uppercase tracking-[0.28em] text-charcoal shadow-[0_20px_50px_-15px_rgba(30,28,26,0.45)] sm:text-sm"
       />
     </div>
   );

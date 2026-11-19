@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { gsap, prefersReducedMotion } from "../../lib/motion";
 
-// Gold dot + trailing ring; the ring swells over anything clickable.
+// Bronze dot + trailing ring; the ring swells over anything clickable.
 export default function Cursor() {
   const dot = useRef(null);
   const ring = useRef(null);
@@ -35,11 +35,11 @@ export default function Cursor() {
 
   return (
     <>
-      <span ref={dot} aria-hidden="true" className="pointer-events-none fixed left-0 top-0 z-[95] h-1.5 w-1.5 rounded-full bg-gold opacity-0" />
+      <span ref={dot} aria-hidden="true" className="pointer-events-none fixed left-0 top-0 z-[95] h-1.5 w-1.5 rounded-full bg-bronze opacity-0" />
       <span
         ref={ring}
         aria-hidden="true"
-        className="pointer-events-none fixed left-0 top-0 z-[95] h-9 w-9 rounded-full border border-gold/60 opacity-0 mix-blend-difference"
+        className="pointer-events-none fixed left-0 top-0 z-[95] h-9 w-9 rounded-full border border-bronze opacity-0 "
       />
     </>
   );
