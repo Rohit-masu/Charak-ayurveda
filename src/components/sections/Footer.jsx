@@ -97,8 +97,13 @@ export default function Footer({ onOpen }) {
       </p>
 
       <div className="shell flex items-center justify-between py-6 text-[11px] uppercase tracking-[0.2em] text-ivory/40">
-        <span>
-          © {year} {site.brand}
+        <span className="flex flex-wrap items-center gap-x-6 gap-y-2">
+          <span>
+            © {year} {site.brand}
+          </span>
+          <a href="/privacy" className="hover:text-bronze">
+            Privacy policy
+          </a>
         </span>
         <a href="#top" onClick={(e) => go(e, "#top")} className="inline-flex items-center gap-2 hover:text-bronze">
           Back to top <ArrowUp size={13} />

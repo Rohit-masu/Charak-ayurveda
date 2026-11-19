@@ -10,6 +10,17 @@ export const site = {
   conceptNote: "Concept visual — final packaging may differ.",
 };
 
+// Privacy policy details (src/pages/Privacy.jsx). Bracketed values are placeholders: get them from the client,
+// then set draft to false. Do not publish the policy with placeholders.
+export const legal = {
+  draft: true,
+  company: "[Registered company name]",
+  address: "",
+  privacyEmail: "",
+  retention: "[12 months]",
+  updated: "November 2026",
+};
+
 export const contact = {
   whatsappNumber: "918860157142",
   phoneDisplay: "+91 88601 57142",

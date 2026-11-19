@@ -129,7 +129,7 @@ export default function Contact({ type, onTypeChange }) {
             <textarea id="message" rows={3} value={values.message} onChange={set("message")} className={`${input} resize-none`} placeholder="Tell us what you are looking for" />
           </Field>
 
-          <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between lg:flex-col lg:items-start xl:flex-row xl:items-center">
             <Magnet strength={0.2}>
               <button
                 type="submit"
@@ -144,7 +144,10 @@ export default function Contact({ type, onTypeChange }) {
             <p className="max-w-[16rem] text-xs leading-relaxed text-charcoal/50" aria-live="polite">
               {opened
                 ? "WhatsApp has opened with your message. Press send there to reach our team."
-                : "Your enquiry opens in WhatsApp, ready to send."}
+                : "Your enquiry opens in WhatsApp, ready to send."}{" "}
+              <a href="/privacy" className="underline decoration-charcoal/30 underline-offset-4 hover:text-bronze-dark">
+                Privacy policy
+              </a>
             </p>
           </div>
         </form>

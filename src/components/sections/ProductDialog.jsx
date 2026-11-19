@@ -3,6 +3,7 @@ import { ArrowUpRight, X } from "lucide-react";
 import { gsap, prefersReducedMotion, useGsap } from "../../lib/motion";
 import { doctorConsultUrl, productEnquiryUrl } from "../../lib/whatsapp";
 import { productVars } from "../../data/products";
+import DoctorNote from "../ui/DoctorNote";
 import { doctor, site } from "../../data/site";
 
 export default function ProductDialog({ product, initialPack = 0, onClose }) {
@@ -137,10 +138,9 @@ export default function ProductDialog({ product, initialPack = 0, onClose }) {
               ))}
             </dl>
           ) : (
-            <p data-dlg-item className="border-y border-ivory/10 py-6 text-[15px] leading-relaxed text-ivory/70">
-              Ingredients, directions and pack sizes will be listed here exactly as printed on the label. For details today,
-              message our team or ask our doctor on WhatsApp.
-            </p>
+            <div data-dlg-item>
+              <DoctorNote product={product} />
+            </div>
           )}
 
           <div data-dlg-item className="space-y-5">
@@ -156,14 +156,17 @@ export default function ProductDialog({ product, initialPack = 0, onClose }) {
                   <ArrowUpRight size={15} />
                 </span>
               </a>
-              <a
-                href={doctorConsultUrl(product.name)}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[color:var(--p-accent)] underline decoration-ivory/30 underline-offset-8 transition-colors hover:text-ivory"
-              >
-                Ask our doctor{doctor.free ? " — free" : ""}
-              </a>
+              {/* With no label details the DoctorNote card above already offers the consultation. */}
+              {rows.length > 0 && (
+                <a
+                  href={doctorConsultUrl(product.name)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[color:var(--p-accent)] underline decoration-ivory/30 underline-offset-8 transition-colors hover:text-ivory"
+                >
+                  Ask our doctor{doctor.free ? " — free" : ""}
+                </a>
+              )}
             </div>
             <p className="text-xs leading-relaxed text-ivory/50">{site.disclaimer}</p>
           </div>

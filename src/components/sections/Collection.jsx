@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ArrowUpRight, Plus } from "lucide-react";
 import SplitText from "../bits/SplitText";
+import DoctorNote from "../ui/DoctorNote";
 import { gsap, prefersReducedMotion, useGsap } from "../../lib/motion";
 import { productEnquiryUrl } from "../../lib/whatsapp";
 import { products, productVars } from "../../data/products";
@@ -123,11 +124,7 @@ function ProductPanel({ product, index, onOpen }) {
             </div>
           )}
 
-          {!hasDetails && (
-            <p className="mt-8 max-w-sm border-t border-ivory/10 pt-6 text-sm leading-relaxed text-ivory/60">
-              Ingredients, directions and pack sizes will be listed here from the label. Until then, ask us on WhatsApp.
-            </p>
-          )}
+          {!hasDetails && <DoctorNote product={product} className="mt-8 max-w-md" />}
         </div>
 
         <div className="relative space-y-5">

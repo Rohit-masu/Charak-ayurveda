@@ -40,7 +40,7 @@ export default function Concerns({ onOpen }) {
           Find Charak Ayurveda formulations for the wellness needs that matter to you. More ranges are on the way.
         </p>
 
-        <ul data-concerns className="mx-auto mt-16 grid max-w-6xl grid-cols-2 gap-x-4 gap-y-12 sm:grid-cols-4 lg:grid-cols-8">
+        <ul data-concerns className="mx-auto mt-16 grid max-w-6xl grid-cols-2 gap-x-4 gap-y-12 sm:grid-cols-4 xl:grid-cols-8">
           {concerns.map((c) => {
             const Icon = icons[c.icon];
             const list = productsFor(c);
@@ -54,7 +54,7 @@ export default function Concerns({ onOpen }) {
                   className="group mx-auto flex flex-col items-center disabled:cursor-default"
                 >
                   <span
-                    className={`grid aspect-square w-28 place-items-center rounded-full outline-dashed outline-1 outline-offset-[5px] transition-[transform,outline-offset,background-color] duration-700 ease-lux sm:w-32 ${
+                    className={`grid aspect-square w-28 place-items-center rounded-full outline-dashed outline-1 outline-offset-[5px] transition-[transform,outline-offset,background-color] duration-700 ease-lux sm:w-32 xl:w-[7.25rem] 2xl:w-32 ${
                       live
                         ? "bg-charcoal text-bronze-light outline-bronze/70 group-hover:-translate-y-1.5 group-hover:bg-graphite-light group-hover:outline-offset-[9px]"
                         : "bg-sandstone/70 text-charcoal/45 outline-charcoal/15"
