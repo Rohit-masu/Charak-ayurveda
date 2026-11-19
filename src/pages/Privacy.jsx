@@ -65,6 +65,8 @@ const sections = [
   },
 ];
 
+const year = new Date().getFullYear();
+
 export default function Privacy() {
   useEffect(() => {
     document.title = `Privacy policy — ${site.brand}`;
@@ -124,7 +126,7 @@ export default function Privacy() {
       <footer className="bg-charcoal py-8 text-ivory">
         <div className="shell flex flex-wrap items-center justify-between gap-4 text-[11px] uppercase tracking-[0.2em] text-ivory/50">
           <span>
-            © {new Date().getFullYear()} {site.brand}
+            © {year} {site.brand}
           </span>
           <a href="/" className="hover:text-bronze">
             Back to the site
